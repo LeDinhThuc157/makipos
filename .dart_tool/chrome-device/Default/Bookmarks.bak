@@ -1,0 +1,210 @@
+{
+   "checksum": "a6fd3e56dd8f52a3b5b570b3d44f2c29",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13265573111090797",
+            "date_last_used": "0",
+            "guid": "a300ee60-baeb-43dc-bb3f-289025c41a22",
+            "id": "5",
+            "name": "Thời bao cấp – Wikipedia tiếng Việt",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://vi.wikipedia.org/wiki/Th%E1%BB%9Di_bao_c%E1%BA%A5p#Giai_%C4%91o%E1%BA%A1n_1976-1980"
+         }, {
+            "date_added": "13268744581742809",
+            "date_last_used": "0",
+            "guid": "b87a11ce-73a1-4bc9-8996-633c0e3ff322",
+            "id": "6",
+            "name": "Bài 1 DBHB.pdf",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///D:/B%C3%A0i%201%20DBHB.pdf"
+         }, {
+            "date_added": "13279444023272993",
+            "date_last_used": "0",
+            "guid": "28ece8e5-0855-40fd-9601-4d8e1f449330",
+            "id": "7",
+            "name": "BK Education - C.Edge (Pre-intermediate) | Quizlet",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://quizlet.com/class/2734937/?fbclid=IwAR3_Lg6HmfF5Dyvu9XWw6sCU2-cGJPzE1kst14HIPDy6cUApQG0cojX5A7g"
+         }, {
+            "date_added": "13282582748396529",
+            "date_last_used": "0",
+            "guid": "911265ea-21f1-4f52-acbf-97502c264e51",
+            "id": "8",
+            "name": "Khi nào chúng ta sử dụng Danh sách Khởi tạo (Initializer list) trong C++? - codecungnhau.com",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://codecungnhau.com/khi-nao-chung-ta-su-dung-danh-sach-khoi-tao-trong-cpp/"
+         }, {
+            "date_added": "13282583042258022",
+            "date_last_used": "0",
+            "guid": "885acc21-bfcd-4442-b33c-b5d65c2c838d",
+            "id": "9",
+            "name": "Copy constructor trong C++ | 101 bài hướng dẫn C++ hay nhất",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://vietjack.com/cplusplus/copy_constructor_trong_cplusplus.jsp"
+         }, {
+            "date_added": "13282583658973573",
+            "date_last_used": "0",
+            "guid": "ded79d51-62b3-43e7-a83f-cfa5053afdd0",
+            "id": "10",
+            "name": "F8, học lập trình để đi làm! | Học lập trình online | Học lập trình Javascript",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://fullstack.edu.vn/"
+         }, {
+            "date_added": "13282731297889296",
+            "date_last_used": "0",
+            "guid": "2d58a914-12bd-4471-8235-6640f8f1856c",
+            "id": "11",
+            "name": "",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///D:/thuc/2.%20V%E1%BA%ADt%20l%C3%BD%20%C4%90%E1%BA%A1i%20c%C6%B0%C6%A1ng%20II/3.%20B%C3%A0i%20t%E1%BA%ADp%20%C4%91%E1%BB%8Bnh%20h%C6%B0%E1%BB%9Bng/WEEK-6-7-8-9.pdf"
+         }, {
+            "date_added": "13283004786224274",
+            "date_last_used": "0",
+            "guid": "98e02498-3adb-4799-afb6-8ea4015b7a71",
+            "id": "12",
+            "name": "Kỹ-năng-mềm-lms.pdf",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///D:/thuc/K%E1%BB%B9%20n%C4%83ng%20m%E1%BB%81m/K%E1%BB%B9-n%C4%83ng-m%E1%BB%81m-lms.pdf"
+         }, {
+            "date_added": "13283328801541902",
+            "date_last_used": "0",
+            "guid": "f693a7fd-21c6-40ff-a37a-97e4c7f01e95",
+            "id": "13",
+            "name": "National Institute of Standards and Technology | NIST",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.nist.gov/"
+         }, {
+            "date_added": "13284271287542276",
+            "date_last_used": "0",
+            "guid": "1af63245-d6da-49b7-808c-8e1ef3477215",
+            "id": "14",
+            "name": "Kỹ thuật lập trình - OneDrive",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://husteduvn-my.sharepoint.com/personal/hung_nh182563_sis_hust_edu_vn/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fhung%5Fnh182563%5Fsis%5Fhust%5Fedu%5Fvn%2FDocuments%2FBCORN%20material%2FK%E1%BB%B9%20thu%E1%BA%ADt%20l%E1%BA%ADp%20tr%C3%ACnh%2FSlide%20KTLT%20%28Part%202%29%2Epdf&parent=%2Fpersonal%2Fhung%5Fnh182563%5Fsis%5Fhust%5Fedu%5Fvn%2FDocuments%2FBCORN%20material%2FK%E1%BB%B9%20thu%E1%BA%ADt%20l%E1%BA%ADp%20tr%C3%ACnh"
+         }, {
+            "date_added": "13284351154054859",
+            "date_last_used": "0",
+            "guid": "6cd4050c-a351-4403-8ffc-8cd0ba45f6db",
+            "id": "15",
+            "name": "Nạp chồng toán tử và Nạp chồng hàm trong C++ | 101 bài hướng dẫn C++ hay nhất",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://vietjack.com/cplusplus/nap_chong_ham_va_nap_chong_toan_tu_trong_cplusplus.jsp"
+         }, {
+            "date_added": "13286950677805388",
+            "date_last_used": "0",
+            "guid": "38fe7bb2-ab92-400d-bf83-6c6edd018b87",
+            "id": "16",
+            "name": "đáp án.pdf",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///C:/Users/Admin/Documents/Zalo%20Received%20Files/%C4%91%C3%A1p%20%C3%A1n.pdf"
+         }, {
+            "date_added": "13287637668854696",
+            "date_last_used": "0",
+            "guid": "fde3aa16-c14f-4f6d-a7f4-4ac9c47f58c8",
+            "id": "17",
+            "name": "Quiz20182",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "http://spkt-bkhn.edu.vn/OntapKNM20182/index.html"
+         }, {
+            "date_added": "13288519232316807",
+            "date_last_used": "0",
+            "guid": "b30b92db-236c-41bc-a776-c4cd0a17eb19",
+            "id": "18",
+            "name": "Tai-lieu-ky-nang-mem.pdf",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///D:/thuc/K%E1%BB%B9%20n%C4%83ng%20m%E1%BB%81m/Tai-lieu-ky-nang-mem.pdf"
+         }, {
+            "date_added": "13289198455233076",
+            "date_last_used": "0",
+            "guid": "3eb4ff8d-512c-4c14-b5a9-bd36904e23f5",
+            "id": "19",
+            "name": "",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "file:///D:/thuc/2.%20V%E1%BA%ADt%20l%C3%BD%20%C4%90%E1%BA%A1i%20c%C6%B0%C6%A1ng%20II/5.%20%C4%90%E1%BB%81%20thi%20Cu%E1%BB%91i%20K%C3%AC%20+%20%C4%90%C3%A1p%20%C3%81n/T%C3%B4ng%20H%C6%A1p%20Th%E1%BA%A7y%20%C4%90%E1%BB%A9c.pdf"
+         }, {
+            "date_added": "13317400529746025",
+            "date_last_used": "0",
+            "guid": "debc6ee3-d593-483b-94cd-7a955831a88b",
+            "id": "20",
+            "name": "Google Dịch",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://translate.google.com/?hl=vi"
+         }, {
+            "date_added": "13319479561729615",
+            "date_last_used": "0",
+            "guid": "c4491563-7795-470a-b89e-4edcaddc94a0",
+            "id": "21",
+            "name": "pages_from_kythuatsieucaotan_4_6855.pdf",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://tailieu.vn/docview/tailieu/2011/20110724/vit_momo/pages_from_kythuatsieucaotan_4_6855.pdf"
+         } ],
+         "date_added": "13319894379721404",
+         "date_last_used": "0",
+         "date_modified": "13319479561729615",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Favorites bar",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13319894379721407",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other favorites",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13319894379721409",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile favorites",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CjEKDgiIgQISCC1Y0TqGAQAAEgAgASoYUGEvTGJyU2xmOXFKVjVhRHljeC9qUT09oAYMEqkBCBISpAEKHHhoVUlFYmtwSWprRFREUG11bGxhbWt0UFN4dz0SJGIzMGI5MmRiLTIzNmMtNDFiYy1hNzc2LWM0Y2QwYTE3ZWIxORgAIAAoADDolobG7C84ipiGxuwvQIqYhsbsL0ocV290MkQ2SlJwTHJITkFvYUpoNGw5R3llcmtZPVogIh7/+1NBQ2Q1SHN6ZGlJL1ZVRFdJc0JmQkJkY1VyWT1ld3BsoxKpAQgOEqQBChxQOW5UbDBnSlJMd3c2UFFDYWF3SGpqRk8rMkE9EiQxYWY2MzI0NS1kNmRhLTQ5YjctODA4Yy04ZTFlZjM0NzcyMTUYACABKAEw66nzveEwOM7J2aHpL0DrqfO94TBKHE5XSGZkNk1UeklPU0RnbFZKaGY4UWlPdTZOdz1aICIe/7RYRXl2aTRsMWwzTDhFL1ljeHl4TGxjV2gyeFU9ZQAAAAASqQEIERKkAQocTzljNnZ0dzlhVEtOQVBlT2VKaXZUeW1pYitNPRIkZmRlM2FhMTYtYzE0Zi00ZjZkLWE3ZjQtNGFjOWM0N2Y1OGM4GAAgACgAMM+zg7WKMDiC2Nmh6S9AgtjZoekvShxHRUJEdWdvSWZJaVZISzVOempPeDZCN3BJaGM9WiAiHv/2dmNoZW9DU3NPUEFmZlc1aFJnbkpPNjQwNVVvPWV/D+Z8EqkBCA8SpAEKHEd4TXVONWwvTGJ6ZDRjbjVXNzRJZkNFSVpYWT0SJDZjZDQwNTBjLWEzNTEtNDQwMy04ZmZjLThjZDBiYTQ1ZjZkYhgAIAEoATDsqfO94TA43cnZoekvQOyp873hMEocZDZENXU4TmF3YkRKWEJNWitYTlZOMWxyVDVFPVogIh7/2nhYa3M1ZVBEdERXYkxROUxBNFBOQUZqektjcz1lAAAAABKoAQgNEqMBChxudUNUdHpZVW5Ta2VZYXEzeXkwUjJSOWE0VDQ9EiRmNjkzYTdmZC0yMWM2LTQwZmYtYTM3YS05N2U0YzdmMDFlOTUYACAAKAAw0Nei5IUwOLbB2aHpL0C2wdmh6S9KHG8zWTJVVXEzM2cvL0hVaFZrWm5TSFRMSm1oND1aHyId/2hBVkRIR25HcCt2RXRJVjJseEhreHlYTDB5QT1lAAAAABKpAQgUEqQBChxqRDdKeE1VMksydHFLQlhGTUZtMjI3Ty9vb3c9EiRkZWJjNmVlMy1kNTkzLTQ4M2ItOTRjZC03YTk1NTgzMWE4OGIYACAAKAAw19DckdgwOJTS3JHYMECU0tyR2DBKHGlIbmMrRXM3cVRZUXE5akNrWEhVVytGeGpFQT1aICIe//5CV05lT3F0ck5lZ3dxRkRVSzJVMytJZExJOEk9ZcXPkAESqAEICxKjAQocOUE2aW10U0lyNTU3cG9wc1hzNHFqa1VJMVIwPRIkMmQ1OGE5MTQtMTJiZC00NDcxLTgyMzUtNjY0MGY4ZjE4NTZjGAAgACgAMMn4kv7WLziWwdmh6S9AlsHZoekvShxGSXV0NDNFQWg0NHhtSWRnaVNqREE4RGdWWDg9Wh8iHf5TMTgxNHZoNnVGMXRkQ1hPU0kydGY2ZVkxYTQ9ZXdwbKMSqAEIBxKjAQocc0UxdXBramhnTGR0bys4MjBweUNKTG5FTGkwPRIkMjhlY2U4ZTUtMDg1NS00MGZkLTk2MDEtNGQ4ZTFmNDQ5MzMwGAAgACgAMLeP39iFMDipwNmh6S9AqcDZoekvShxuaEtCQmh3WWlLQVBqZ3E2RzVaYngwcWh0d3M9Wh8iHdxCcXNqdUliTk14M2dZWDBpQjVhYjh6MUZWVW89ZQAAAAASqAEIDBKjAQocOFNJUWVWQ3JlWGEvODJuaEE4dXp0QWFwYndrPRIkOThlMDI0OTgtM2FkYi00Nzk5LWFmYjYtOGVhNDAxNWI3YTcxGAAgACgAMOKPx4DYLzimwdmh6S9ApsHZoekvShxaN3U1R1FTRGxCWjFRWDlBVVhTaHlmTWJZQUU9Wh8iHf8zQkhFWm9pZ3MvTlJzYjZLYkY4N2hHSVV4bzA9ZXdwbKMSqQEIFRKkAQocbjVGRWZZeEpzSHZXeWd2U0gyU0JjbzdCbGtNPRIkYzQ0OTE1NjMtNzc5NS00NzBhLWI4OWUtNGVkY2FkZGM5NGEwGAAgACgAMIHiivHfMDir44rx3zBAq+OK8d8wShxncVA4U0o1bUlSMlp4VDVDUDJsTHVYT1NkUTg9WiAiHv//TTlXdzdPYlFqRUFFK0NMbFRTT0pxaE9udVYwPWUAAAAAEqgBCAoSowEKHFRQcjBUaHdRQkU2VlphcWJDOUZCOHE2TXhMMD0SJGRlZDc5ZDUxLTYyYjMtNDNlNy1hODNmLWNmYTUwNTNhZmRkMBgAIAAoADC3j9/YhTA4h8HZoekvQIfB2aHpL0ocZDV5NGRxK05FUWtEVHdqTlg0ZUVwNzRFc2U4PVofIh39Y042eFFiWnNIako1V1A0S3hHbEZrUm1vTTkwPWUAAAAAEqkBCBMSpAEKHHc5bzZtUnMyWElmK1dtYTRBSURVMnZDM0VwUT0SJDNlYjRmZjhkLTUxMmMtNGMxNC1iNWE5LWJkMzY5MDRlMjNmNRgAIAAoADDW/faJ7y842uf2ie8vQNrn9onvL0ocdmt1QXQyRUdONWJML244bGUwcTQvT2NnbjdzPVogIh7//VoxUjFvUXFYNTRuRlcyeHpvRGN3M2FFb2dsRT1ld3BsoxKJAQgDEoQBChxuamdEdTg4ZUNydlhwODZwRDdmSEdjcUZwODg9EiQyMmRmM2FhMS1mODkyLTVjMDctYTgxOC1hYmI2ZGMwZDVmNmYYACAAKAAw3P60vrAwOJy62aHpL0Ccutmh6S9KHHl6TkIwMWNuNTRBN2NSVTB1VCsvUGdtVHRVbz1aAGUAAAAAEqgBCAkSowEKHEtLdWpjK2x5RVR6clF5R2xIK1dkNXZaU1ROMD0SJDg4NWFjYzIxLWJmY2QtNDQ0Mi1iMzNjLWI1ZDY1YzJjODM4ZBgAIAAoADC3j9/YhTA46MDZoekvQOjA2aHpL0ocNkJHYmRVVTdFSFpuVHF3YzBkTjl1R25oZjNnPVofIh37VjloTFhFNXJNQmVPMG5xZ2N5T2c4R21vL1FVPWUAAAAAEqgBCAgSowEKHHNyNW5mS3laMTBPVGl5SmZ2Z29PS2JleXV1dz0SJDkxMTI2NWVhLTIxZjEtNGY1Mi1hY2JmLTk3NTAyYzI2NGU1MRgAIAAoADC3j9/YhTA42MDZoekvQNjA2aHpL0ocWHZWUWJkLzJZciswaDRNWk4yaGhHZjR2NjJVPVofIh33K29xa1hoMW5wT0hoa1RXZk1qbmlzZ1cyajJFPWUAAAAAEqkBCBASpAEKHEZ6Tlc4Y04wd0p6dGhIWU5YZWkvN1hvWUd0VT0SJDM4ZmU3YmIyLWFiOTItNDAwZC1iZjgzLTZjNmVkZDAxOGI4NxgAIAAoADCEpo3a5i84q9XZoekvQKvV2aHpL0ocNk1tb2tPMTdyY1pUaEJwVGo2Q3I5aGtNUFc4PVogIh7/7VZxcVdNaGdqMC9YNlhxVS9KeGpUbEZ2U1Y1Zz1ld3BsoxKJAQgBEoQBChx5eEovNmZ2a2VjcjdrcDVFUXpCNHRXTHBkYkU9EiRjOTY1YWYxMy0yNzdiLTUzYTQtYjUwYi0wNmYyOTJiODJlNzkYACAAKAAw3P60vrAwOK+52aHpL0Cvudmh6S9KHGFSQ1dMZ2hGOWI1SW5xS0lEdnVKL2p2UWtGYz1aAGUAAAAAEqcBCAUSogEKHFZVNnEvMFZHQ1lhUEtYa0tPaFg0VWxDamxiVT0SJGEzMDBlZTYwLWJhZWItNDNkYy1iYjNmLTI4OTAyNWM0MWEyMhgAIAAoADC3j9/YhTA4vL/ZoekvQLy/2aHpL0ocQXR0VDc0ZFB3RnZyWlhhbDBWUWFoNUMxam13PVoeIhxyZFVkUjJHK3ArZ3dvcjNwaW9jVnQwWTZ3cms9ZQAAAAASqAEIBhKjAQocWkpzamVEb0wwVUNNRjArSGRhKzZ6aWVYNkpBPRIkYjg3YTExY2UtNzNhMS00YmM5LTg5OTYtNjMzYzBlM2ZmMzIyGAAgACgAMMew4fCiLzjLv9mh6S9Ay7/ZoekvShw5TGNiWG0zV3h4YWE1cUE3bzNOSEpENDYzTjQ9Wh8iHbk0b0UzZjM1eGlHZHpCVWU4V0QzUGFLMUs3K1k9ZXdwbKMSiQEIAhKEAQocWWNTVG9udkVTUHdxQ3M0TDJjclZodjY4TDk4PRIkZTZhYjI2MTAtNzMzNS01MzIzLWIwZDUtZjVjNGM3MWQ3NzJhGAAgACgAMNz+tL6wMDi+udmh6S9AvrnZoekvShxvUFZraHdCUmJWNjVLQ1dSMitJT05IV29PdTg9WgBlAAAAADAAOAA=",
+   "version": 1
+}

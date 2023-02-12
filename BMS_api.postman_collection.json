@@ -1,0 +1,523 @@
+{
+	"info": {
+		"_postman_id": "f2f0ec3c-9308-4f7e-a9d0-8753e82edbfb",
+		"name": "BMS_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"bms_user_test_8\",\r\n    \"password\": \"12345678\",\r\n    \"manufacturerId\": \"63b5363c0a3a520007fa2ab9\",\r\n    \"roles\": [\r\n        \"user\"\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://{{users_service}}:3029/users",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authCode\": false,\r\n    \"strategy\": \"local\",\r\n    \"username\": \"BMS_admin\",\r\n    \"password\": \"01012023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{users_service}}:3029/users-service/users/authentication?_v=1",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"users-service",
+						"users",
+						"authentication"
+					],
+					"query": [
+						{
+							"key": "_v",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo",
+						"description": "token từ user_login của chính user cần update, đối với update trường roles cần token của account admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roles\": [\r\n        \"forbidden_control\",\r\n        \"user\"\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "https://{{users_service}}:3029/users/63b5536d6125db0007ca29c6",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"users",
+						"63b5536d6125db0007ca29c6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{users_service}}:3029/users",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"$unset\": {\n        \"manufacturerId\":1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{users_service}}:3029/devices",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"devices"
+					],
+					"query": [
+						{
+							"key": "location%5B%24nearSphere%5D%5B%24geometry%5D%5Btype%5D",
+							"value": "Point",
+							"disabled": true
+						},
+						{
+							"key": "location%5B%24nearSphere%5D%5B%24geometry%5D%5Bcoordinates%5D%5B0%5D",
+							"value": "105.7831022",
+							"disabled": true
+						},
+						{
+							"key": "location%5B%24nearSphere%5D%5B%24geometry%5D%5Bcoordinates%5D%5B1%5D",
+							"value": "21.031839599999998",
+							"disabled": true
+						},
+						{
+							"key": "location%5B%24nearSphere%5D%5B%24maxDistance%5D",
+							"value": "1000",
+							"disabled": true
+						},
+						{
+							"key": "location%5B%24nearSphere%5D%5B%24minDistance%5D",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "ONLINE",
+							"disabled": true
+						},
+						{
+							"key": "systemStatus",
+							"value": "TESTING",
+							"disabled": true
+						},
+						{
+							"key": "productId[$in][0]",
+							"value": "ABCD04350",
+							"disabled": true
+						},
+						{
+							"key": "$select",
+							"value": "productId",
+							"disabled": true
+						},
+						{
+							"key": "$limit",
+							"value": "-1",
+							"disabled": true
+						},
+						{
+							"key": "productId[$regex]",
+							"value": "^fcf5.*",
+							"disabled": true
+						},
+						{
+							"key": "deviceTypeId",
+							"value": "5eca85417aa7fb2860c4f313",
+							"disabled": true
+						},
+						{
+							"key": "systemStatus[$nin][0]",
+							"value": "INUSED",
+							"disabled": true
+						},
+						{
+							"key": "systemStatus[$nin][1]",
+							"value": "INWILD",
+							"disabled": true
+						},
+						{
+							"key": "systemStatus[$nin][2]",
+							"value": "WARRANTY",
+							"disabled": true
+						},
+						{
+							"key": "_id",
+							"value": "635a3bee7f5e970007ecbe57",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][path]",
+							"value": "relationInfos",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][ref]",
+							"value": "relations",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][localField]",
+							"value": "_id",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][foreignField]",
+							"value": "childrenId",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][let][id]",
+							"value": "$_id",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][pipeline][0][$match][$expr][$eq][0]",
+							"value": "$$id",
+							"disabled": true
+						},
+						{
+							"key": "$populate[0][pipeline][0][$match][$expr][$eq][1]",
+							"value": "$childrenId",
+							"disabled": true
+						},
+						{
+							"key": "productId[$options]",
+							"value": "$i",
+							"disabled": true
+						},
+						{
+							"key": "hardwareVersion",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "relationInfos.parentId",
+							"value": "5ab20e3c3be464000764c017",
+							"disabled": true
+						},
+						{
+							"key": "parentId",
+							"value": "5ab20e3c3be464000764c017",
+							"disabled": true
+						},
+						{
+							"key": "manufacturerId",
+							"value": "5ed630077aa7fb1e34c84266",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add devices to user by id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"childrenId\":[\"635a3bee7f5e970007ecbe57\"],\n\t\"childrenType\":\"deviceId\",\n    \"parentId\":[\"63b53c446125db0007ca20fc\"],\n\t\"parentType\":\"userId\",\n\t\"roles\":[]\n}"
+				},
+				"url": {
+					"raw": "https://{{users_service}}:3029/relations",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"relations"
+					]
+				},
+				"description": "Can be use for device add user  (userID)\n\nadd parent or children for own user \n{\n  \"parentId\":\"\", / string or array\n  \"parentType\":\"\", // username, userId , deviceId , productId\n  \"role\":[\"\"] // admin , user , guest\n}\n\n{\n  \"childrenId\":\"\", / string or array\n  \"childrenType\":\"\", // username, userId , deviceId , productId\n  \"role\":[\"\"] // admin , user , guest\n}\n\n\n// add parent and child for other\n\n{\n  \"parentId\":\"\", / string or array\n  \"parentType\":\"\", // username, userId , deviceId , productId\n  \"childrenId\":\"\", / string or array\n  \"childrenType\":\"\", // username, userId , deviceId , productId\n  \"role\":[\"\"] // admin , user , guest\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "remove parent or childen by id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1NDU1YzYxMjVkYjAwMDdjYTIzYjQiLCJ1c2VybmFtZSI6ImJtc191c2VyX3Rlc3RfMiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODg4NDg5LCJleHAiOjEwMzEyODg4NDg5LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI5YjJmYWU1Yy01NGNlLTRlYjMtOGVlYy0xNjQ0MGExMTg4MjAifQ.l8DOK_lUKSMGfHcpWqTOdc0wzGROmyyDkL3T9THw9Bk"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{users_service}}:3029/relations?childrenId=635a3bee7f5e970007ecbe57",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"relations"
+					],
+					"query": [
+						{
+							"key": "parentId",
+							"value": "5b83b97610e32136617aa58b",
+							"disabled": true
+						},
+						{
+							"key": "childrenId[$in][0]",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "childrenProductId",
+							"value": "bms_device_test_1",
+							"disabled": true
+						},
+						{
+							"key": "parentId[$exists]",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "childrenId",
+							"value": "635a3bee7f5e970007ecbe57"
+						}
+					]
+				},
+				"description": "Can be use for remove children  (childrenId) and parent (parentId)"
+			},
+			"response": []
+		},
+		{
+			"name": "get device history",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo"
+					}
+				],
+				"url": {
+					"raw": "https://{{users_service}}:3029/devices-events?deviceId=635a3bee7f5e970007ecbe57&$sort[time]=-1&$limit=50&eventType=UPDATE_PROPERTY&$skip=0",
+					"protocol": "https",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3029",
+					"path": [
+						"devices-events"
+					],
+					"query": [
+						{
+							"key": "deviceId",
+							"value": "635a3bee7f5e970007ecbe57"
+						},
+						{
+							"key": "$sort[time]",
+							"value": "-1"
+						},
+						{
+							"key": "$limit",
+							"value": "50"
+						},
+						{
+							"key": "eventType[$in][0]",
+							"value": "UPDATE_PROPERTY",
+							"disabled": true
+						},
+						{
+							"key": "eventType[$in][1]",
+							"value": "CONTROL_PROPERTY",
+							"disabled": true
+						},
+						{
+							"key": "eventType",
+							"value": "UPDATE_PROPERTY"
+						},
+						{
+							"key": "$skip",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user control device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1NDU1YzYxMjVkYjAwMDdjYTIzYjQiLCJ1c2VybmFtZSI6ImJtc191c2VyX3Rlc3RfMiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODg4NDg5LCJleHAiOjEwMzEyODg4NDg5LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI5YjJmYWU1Yy01NGNlLTRlYjMtOGVlYy0xNjQ0MGExMTg4MjAifQ.l8DOK_lUKSMGfHcpWqTOdc0wzGROmyyDkL3T9THw9Bk"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deviceId\": \"635a3bee7f5e970007ecbe57\",\n    \"propertyCode\": \"W_SWITCH\",\n    \"localId\": \"1\",\n    \"commandString\": \"{\\\"d\\\":1}\",\n    \"waitResponse\": false,\n    \"timeout\": 1000\n}"
+				},
+				"url": {
+					"raw": "http://{{users_service}}:3028/users-control-devices",
+					"protocol": "http",
+					"host": [
+						"{{users_service}}"
+					],
+					"port": "3028",
+					"path": [
+						"users-control-devices"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
