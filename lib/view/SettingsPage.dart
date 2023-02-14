@@ -1181,7 +1181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 "localId": "1",
                 "commandString": "{\"d\":$value}",
                 "waitResponse": false,
-                "timeout": 1000
+                "timeout": 100
               }
           )
       );

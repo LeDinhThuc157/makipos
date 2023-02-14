@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:time/time.dart';
+import 'package:intl/intl.dart';
 
 import '../theme/colors.dart';
 
@@ -77,7 +77,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
               ),
           ),
           Text(
-              "${DateTime.now()}",
+              "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
             style: TextStyle(
               color: Colors.white
             ),

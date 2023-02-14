@@ -200,7 +200,7 @@ class _StatusPageState extends State<StatusPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  child: charbool! ?
+                  child: charbool ?
                   Text(
               'Charge: ON',
                 style: TextStyle(
@@ -231,7 +231,7 @@ class _StatusPageState extends State<StatusPage> {
                       ),
                     ),
                   ),
-                  child: dischabool! ? Text(
+                  child: dischabool ? Text(
                     'Discharge: ON',
                     style: TextStyle(
                       color: secondary,
