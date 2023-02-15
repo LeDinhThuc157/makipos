@@ -81,8 +81,10 @@ class _ControlPageState extends State<ControlPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
-    GetDataControl("charging_mos_switch");
-    GetDataControl("discharge_mos_switch");
+    setState(() {
+      GetDataControl("charging_mos_switch");
+      GetDataControl("discharge_mos_switch");
+    });
     return Scaffold(
       appBar: CustomAppbar(),
       backgroundColor: Colors.white,

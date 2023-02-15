@@ -17,11 +17,13 @@ import '../theme/textvalue.dart';
 import '../widgets/custom_appbar.dart';
 import 'home.dart';
 
-class  StatusPage extends StatefulWidget {
+class StatusPage extends StatefulWidget {
   const StatusPage(
-       this._token,
+    this._token,
   );
+
   final String _token;
+
   @override
   _StatusPageState createState() => _StatusPageState();
 }
@@ -45,21 +47,30 @@ class _StatusPageState extends State<StatusPage> {
   bool charbool = true;
   var discharge;
   bool dischabool = true;
+  var balance;
+  bool balancebool = true;
 
-  Boolvalue(){
-    if(charge == "1"){
+  Boolvalue() {
+    if (charge == "1") {
       charbool = true;
     }
-    if(charge == "0"){
+    if (charge == "0") {
       charbool = false;
     }
-    if(discharge == "1"){
+    if (discharge == "1") {
       dischabool = true;
     }
-    if(discharge == "0"){
+    if (discharge == "0") {
       dischabool = false;
     }
+    if (balance == "0") {
+      balancebool = false;
+    }
+    if (balance == "1") {
+      balancebool = true;
+    }
   }
+
   var bat_vol;
   var bat_cap;
   var bat_capacity;
@@ -70,22 +81,24 @@ class _StatusPageState extends State<StatusPage> {
   var system_working_time;
   var bat_current;
   var mos_temp;
+
+  List cells_vol = [];
   String id = "63be79a13ea8bc0007797118";
+
   postData() async {
     try {
       //4.Thông tin thiết bị.
 
       var responseGet_Listdevice = await http.get(
         Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
-        headers: {
-          "Authorization": widget._token.toString()
-        },
+        headers: {"Authorization": widget._token.toString()},
       );
       print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
-      print("Time: ${userMap["propertiesValue"]["uptime"]}");
+      // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
 
       setState(() {
+        cells_vol = userMap["propertiesValue"]["cells_vol"];
         cell_1_vol = userMap["propertiesValue"]["cell_1_vol"].toString();
         cell_2_vol = userMap["propertiesValue"]["cell_2_vol"].toString();
         cell_3_vol = userMap["propertiesValue"]["cell_3_vol"].toString();
@@ -107,12 +120,20 @@ class _StatusPageState extends State<StatusPage> {
         bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
         bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
         box_temp = userMap["propertiesValue"]["box_temp"].toString();
-        system_working_time = userMap["propertiesValue"]["system_working_time"].toString();
-        bat_current = userMap["propertiesValue"]["bat_current"].toString();
+        system_working_time =
+            userMap["propertiesValue"]["system_working_time"].toString();
         charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
-        discharge = userMap["propertiesValue"]["discharge_mos_switch"].toString();
+        discharge =
+            userMap["propertiesValue"]["discharge_mos_switch"].toString();
+        balance =
+            userMap["propertiesValue"]["active_equalization_switch"].toString();
         mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+        bat_current =
+            (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
+                    0.01)
+                .toString();
       });
+      print(cells_vol);
     } catch (e) {
       print(e);
     }
@@ -174,9 +195,10 @@ class _StatusPageState extends State<StatusPage> {
     // print("StatusUsers: ${responseGet_User.statusCode}");
     // print("BodyUsers: ${responseGet_User.body}");
   }
+
   @override
   Widget build(BuildContext context) {
-    double  heightR,widthR;
+    double heightR, widthR;
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
@@ -188,84 +210,96 @@ class _StatusPageState extends State<StatusPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 5*heightR,),
-
+            SizedBox(
+              height: 5 * heightR,
+            ),
 
             Container(
-              height: 50*heightR,
-              padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR),
+              height: 50 * heightR,
+              padding:
+                  EdgeInsets.only(left: 300 * heightR, right: 300 * heightR),
               color: mainColor,
               child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  child: charbool ?
-                  Text(
-              'Charge: ON',
-                style: TextStyle(
-                  color: secondary,
-                  fontSize: 24*heightR,
-                ),
-              ): Text(
-                    'Charge: OFF',
-                    style: TextStyle(
-                      color: secondary,
-                      fontSize: 24*heightR,
-                    ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    child: charbool
+                        ? Text(
+                            'Charge: ON',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                          )
+                        : Text(
+                            'Charge: OFF',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                          ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      right: BorderSide(
-                          color: Colors.green,
-                          width: 2.0,
-                          style: BorderStyle.solid
+                  Container(
+                    padding: EdgeInsets.only(
+                        left: 300 * heightR, right: 300 * heightR),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        right: BorderSide(
+                            color: Colors.green,
+                            width: 2.0,
+                            style: BorderStyle.solid),
+                        left: BorderSide(
+                            color: Colors.green,
+                            width: 2.0,
+                            style: BorderStyle.solid),
                       ),
-                      left: BorderSide(
-                          color: Colors.green,
-                          width: 2.0,
-                          style: BorderStyle.solid
-                      ),
                     ),
+                    child: dischabool
+                        ? Text(
+                            'Discharge: ON',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                          )
+                        : Text(
+                            'Discharge: OFF',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                          ),
                   ),
-                  child: dischabool ? Text(
-                    'Discharge: ON',
-                    style: TextStyle(
-                      color: secondary,
-                      fontSize: 24*heightR,
-                    ),
-                  ):Text(
-                    'Discharge: OFF',
-                    style: TextStyle(
-                      color: secondary,
-                      fontSize: 24*heightR,
-                    ),
+                  Container(
+                    child: balancebool
+                        ? Text(
+                            'Balance: ON',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                          )
+                        : Text(
+                            'Balance: OFF',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                          ),
                   ),
-                ),
-                Container(
-                  child: Text(
-                    'Balance: ON',
-                    style: TextStyle(
-                      color: secondary,
-                      fontSize: 24*heightR,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                ],
+              ),
             ),
             SizedBox(
-              height: 5*heightR,
+              height: 5 * heightR,
             ),
             Container(
-              padding: EdgeInsets.only(left: 400*heightR,right: 200*heightR),
+              padding:
+                  EdgeInsets.only(left: 400 * heightR, right: 200 * heightR),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.black54
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black54),
               child: Row(
                 children: [
                   Container(
@@ -278,7 +312,7 @@ class _StatusPageState extends State<StatusPage> {
                     ),
                   ),
                   SizedBox(
-                    width: 20*heightR,
+                    width: 20 * heightR,
                   ),
                   Container(
                     child: Row(
@@ -287,54 +321,34 @@ class _StatusPageState extends State<StatusPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text_title(
-                                data:'MOS Temp:'
-                            ),
-                            Text_title(
-                                data:'Battery Capacity:'
-                            ),
-                            Text_title(
-                                data:'Cycle Capacity:'
-                            ),
-                            Text_title(
-                                data:'Ave. Cell Volt(Chưa có):'
-                            ),
-                            Text_title(
-                                data:'Battery T2:'
-                            ),
+                            Text_title(data: 'MOS Temp:'),
+                            Text_title(data: 'Battery Capacity:'),
+                            Text_title(data: 'Cycle Capacity:'),
+                            Text_title(data: 'Ave. Cell Volt(Chưa có):'),
+                            Text_title(data: 'Battery T2:'),
                           ],
                         ),
                         SizedBox(
-                          width: 5*heightR,
+                          width: 5 * heightR,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text_Value(
-                                data: '$mos_temp°C',
+                              data: '$mos_temp°C',
                             ),
-                            Text_Value(
-                                data:'$bat_cap AH'
-                            ),
-                            Text_Value(
-                                data:'$bat_capacity AH'
-                            ),
-                            Text_Value(
-                                data:'3.384V'
-                            ),
-                            Text_Value(
-                                data:'$bat_temp °C'
-                            ),
+                            Text_Value(data: '$bat_cap AH'),
+                            Text_Value(data: '$bat_capacity AH'),
+                            Text_Value(data: '3.384V'),
+                            Text_Value(data: '$bat_temp °C'),
                           ],
                         ),
                       ],
                     ),
                   ),
-
                   SizedBox(
-                    width: 400*heightR,
+                    width: 400 * heightR,
                   ),
-
                   Container(
                     child: Row(
                       children: [
@@ -342,21 +356,13 @@ class _StatusPageState extends State<StatusPage> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text_title(
-                                data:'Remain Battery:'
-                            ),
+                            Text_title(data: 'Remain Battery:'),
                             // Text_title(
                             //     data:'Remain Capacity(Khong co):'
                             // ),
-                            Text_title(
-                                data:'Cycle Count:'
-                            ),
-                            Text_title(
-                                data:'Cell Volt.Diff:'
-                            ),
-                            Text_title(
-                                data:'Battery T1:'
-                            ),
+                            Text_title(data: 'Cycle Count:'),
+                            Text_title(data: 'Cell Volt.Diff:'),
+                            Text_title(data: 'Battery T1:'),
                             // Text_title(
                             //     data:'Battery T3(Khoong co):'
                             // ),
@@ -366,13 +372,11 @@ class _StatusPageState extends State<StatusPage> {
                             // Text_title(
                             //     data:'Charg.Plugged(Khong co):'
                             // ),
-                            Text_title(
-                                data:'Time Emerg:'
-                            ),
+                            Text_title(data: 'Time Emerg:'),
                           ],
                         ),
                         SizedBox(
-                          width: 5*heightR,
+                          width: 5 * heightR,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,15 +387,9 @@ class _StatusPageState extends State<StatusPage> {
                             // Text_Value(
                             //     data:'396.0AH'
                             // ),
-                            Text_Value(
-                                data:'$bat_cycles'
-                            ),
-                            Text_Value(
-                                data:'0.002V'
-                            ),
-                            Text_Value(
-                                data:'$box_temp°C'
-                            ),
+                            Text_Value(data: '$bat_cycles'),
+                            Text_Value(data: '0.002V'),
+                            Text_Value(data: '$box_temp°C'),
                             // Text_Value(
                             //     data:'23.5°C'
                             // ),
@@ -401,16 +399,14 @@ class _StatusPageState extends State<StatusPage> {
                             // Text_Value(
                             //     data:'Plugged'
                             // ),
-                            Text_Value(
-                                data:'$system_working_time'
-                            ),
+                            Text_Value(data: '$system_working_time'),
                           ],
                         ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    width: 20*heightR,
+                    width: 20 * heightR,
                   ),
                   Container(
                     child: Text(
@@ -421,563 +417,649 @@ class _StatusPageState extends State<StatusPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
+            SizedBox(
+              height: 20*heightR,
+            ),
             Container(
-
               child: Column(
                 children: [
-                  Text(
-                    "Cells Voltage",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.tealAccent,
-                      fontSize: 36*heightR,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: 230 * heightR,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Cells Voltage",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.tealAccent,
+                        fontSize: 36 * heightR,
+                      ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(),
-                      Container(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "01",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_1_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "02",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_2_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "03",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_3_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "04",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_4_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "05",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_5_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "06",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_6_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "07",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_7_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "08",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_8_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "09",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_9_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "10",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_10_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "11",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_11_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "12",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_12_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "13",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_13_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "10",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_10_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "11",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_11_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "12",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_12_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "13",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_13_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20*heightR,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  child: Text(
-                                    "13",
-                                    style:TextStyle(
-                                      color: secondary,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: blue,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  width: 40*heightR,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(
-                                  width: 10*heightR,
-                                ),
-                                Text("${cell_13_vol}V",
-                                  style: TextStyle(
-                                    color: green,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(),
-                    ],
+                  SizedBox(
+                    height: 20*heightR,
                   ),
+                  Container(
+                    height: 600 * heightR,
+                    width: 1200 * heightR,
+                    color: Colors.black54,
+                    child: ListView.builder(
+                        itemCount: cells_vol.length ~/ 2,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 40 * heightR,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      "${2*index}",
+                                      style: TextStyle(
+                                        color: secondary,
+                                        fontSize: 25*heightR
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: blue,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    width: 60 * heightR,
+                                    alignment: Alignment.center,
+                                  ),
+                                  SizedBox(
+                                    width: 10 * heightR,
+                                  ),
+                                  Text(
+                                    "${cells_vol[2*index]} mV",
+                                    style: TextStyle(
+                                      color: green,
+                                      fontSize: 25*heightR
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 80 * heightR,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      "${2*index + 1}",
+                                      style: TextStyle(
+                                        color: secondary,
+                                          fontSize: 25*heightR
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: blue,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    width: 60 * heightR,
+                                    alignment: Alignment.center,
+                                  ),
+                                  SizedBox(
+                                    width: 10 * heightR,
+                                  ),
+                                  Text(
+                                    "${cells_vol[2*index+1]} mV",
+                                    style: TextStyle(
+                                      color: green,
+                                        fontSize: 25*heightR
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        }),
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     SizedBox(),
+                  //     Container(
+                  //       child: Column(
+                  //         children: [
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "01",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_1_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "02",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_2_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "03",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_3_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "04",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_4_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "05",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_5_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "06",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_6_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "07",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_7_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "08",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_8_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "09",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_9_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     Container(
+                  //       child: Column(
+                  //         children: [
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "10",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_10_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "11",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_11_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "12",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_12_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "13",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_13_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "10",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_10_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "11",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_11_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "12",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_12_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "13",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_13_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20*heightR,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Container(
+                  //                 child: Text(
+                  //                   "13",
+                  //                   style:TextStyle(
+                  //                     color: secondary,
+                  //                   ),
+                  //                 ),
+                  //                 decoration: BoxDecoration(
+                  //                   color: blue,
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 width: 40*heightR,
+                  //                 alignment: Alignment.center,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 10*heightR,
+                  //               ),
+                  //               Text("${cell_13_vol}V",
+                  //                 style: TextStyle(
+                  //                   color: green,
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     SizedBox(),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
@@ -996,11 +1078,4 @@ class _StatusPageState extends State<StatusPage> {
       ), //Center
     );
   }
-
-
-
-
 }
-
-
-

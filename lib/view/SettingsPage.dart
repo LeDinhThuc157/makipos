@@ -36,6 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
   TextEditingController chargeOTP = TextEditingController();
   TextEditingController dischargeOTP = TextEditingController();
   TextEditingController chargeUTP = TextEditingController();
+  TextEditingController chargeUTPR = TextEditingController();
   TextEditingController startBalanceVolt = TextEditingController();
 
   var _calibratingVolt;
@@ -50,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
   var _chargeOTP;
   var _dischargeOTP;
   var _chargeUTP;
+  var _chargeUTPR;
   var _startBalanceVolt;
 
   postData() async {
@@ -76,6 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
         _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
         _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
         _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
+        _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
         _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
         _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
         _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
@@ -506,22 +509,22 @@ class _SettingsPageState extends State<SettingsPage> {
                             SizedBox(height: 20*heightR,),
                             Container(
                               height: _height_1,
-                              child: Text_title(data:"Cell OVP(V):"),
+                              child: Text_title(data:"Cell OVP(mV):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
                               height: _height_1,
-                              child: Text_title(data:"Cell OVPR(V):"),
+                              child: Text_title(data:"Cell OVPR(mV):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
                               height: _height_1,
-                              child: Text_title(data:"Cell UVPR(V):"),
+                              child: Text_title(data:"Cell UVPR(mV):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
                               height: _height_1,
-                              child: Text_title(data:"Cell UVP(V):"),
+                              child: Text_title(data:"Cell UVP(mV):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
@@ -552,6 +555,11 @@ class _SettingsPageState extends State<SettingsPage> {
                             Container(
                               height: _height_1,
                               child: Text_title(data:"Charge UTP(°C):"),
+                            ),
+                            SizedBox(height: 20*heightR,),
+                            Container(
+                              height: _height_1,
+                              child: Text_title(data:"Charge UTPR(°C):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
@@ -732,6 +740,23 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                 ),
                                 controller: chargeUTP,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.cyanAccent),
+                              ),
+                            ),
+                            SizedBox(height: 20*heightR,),
+                            Container(
+                              width: 260*heightR,
+                              height: _height_1,
+                              // color: Colors.red,
+                              child: TextField(
+                                decoration:  InputDecoration(
+                                  labelText: "$_chargeUTPR",
+                                  labelStyle: TextStyle(
+                                    color: Colors.cyanAccent,
+                                  ),
+                                ),
+                                controller: chargeUTPR,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.cyanAccent),
                               ),
@@ -1100,6 +1125,41 @@ class _SettingsPageState extends State<SettingsPage> {
                                       btnCancelOnPress: () {},
                                       btnOkOnPress: () {
                                         postDataSetting(id,"charge_cryo_protect",int.parse(chargeUTP.text));
+                                      },
+                                    ).show();
+                                  },
+                                  child: Text(
+                                    "Ok",
+                                    style: TextStyle(
+                                        color: Colors.white
+                                    ),
+                                  )
+                              ),
+                            ),
+                            SizedBox(height: 20*heightR,),
+                            Container(
+                              height: _height_1,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.black87
+                              ),
+                              child: TextButton(
+                                  onPressed: (){
+                                    AwesomeDialog(
+                                      context: context,
+                                      keyboardAware: true,
+                                      dismissOnBackKeyPress: false,
+                                      dialogType: DialogType.warning,
+                                      animType: AnimType.bottomSlide,
+                                      btnCancelText: "No, cancel",
+                                      btnOkText: "Yes, continue",
+                                      title: 'Continue update!',
+                                      // padding: const EdgeInsets.all(5.0),
+                                      desc:
+                                      'Charge UTPR:${int.parse(chargeUTPR.text)}',
+                                      btnCancelOnPress: () {},
+                                      btnOkOnPress: () {
+                                        postDataSetting(id,"recover_val_charge_cryoprotect",int.parse(chargeUTPR.text));
                                       },
                                     ).show();
                                   },
