@@ -1,8 +1,7 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'dart:html';
-
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -82,6 +81,8 @@ class _StatusPageState extends State<StatusPage> {
   var bat_current;
   var mos_temp;
 
+  var ave_cell;
+  var cell_diff;
   List cells_vol = [];
   String id = "63be79a13ea8bc0007797118";
 
@@ -99,19 +100,6 @@ class _StatusPageState extends State<StatusPage> {
 
       setState(() {
         cells_vol = userMap["propertiesValue"]["cells_vol"];
-        cell_1_vol = userMap["propertiesValue"]["cell_1_vol"].toString();
-        cell_2_vol = userMap["propertiesValue"]["cell_2_vol"].toString();
-        cell_3_vol = userMap["propertiesValue"]["cell_3_vol"].toString();
-        cell_4_vol = userMap["propertiesValue"]["cell_4_vol"].toString();
-        cell_5_vol = userMap["propertiesValue"]["cell_5_vol"].toString();
-        cell_6_vol = userMap["propertiesValue"]["cell_6_vol"].toString();
-        cell_7_vol = userMap["propertiesValue"]["cell_7_vol"].toString();
-        cell_8_vol = userMap["propertiesValue"]["cell_8_vol"].toString();
-        cell_9_vol = userMap["propertiesValue"]["cell_9_vol"].toString();
-        cell_10_vol = userMap["propertiesValue"]["cell_10_vol"].toString();
-        cell_11_vol = userMap["propertiesValue"]["cell_11_vol"].toString();
-        cell_12_vol = userMap["propertiesValue"]["cell_12_vol"].toString();
-        cell_13_vol = userMap["propertiesValue"]["cell_13_vol"].toString();
 
         bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
         bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
@@ -132,6 +120,24 @@ class _StatusPageState extends State<StatusPage> {
             (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
                     0.01)
                 .toString();
+        var min = cells_vol[0];
+        var max = cells_vol[0];
+        var sum = cells_vol.reduce((value, current) => value + current);
+        for (var i = 0; i < cells_vol.length; i++) {
+          // Calculate sum
+          // sum += cells_vol[i];
+          // Checking for largest value in the list
+          if (cells_vol[i] > max) {
+            max = cells_vol[i];
+          }
+          // Checking for smallest value in the list
+          if (cells_vol[i] < min) {
+            min = cells_vol[i];
+          }
+        }
+        cell_diff = (max - min)*0.001;
+        ave_cell = sum / (cells_vol.length);
+        print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
       });
       print(cells_vol);
     } catch (e) {
@@ -213,16 +219,17 @@ class _StatusPageState extends State<StatusPage> {
             SizedBox(
               height: 5 * heightR,
             ),
-
             Container(
               height: 50 * heightR,
-              padding:
-                  EdgeInsets.only(left: 300 * heightR, right: 300 * heightR),
+              // width: 2400 * heightR,
+              // padding:
+              //     EdgeInsets.only(left: 300 * heightR, right: 300 * heightR),
               color: mainColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(),
                   Container(
                     child: charbool
                         ? Text(
@@ -241,20 +248,6 @@ class _StatusPageState extends State<StatusPage> {
                           ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(
-                        left: 300 * heightR, right: 300 * heightR),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                            color: Colors.green,
-                            width: 2.0,
-                            style: BorderStyle.solid),
-                        left: BorderSide(
-                            color: Colors.green,
-                            width: 2.0,
-                            style: BorderStyle.solid),
-                      ),
-                    ),
                     child: dischabool
                         ? Text(
                             'Discharge: ON',
@@ -288,6 +281,7 @@ class _StatusPageState extends State<StatusPage> {
                             ),
                           ),
                   ),
+                  SizedBox(),
                 ],
               ),
             ),
@@ -295,24 +289,21 @@ class _StatusPageState extends State<StatusPage> {
               height: 5 * heightR,
             ),
             Container(
-              padding:
-                  EdgeInsets.only(left: 400 * heightR, right: 200 * heightR),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.black54),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(),
                   Container(
                     child: Text(
                       "$bat_vol mV",
                       style: TextStyle(
                         color: Colors.greenAccent[400],
-                        fontSize: 50,
+                        fontSize: 60*heightR,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20 * heightR,
                   ),
                   Container(
                     child: Row(
@@ -324,13 +315,13 @@ class _StatusPageState extends State<StatusPage> {
                             Text_title(data: 'MOS Temp:'),
                             Text_title(data: 'Battery Capacity:'),
                             Text_title(data: 'Cycle Capacity:'),
-                            Text_title(data: 'Ave. Cell Volt(Chưa có):'),
+                            Text_title(data: 'Ave. Cell Volt:'),
                             Text_title(data: 'Battery T2:'),
                           ],
                         ),
-                        SizedBox(
-                          width: 5 * heightR,
-                        ),
+                        // SizedBox(
+                        //   width: 5 * heightR,
+                        // ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -339,16 +330,14 @@ class _StatusPageState extends State<StatusPage> {
                             ),
                             Text_Value(data: '$bat_cap AH'),
                             Text_Value(data: '$bat_capacity AH'),
-                            Text_Value(data: '3.384V'),
+                            Text_Value(data: '$ave_cell V'),
                             Text_Value(data: '$bat_temp °C'),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 400 * heightR,
-                  ),
+                  SizedBox(),
                   Container(
                     child: Row(
                       children: [
@@ -375,9 +364,9 @@ class _StatusPageState extends State<StatusPage> {
                             Text_title(data: 'Time Emerg:'),
                           ],
                         ),
-                        SizedBox(
-                          width: 5 * heightR,
-                        ),
+                        // SizedBox(
+                        //   width: 5 * heightR,
+                        // ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -388,7 +377,7 @@ class _StatusPageState extends State<StatusPage> {
                             //     data:'396.0AH'
                             // ),
                             Text_Value(data: '$bat_cycles'),
-                            Text_Value(data: '0.002V'),
+                            Text_Value(data: '$cell_diff V'),
                             Text_Value(data: '$box_temp°C'),
                             // Text_Value(
                             //     data:'23.5°C'
@@ -405,18 +394,16 @@ class _StatusPageState extends State<StatusPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 20 * heightR,
-                  ),
                   Container(
                     child: Text(
                       '$bat_current A',
                       style: TextStyle(
                         color: Colors.greenAccent[400],
-                        fontSize: 50,
+                        fontSize: 60 *heightR,
                       ),
                     ),
                   ),
+                  SizedBox(),
                 ],
               ),
             ),

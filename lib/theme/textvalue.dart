@@ -7,11 +7,14 @@ class Text_Value extends StatelessWidget {
   final  data;
   @override
   Widget build(BuildContext context) {
+    double heightR;
+    heightR = MediaQuery.of(context).size.height / 1080;
     return Text(
         data,
       style: TextStyle(
         color: Colors.greenAccent,
-        fontWeight: FontWeight.bold
+        fontWeight: FontWeight.bold,
+        fontSize: 24*heightR,
       ),
     );
   }
@@ -20,12 +23,16 @@ class Text_Value extends StatelessWidget {
 class Text_title extends StatelessWidget {
   const Text_title({super.key, required this.data});
   final  data;
+
   @override
   Widget build(BuildContext context) {
+    double heightR;
+    heightR = MediaQuery.of(context).size.height / 1080;
     return Text(
       data,
       style: TextStyle(
           color: Colors.white,
+        fontSize: 24 * heightR,
       ),
     );
   }

@@ -18,6 +18,21 @@ class  SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
+  var bat_vol;
+  var bat_cap;
+  var bat_capacity;
+  var bat_temp;
+  var bat_percent;
+  var bat_cycles;
+  var box_temp;
+  var system_working_time;
+  var bat_current;
+  var mos_temp;
+  var ave_cell;
+  var cell_diff;
+  List cells_vol = [];
+
   // Basic setting text
   TextEditingController  cellcount = TextEditingController();
   var _cellcount;
@@ -60,11 +75,12 @@ class _SettingsPageState extends State<SettingsPage> {
 
       var responseGet_Listdevice = await http.get(
         Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
-        headers: {
-          "Authorization": widget._token.toString()
-        },
+        headers: {"Authorization": widget._token.toString()},
       );
+      print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
+      // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
+
       setState(() {
         _calibratingVolt = userMap["propertiesValue"]["bat_vol"].toString();
         _calibratingCurr = userMap["propertiesValue"]["bat_current"].toString();
@@ -82,7 +98,42 @@ class _SettingsPageState extends State<SettingsPage> {
         _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
         _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
         _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
+        //Status
+        cells_vol = userMap["propertiesValue"]["cells_vol"];
+        bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+        bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+        bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+        bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+        bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+        bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+        box_temp = userMap["propertiesValue"]["box_temp"].toString();
+        system_working_time =
+            userMap["propertiesValue"]["system_working_time"].toString();
+        mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+        bat_current =
+            (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
+                0.01)
+                .toString();
+        var min = cells_vol[0];
+        var max = cells_vol[0];
+        var sum = cells_vol.reduce((value, current) => value + current);
+        for (var i = 0; i < cells_vol.length; i++) {
+          // Calculate sum
+          // sum += cells_vol[i];
+          // Checking for largest value in the list
+          if (cells_vol[i] > max) {
+            max = cells_vol[i];
+          }
+          // Checking for smallest value in the list
+          if (cells_vol[i] < min) {
+            min = cells_vol[i];
+          }
+        }
+        cell_diff = (max - min)*0.001;
+        ave_cell = sum / (cells_vol.length);
+        print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
       });
+      print(cells_vol);
     } catch (e) {
       print(e);
     }
@@ -163,81 +214,121 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             SizedBox(height: 5*heightR,),
             Container(
-              height: 125*heightR,
-              padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR),
-              color: Colors.black45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black54),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR,top: 15*heightR,bottom: 15*heightR),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(
-                          'Discharge: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 18*heightR,
-                          ),
-                        ),
+                  SizedBox(),
+                  Container(
+                    child: Text(
+                      "$bat_vol mV",
+                      style: TextStyle(
+                        color: Colors.greenAccent[400],
+                        fontSize: 60*heightR,
                       ),
-                      SizedBox(height: 20*heightR,),
-                      Container(
-                        padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR,top: 15*heightR,bottom: 15*heightR),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(
-                          'Discharge: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 18*heightR,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR,top: 15*heightR,bottom: 15*heightR),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(15),
+                  Container(
+                    child: Row(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text_title(data: 'MOS Temp:'),
+                            Text_title(data: 'Battery Capacity:'),
+                            Text_title(data: 'Cycle Capacity:'),
+                            Text_title(data: 'Ave. Cell Volt:'),
+                            Text_title(data: 'Battery T2:'),
+                          ],
                         ),
-                        child: Text(
-                          'Discharge: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 18*heightR,
-                          ),
+                        // SizedBox(
+                        //   width: 5 * heightR,
+                        // ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text_Value(
+                              data: '$mos_temp°C',
+                            ),
+                            Text_Value(data: '$bat_cap AH'),
+                            Text_Value(data: '$bat_capacity AH'),
+                            Text_Value(data: '$ave_cell V'),
+                            Text_Value(data: '$bat_temp °C'),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 20*heightR,),
-                      Container(
-                        padding: EdgeInsets.only(left: 300*heightR,right: 300*heightR,top: 15*heightR,bottom: 15*heightR),
-                        decoration: BoxDecoration(
-                          color: Colors.black87,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(
-                          'Discharge: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 18*heightR,
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  SizedBox(),
+                  Container(
+                    child: Row(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text_title(data: 'Remain Battery:'),
+                            // Text_title(
+                            //     data:'Remain Capacity(Khong co):'
+                            // ),
+                            Text_title(data: 'Cycle Count:'),
+                            Text_title(data: 'Cell Volt.Diff:'),
+                            Text_title(data: 'Battery T1:'),
+                            // Text_title(
+                            //     data:'Battery T3(Khoong co):'
+                            // ),
+                            // Text_title(
+                            //     data:'Heating Status(Khong co):'
+                            // ),
+                            // Text_title(
+                            //     data:'Charg.Plugged(Khong co):'
+                            // ),
+                            Text_title(data: 'Time Emerg:'),
+                          ],
+                        ),
+                        // SizedBox(
+                        //   width: 5 * heightR,
+                        // ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text_Value(
+                              data: '$bat_percent%',
+                            ),
+                            // Text_Value(
+                            //     data:'396.0AH'
+                            // ),
+                            Text_Value(data: '$bat_cycles'),
+                            Text_Value(data: '$cell_diff V'),
+                            Text_Value(data: '$box_temp°C'),
+                            // Text_Value(
+                            //     data:'23.5°C'
+                            // ),
+                            // Text_Value(
+                            //     data:'OFF'
+                            // ),
+                            // Text_Value(
+                            //     data:'Plugged'
+                            // ),
+                            Text_Value(data: '$system_working_time'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      '$bat_current A',
+                      style: TextStyle(
+                        color: Colors.greenAccent[400],
+                        fontSize: 60 *heightR,
+                      ),
+                    ),
+                  ),
+                  SizedBox(),
                 ],
               ),
             ),
