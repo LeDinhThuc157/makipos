@@ -91,7 +91,6 @@ class _ControlPageState extends State<ControlPage> {
       body: Column(
         children: [
           Container(
-            height: 200*heightR,
             child: Center(
                 child: SwitchListTile(
                     title: Row(
@@ -121,7 +120,6 @@ class _ControlPageState extends State<ControlPage> {
             ),
           ),
           Container(
-            height: 200*heightR,
             child: Center(
                 child: SwitchListTile(
                     title: Row(
@@ -151,7 +149,6 @@ class _ControlPageState extends State<ControlPage> {
             ),
           ),
           Container(
-            height: 200*heightR,
             child: ListView(
               padding: EdgeInsets.all(8),
               children: <Widget>[

@@ -152,6 +152,12 @@
       "languageVersion": "2.13"
     },
     {
+      "name": "math_expressions",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/math_expressions-2.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "menu_button",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/menu_button-1.4.2+1",
       "packageUri": "lib/",
@@ -290,7 +296,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-15T09:24:37.656711Z",
+  "generated": "2023-02-17T05:49:35.696217Z",
   "generator": "pub",
   "generatorVersion": "2.18.1"
 }

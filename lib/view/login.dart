@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
+import 'create_user.dart';
 import 'home.dart';
 
 void main() async {
@@ -195,9 +196,10 @@ class _SignPageState extends State<SignPage> {
                             style: TextStyle(fontSize: 110*curR),
                           ),
                           onPressed: () {
-                            // Navigator.push(context, MaterialPageRoute(
-                            //   builder: (context) => StatusPage(),
-                            // ));
+
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => CreateUser(),
+                            ));
                           },
                         )
                     ),
