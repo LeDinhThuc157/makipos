@@ -74,18 +74,21 @@ class _CustomAppbarState extends State<CustomAppbar> {
               icon: Icon(
                 Icons.menu,
                 color: secondary,
+                size: 30*heightR,
               ),
           ),
           Text(
               "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
             style: TextStyle(
-              color: Colors.white
+              color: Colors.white,
+              fontSize: 24*heightR
             ),
           ),
           PopupMenuButton(
               icon: Icon(
                   Icons.more_vert,
                 color: secondary,
+                size: 30*heightR,
               ),
               // color: secondary,
               // elevation: 20,

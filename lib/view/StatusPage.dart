@@ -144,62 +144,6 @@ class _StatusPageState extends State<StatusPage> {
       print(e);
     }
 
-    //1.Thông tin tạo tài khoản login.
-//       var response_user_login = await http.post(
-//           Uri.parse(
-//               "https://smarthome.test.makipos.net:3029/users-service/users/authentication?_v=1"),
-//           headers: {
-//             "Content-type": "application/json; charset=utf-8",
-//             // "Accept": "application/json",
-//             // "Ocp-Apim-Subscription-Key": "63b5363c0a3a520007fa2ab9",
-//             // "Ocp-Apim-Trace": "true"
-//           },
-//           body: jsonEncode({
-//             "authCode": false,
-//             "strategy": "local",
-//             "username": "BMS_admin",
-//             "password": "01012023"
-//           })
-//       );
-//       print("Status_response_user_login:${response_user_login.statusCode}");
-//       print("LoginUsers:${response_user_login.body}");
-
-//2.Tạo tài khoản.
-
-    // var response_create_user = await http.post(
-    //     Uri.parse("https://smarthome.test.makipos.net:3029/users"),
-    //     headers: {
-    //       "Content-type": "application/json; charset=utf-8",
-    //       // "Accept": "application/json",
-    //       // "Ocp-Apim-Subscription-Key": "63b5363c0a3a520007fa2ab9",
-    //       // "Ocp-Apim-Trace": "true"
-    //     },
-    //     body: jsonEncode(
-    //         {
-    //       "username": "bms_user_test_11",
-    //       "password": "123456789",
-    //       "manufacturerId": "63b5363c0a3a520007fa2ab9",
-    //       "roles": [
-    //         "user"
-    //       ],
-    //     }
-    //     ));
-    // print("Body_response_create:${response_create_user.body}");
-    // print("Status_response_create:${response_create_user.statusCode}");
-    // print("CreateUsers:${create["message"]["message"]}");
-
-//3.Thông tin all tài khoản.
-
-    // var responseGet_User = await http.get(
-    //   Uri.parse("https://smarthome.test.makipos.net:3029/users"),
-    //   headers: {
-    //     // "Accept": "application/json",
-    //     "Authorization":
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo",
-    //   },
-    // );
-    // print("StatusUsers: ${responseGet_User.statusCode}");
-    // print("BodyUsers: ${responseGet_User.body}");
   }
 
   @override
@@ -435,7 +379,10 @@ class _StatusPageState extends State<StatusPage> {
                   Container(
                     height: 600 * heightR,
                     width: 1200 * heightR,
-                    color: Colors.black54,
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: ListView.builder(
                         itemCount: cells_vol.length ~/ 2,
                         itemBuilder: (BuildContext context, int index) {
@@ -1066,3 +1013,4 @@ class _StatusPageState extends State<StatusPage> {
     );
   }
 }
+

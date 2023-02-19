@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../responsive/mobile_body.dart';
+import '../responsive/responsive_layout.dart';
 import '../widgets/bottombar_item.dart';
 import '../theme/colors.dart';
 import 'ControlPage.dart';
@@ -136,8 +138,11 @@ class _HomeState extends State<Home> {
       IndexedStack(
         index: activeTab,
         children: <Widget>[
-          StatusPage(widget._token.toString()),
-          SettingsPage(widget._token.toString()),
+          ResponsiveLayout(mobileBody: MymobileBodySTT(widget._token.toString()), desktopBody: StatusPage(widget._token.toString())),
+          ResponsiveLayout(mobileBody: MymobileBodySTS(widget._token.toString()), desktopBody: SettingsPage(widget._token.toString())),
+
+          // StatusPage(widget._token.toString()),
+          // SettingsPage(widget._token.toString()),
           ControlPage(Icon(Icons.cached), 'Cha',widget._token.toString(),"za"),
         ],
       );

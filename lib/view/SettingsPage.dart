@@ -334,8 +334,15 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: 250 * heightR,
+                    alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 5*heightR,bottom: 5*heightR),
                     child: Text(
                       "Basic Settings",
@@ -346,9 +353,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20*heightR,
+                  ),
                   Container(
+                    width: 1200 * heightR,
                     decoration: BoxDecoration(
-                      color: Colors.black54
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -573,10 +585,20 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 20*heightR,
+            ),
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: 250 * heightR,
+                    alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 5*heightR,bottom: 5*heightR),
                     child: Text(
                       "Advance Settings",
@@ -587,9 +609,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 20*heightR,
+                  ),
                   Container(
+                    width: 1200*heightR,
                     decoration: BoxDecoration(
-                        color: Colors.black54
+                        color: Colors.black54,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

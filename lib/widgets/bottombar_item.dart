@@ -15,6 +15,9 @@ class BottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double  heightR,widthR;
+    heightR = MediaQuery.of(context).size.height / 1080; //v26
+    widthR = MediaQuery.of(context).size.width / 2400;
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -22,22 +25,22 @@ class BottomBarItem extends StatelessWidget {
                 isNotified ?
                 new Stack(
                   children: <Widget>[
-                    new Icon(icon, size: 26, color: isActive ? activeColor : activeColor.withOpacity(.4),),
+                    new Icon(icon, size: 56*heightR, color: isActive ? activeColor : activeColor.withOpacity(.4),),
                     new Positioned( 
-                      top: 5.0,
-                      right: 0,
-                      left: 8.0,
+                      top: 5.0*heightR,
+                      right: 0*heightR,
+                      left: 8.0*heightR,
                       child: 
                         Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: new Icon(Icons.brightness_1, size: 10.0, color: Colors.red),
+                          padding: EdgeInsets.only(left: 20*heightR),
+                          child: new Icon(Icons.brightness_1, size: 10.0*heightR, color: Colors.red),
                         ),
                     )
                   ]
                 ) 
                 :
-                new Icon(icon, size: 34, color: isActive ? activeColor : activeColor.withOpacity(.4),),
-                Text(title, style: TextStyle(fontSize: 14, color: isActive ? activeColor : activeColor.withOpacity(.5))),
+                new Icon(icon, size: 54*heightR, color: isActive ? activeColor : activeColor.withOpacity(.4),),
+                Text(title, style: TextStyle(fontSize: 22*heightR, color: isActive ? activeColor : activeColor.withOpacity(.5))),
               ],
             ),
     );  
