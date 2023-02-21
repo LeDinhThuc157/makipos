@@ -245,7 +245,7 @@ class _StatusPageState extends State<StatusPage> {
                       "$bat_vol mV",
                       style: TextStyle(
                         color: Colors.greenAccent[400],
-                        fontSize: 60*heightR,
+                        fontSize: 30*heightR,
                       ),
                     ),
                   ),
@@ -343,7 +343,7 @@ class _StatusPageState extends State<StatusPage> {
                       '$bat_current A',
                       style: TextStyle(
                         color: Colors.greenAccent[400],
-                        fontSize: 60 *heightR,
+                        fontSize: 30 *heightR,
                       ),
                     ),
                   ),
