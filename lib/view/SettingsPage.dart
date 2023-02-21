@@ -203,6 +203,7 @@ class _SettingsPageState extends State<SettingsPage> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     final _height_1 = 40*heightR;
+    final _widht_1 = 260*heightR;
     postData();
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
@@ -398,14 +399,14 @@ class _SettingsPageState extends State<SettingsPage> {
                           children: [
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
                                 obscureText: false,
                                 decoration:  InputDecoration(
-                                  labelText: "$_cellcount",
-                                  labelStyle: TextStyle(color: Colors.cyanAccent)
+                                    labelText: "$_cellcount",
+                                    labelStyle: TextStyle(color: Colors.cyanAccent)
                                 ),
                                 controller: cellcount,
                                 textAlign: TextAlign.center,
@@ -414,13 +415,13 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
                                 obscureText: false,
                                 decoration:  InputDecoration(
-                                  labelText: "$_batterycapacity",
+                                    labelText: "$_batterycapacity",
                                     labelStyle: TextStyle(color: Colors.cyanAccent)
                                 ),
                                 controller: batterycapacity,
@@ -430,14 +431,14 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
                                 autocorrect: false,
                                 obscureText: false,
                                 decoration:  InputDecoration(
-                                  labelText: "$_calibratingVolt",
+                                    labelText: "$_calibratingVolt",
                                     labelStyle: TextStyle(color: Colors.cyanAccent)
                                 ),
                                 textAlign: TextAlign.center,
@@ -446,7 +447,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -455,7 +456,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 decoration:  InputDecoration(
                                   labelText: "$_calibratingCurr",
                                   labelStyle: TextStyle(
-                                      color: Colors.cyanAccent,
+                                    color: Colors.cyanAccent,
                                   ),
                                 ),
                                 textAlign: TextAlign.center,
@@ -477,33 +478,33 @@ class _SettingsPageState extends State<SettingsPage> {
                                     borderRadius: BorderRadius.circular(15),
                                     color: Colors.black
                                 ),
-                              child: TextButton(
-                                child:  Text(
-                                  "Ok",
-                                  style: TextStyle(
+                                child: TextButton(
+                                  child:  Text(
+                                    "Ok",
+                                    style: TextStyle(
                                       color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                onPressed: (){
-                                  AwesomeDialog(
-                                    context: context,
-                                    keyboardAware: true,
-                                    dismissOnBackKeyPress: false,
-                                    dialogType: DialogType.warning,
-                                    animType: AnimType.bottomSlide,
-                                    btnCancelText: "No, cancel",
-                                    btnOkText: "Yes, continue",
-                                    title: 'Continue update!',
-                                    // padding: const EdgeInsets.all(5.0),
-                                    desc:
-                                    'Cell Count:${int.parse(cellcount.text)}',
-                                    btnCancelOnPress: () {},
-                                    btnOkOnPress: () {
-                                      postDataSetting(id,"single_overvoltage",int.parse(cellcount.text));
-                                    },
-                                  ).show();
-                                },
-                              )
+                                  onPressed: (){
+                                    AwesomeDialog(
+                                      context: context,
+                                      keyboardAware: true,
+                                      dismissOnBackKeyPress: false,
+                                      dialogType: DialogType.warning,
+                                      animType: AnimType.bottomSlide,
+                                      btnCancelText: "No, cancel",
+                                      btnOkText: "Yes, continue",
+                                      title: 'Continue update!',
+                                      // padding: const EdgeInsets.all(5.0),
+                                      desc:
+                                      'Cell Count:${int.parse(cellcount.text)}',
+                                      btnCancelOnPress: () {},
+                                      btnOkOnPress: () {
+                                        postDataSetting(id,"single_overvoltage",int.parse(cellcount.text));
+                                      },
+                                    ).show();
+                                  },
+                                )
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
@@ -597,7 +598,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    width: 250 * heightR,
+                    width: 350 * heightR,
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 5*heightR,bottom: 5*heightR),
                     child: Text(
@@ -615,7 +616,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   Container(
                     width: 1200*heightR,
                     decoration: BoxDecoration(
-                        color: Colors.black54,
+                      color: Colors.black54,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -694,7 +695,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           children: [
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -711,7 +712,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -728,7 +729,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -745,7 +746,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -762,7 +763,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -779,7 +780,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -796,7 +797,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -813,7 +814,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -830,7 +831,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -847,7 +848,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -864,7 +865,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -881,7 +882,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
