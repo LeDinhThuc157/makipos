@@ -990,7 +990,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    width: 250 * heightR,
+                    width: 300 * heightR,
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 5*heightR,bottom: 5*heightR),
                     child: Text(
@@ -1040,12 +1040,12 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             SizedBox(height: 20*heightR,),
                             Container(
                               height: _height_1,
-                              child: Text_title(data:"Continued Charge Curr.(A):"),
+                              child: Text_title(data:"Cont Charge Curr.(A):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
                               height: _height_1,
-                              child: Text_title(data:"Continued Discharge Curr.(A):"),
+                              child: Text_title(data:"Cont Discharge Curr.(A):"),
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(

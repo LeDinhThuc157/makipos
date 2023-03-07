@@ -175,7 +175,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       "$bat_vol mV",
                       style: TextStyle(
                         color: Colors.greenAccent[400],
-                        fontSize: 60*heightR,
+                        fontSize: 30*heightR,
                       ),
                     ),
                   ),
@@ -273,7 +273,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       '$bat_current A',
                       style: TextStyle(
                         color: Colors.greenAccent[400],
-                        fontSize: 60 *heightR,
+                        fontSize: 30 *heightR,
                       ),
                     ),
                   ),
@@ -353,8 +353,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: TextField(
                                 obscureText: false,
                                 decoration:  InputDecoration(
-                                  labelText: "$_cellcount",
-                                  labelStyle: TextStyle(color: Colors.cyanAccent)
+                                    labelText: "$_cellcount",
+                                    labelStyle: TextStyle(color: Colors.cyanAccent)
                                 ),
                                 controller: cellcount,
                                 textAlign: TextAlign.center,
@@ -369,7 +369,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               child: TextField(
                                 obscureText: false,
                                 decoration:  InputDecoration(
-                                  labelText: "$_batterycapacity",
+                                    labelText: "$_batterycapacity",
                                     labelStyle: TextStyle(color: Colors.cyanAccent)
                                 ),
                                 controller: batterycapacity,
@@ -386,7 +386,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 autocorrect: false,
                                 obscureText: false,
                                 decoration:  InputDecoration(
-                                  labelText: "$_calibratingVolt",
+                                    labelText: "$_calibratingVolt",
                                     labelStyle: TextStyle(color: Colors.cyanAccent)
                                 ),
                                 textAlign: TextAlign.center,
@@ -404,7 +404,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 decoration:  InputDecoration(
                                   labelText: "$_calibratingCurr",
                                   labelStyle: TextStyle(
-                                      color: Colors.cyanAccent,
+                                    color: Colors.cyanAccent,
                                   ),
                                 ),
                                 textAlign: TextAlign.center,
@@ -426,33 +426,33 @@ class _SettingsPageState extends State<SettingsPage> {
                                     borderRadius: BorderRadius.circular(15),
                                     color: Colors.black
                                 ),
-                              child: TextButton(
-                                child:  Text(
-                                  "Ok",
-                                  style: TextStyle(
+                                child: TextButton(
+                                  child:  Text(
+                                    "Ok",
+                                    style: TextStyle(
                                       color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                onPressed: (){
-                                  AwesomeDialog(
-                                    context: context,
-                                    keyboardAware: true,
-                                    dismissOnBackKeyPress: false,
-                                    dialogType: DialogType.warning,
-                                    animType: AnimType.bottomSlide,
-                                    btnCancelText: "No, cancel",
-                                    btnOkText: "Yes, continue",
-                                    title: 'Continue update!',
-                                    // padding: const EdgeInsets.all(5.0),
-                                    desc:
-                                    'Cell Count:${int.parse(cellcount.text)}',
-                                    btnCancelOnPress: () {},
-                                    btnOkOnPress: () {
-                                      postDataSetting(id,"single_overvoltage",int.parse(cellcount.text));
-                                    },
-                                  ).show();
-                                },
-                              )
+                                  onPressed: (){
+                                    AwesomeDialog(
+                                      context: context,
+                                      keyboardAware: true,
+                                      dismissOnBackKeyPress: false,
+                                      dialogType: DialogType.warning,
+                                      animType: AnimType.bottomSlide,
+                                      btnCancelText: "No, cancel",
+                                      btnOkText: "Yes, continue",
+                                      title: 'Continue update!',
+                                      // padding: const EdgeInsets.all(5.0),
+                                      desc:
+                                      'Cell Count:${int.parse(cellcount.text)}',
+                                      btnCancelOnPress: () {},
+                                      btnOkOnPress: () {
+                                        postDataSetting(id,"single_overvoltage",int.parse(cellcount.text));
+                                      },
+                                    ).show();
+                                  },
+                                )
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
@@ -546,7 +546,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    width: 250 * heightR,
+                    width: 350 * heightR,
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 5*heightR,bottom: 5*heightR),
                     child: Text(
@@ -564,7 +564,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   Container(
                     width: 1200*heightR,
                     decoration: BoxDecoration(
-                        color: Colors.black54,
+                      color: Colors.black54,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
