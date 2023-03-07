@@ -78,58 +78,66 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
   var bat_current;
   var mos_temp;
 
+  var ave_cell;
+  var cell_diff;
+
   List cells_vol = [];
   String id = "63be79a13ea8bc0007797118";
 
   postData() async {
+    await Future.delayed(Duration(milliseconds: 1000), (){
+      setState(() {
+      });
+    });
+    // print("Now: ${DateFormat.Hms().format(DateTime.now())}");
     try {
       //4.Thông tin thiết bị.
-
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
-      print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
+      // print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
-
-      setState(() {
-        cells_vol = userMap["propertiesValue"]["cells_vol"];
-        cell_1_vol = userMap["propertiesValue"]["cell_1_vol"].toString();
-        cell_2_vol = userMap["propertiesValue"]["cell_2_vol"].toString();
-        cell_3_vol = userMap["propertiesValue"]["cell_3_vol"].toString();
-        cell_4_vol = userMap["propertiesValue"]["cell_4_vol"].toString();
-        cell_5_vol = userMap["propertiesValue"]["cell_5_vol"].toString();
-        cell_6_vol = userMap["propertiesValue"]["cell_6_vol"].toString();
-        cell_7_vol = userMap["propertiesValue"]["cell_7_vol"].toString();
-        cell_8_vol = userMap["propertiesValue"]["cell_8_vol"].toString();
-        cell_9_vol = userMap["propertiesValue"]["cell_9_vol"].toString();
-        cell_10_vol = userMap["propertiesValue"]["cell_10_vol"].toString();
-        cell_11_vol = userMap["propertiesValue"]["cell_11_vol"].toString();
-        cell_12_vol = userMap["propertiesValue"]["cell_12_vol"].toString();
-        cell_13_vol = userMap["propertiesValue"]["cell_13_vol"].toString();
-
-        bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
-        bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
-        bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
-        bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
-        bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
-        bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
-        box_temp = userMap["propertiesValue"]["box_temp"].toString();
-        system_working_time =
-            userMap["propertiesValue"]["system_working_time"].toString();
-        charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
-        discharge =
-            userMap["propertiesValue"]["discharge_mos_switch"].toString();
-        balance =
-            userMap["propertiesValue"]["active_equalization_switch"].toString();
-        mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
-        bat_current =
-            (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
-                0.01)
-                .toString();
-      });
-      print(cells_vol);
+      cells_vol = userMap["propertiesValue"]["cells_vol"];
+      bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+      bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+      bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+      bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+      bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+      bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+      box_temp = userMap["propertiesValue"]["box_temp"].toString();
+      system_working_time =
+          userMap["propertiesValue"]["system_working_time"].toString();
+      charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
+      discharge =
+          userMap["propertiesValue"]["discharge_mos_switch"].toString();
+      balance =
+          userMap["propertiesValue"]["active_equalization_switch"].toString();
+      mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+      bat_current =
+          (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
+              0.01)
+              .toString();
+      var min = cells_vol[0];
+      var max = cells_vol[0];
+      var sum = cells_vol.reduce((value, current) => value + current);
+      for (var i = 0; i < cells_vol.length; i++) {
+        // Calculate sum
+        // sum += cells_vol[i];
+        // Checking for largest value in the list
+        if (cells_vol[i] > max) {
+          max = cells_vol[i];
+        }
+        // Checking for smallest value in the list
+        if (cells_vol[i] < min) {
+          min = cells_vol[i];
+        }
+      }
+      cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+      ave_cell = (sum / (cells_vol.length)).toStringAsFixed(4);
+      // print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell ");
+      // print(cells_vol);
     } catch (e) {
       print(e);
     }
@@ -516,69 +524,74 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
       //4.Thông tin thiết bị.
 
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
-      print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
+      // print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
 
-      setState(() {
-        _calibratingVolt = userMap["propertiesValue"]["bat_vol"].toString();
-        _calibratingCurr = userMap["propertiesValue"]["bat_current"].toString();
-        _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
-        _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
-        _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
-        _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
-        _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
-        _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
-        _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
-        _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
-        _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
-        _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
-        _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
-        _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
-        _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
-        _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
-        //Status
-        cells_vol = userMap["propertiesValue"]["cells_vol"];
-        bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
-        bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
-        bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
-        bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
-        bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
-        bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
-        box_temp = userMap["propertiesValue"]["box_temp"].toString();
-        system_working_time =
-            userMap["propertiesValue"]["system_working_time"].toString();
-        mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
-        bat_current =
-            (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
-                0.01)
-                .toString();
-        var min = cells_vol[0];
-        var max = cells_vol[0];
-        var sum = cells_vol.reduce((value, current) => value + current);
-        for (var i = 0; i < cells_vol.length; i++) {
-          // Calculate sum
-          // sum += cells_vol[i];
-          // Checking for largest value in the list
-          if (cells_vol[i] > max) {
-            max = cells_vol[i];
-          }
-          // Checking for smallest value in the list
-          if (cells_vol[i] < min) {
-            min = cells_vol[i];
-          }
-        }
-        cell_diff = (max - min)*0.001;
-        ave_cell = sum / (cells_vol.length);
-        print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
+
+      await Future.delayed(Duration(milliseconds: 1000), (){
+        setState(() {
+          // print("Setting");
+        });
       });
-      print(cells_vol);
+      _calibratingVolt = userMap["propertiesValue"]["bat_vol"].toString();
+      _calibratingCurr = userMap["propertiesValue"]["bat_current"].toString();
+      _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
+      _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
+      _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
+      _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
+      _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
+      _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
+      _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
+      _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
+      _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
+      _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
+      _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
+      _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
+      _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
+      _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
+      //Status
+      cells_vol = userMap["propertiesValue"]["cells_vol"];
+      bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+      bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+      bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+      bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+      bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+      bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+      box_temp = userMap["propertiesValue"]["box_temp"].toString();
+      system_working_time =
+          userMap["propertiesValue"]["system_working_time"].toString();
+      mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+      bat_current =
+          (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
+              0.01)
+              .toString();
+      var min = cells_vol[0];
+      var max = cells_vol[0];
+      var sum = cells_vol.reduce((value, current) => value + current);
+      for (var i = 0; i < cells_vol.length; i++) {
+        // Calculate sum
+        // sum += cells_vol[i];
+        // Checking for largest value in the list
+        if (cells_vol[i] > max) {
+          max = cells_vol[i];
+        }
+        // Checking for smallest value in the list
+        if (cells_vol[i] < min) {
+          min = cells_vol[i];
+        }
+      }
+      cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+      ave_cell = (sum / (cells_vol.length)).toStringAsFixed(4);
+      // print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
+      // print(cells_vol);
     } catch (e) {
       print(e);
     }
+
   }
 
   @override
