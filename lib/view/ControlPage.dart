@@ -35,24 +35,31 @@ class _ControlPageState extends State<ControlPage> {
   String id = "63be79a13ea8bc0007797118";
   var isOn_charge ;
   var isOn_discharge ;
+  var charge;
+  var discharge;
   @override
   GetDataControl(final propertyCode) async {
+
+
     try {
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {
           "Authorization": widget._token.toString()
         },
       );
+
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       var _switch = userMap["propertiesValue"]["$propertyCode"].toString();
       if(propertyCode == "charging_mos_switch"){
         if(_switch == "1"){
           isOn_charge = true;
+          charge = "1";
           print("On CG $propertyCode:$isOn_charge");
         }
         if(_switch == "0"){
           isOn_charge = false;
+          charge = "0";
           print("Off CG:$isOn_charge");
         }
       }
@@ -60,19 +67,42 @@ class _ControlPageState extends State<ControlPage> {
       if(propertyCode == "discharge_mos_switch"){
         if(_switch == "1"){
           isOn_discharge = true;
+          discharge = "1";
           print("On DCG $propertyCode:$isOn_discharge");
         }
         if(_switch == "0"){
           isOn_discharge = false;
+          discharge = "0";
           print("Off DCG:$isOn_discharge");
         }
       }
-      // setState(() {
-      //
-      //
-      // });
+
+
+
     } catch (e) {
       print(e);
+    }
+    while(true){
+      await Future.delayed(Duration(milliseconds: 1000), () async {
+        var responseGet_Listdevice = await http.get(
+          Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
+          headers: {
+            "Authorization": widget._token.toString()
+          },
+        );
+        Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
+        var _switch1 = userMap["propertiesValue"]["$propertyCode"].toString();
+        print("Nguyễn Kiều Trang: $_switch1");
+        if(charge != _switch1){
+          setState(() {
+          });
+        }
+        if(discharge != _switch1){
+          setState(() {
+          });
+        }
+      }
+      );
     }
   }
 
@@ -81,10 +111,8 @@ class _ControlPageState extends State<ControlPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
-    setState(() {
-      GetDataControl("charging_mos_switch");
-      GetDataControl("discharge_mos_switch");
-    });
+    GetDataControl("charging_mos_switch");
+    GetDataControl("discharge_mos_switch");
     return Scaffold(
       appBar: CustomAppbar(),
       backgroundColor: Colors.white,
@@ -182,7 +210,7 @@ postDataControl(final id,final propertyCode,bool _check) async{
               "localId": "1",
               "data": !_check ? 0 : 1,
               "waitResponse": false,
-              "timeout": 100
+              "timeout": 1000
             }
         )
     );

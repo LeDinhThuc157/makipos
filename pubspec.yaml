@@ -43,10 +43,14 @@ dependencies:
   intl: ^0.17.0
   http: ^0.13.5
   retry: ^3.1.0
-  universal_io: ^2.0.4
+  universal_io: ^2.2.0
+  websocket_universal: ^0.5.1
   splash_screen_view: ^3.0.0
   awesome_dialog: ^3.0.2
   math_expressions: ^2.3.1
+  web_socket_channel: ^2.3.0
+  dio: ^5.0.1
+  socket_io_client: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

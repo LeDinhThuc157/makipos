@@ -17,13 +17,21 @@ class CustomAppbar extends StatefulWidget with PreferredSizeWidget{
 
 class _CustomAppbarState extends State<CustomAppbar> {
   String _value = "";
+
+  _Zolo() async {
+    await Future.delayed(Duration(milliseconds: 1000), (){
+      setState(() {
+        // print("1111111111111111111111111");
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double  heightR,widthR;
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
-
+    _Zolo();
     return Container(
       height: 80*heightR,
       padding: EdgeInsets.only(left: 50*widthR, right: 15*widthR,top: 10*heightR),

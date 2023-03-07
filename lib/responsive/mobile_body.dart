@@ -588,6 +588,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     final _height_1 = 40*heightR;
+    final _widht_1 = 200*heightR;
     postData();
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
@@ -777,7 +778,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                           children: [
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -793,7 +794,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -809,7 +810,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -825,7 +826,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1073,7 +1074,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                           children: [
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1090,7 +1091,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1107,7 +1108,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1124,7 +1125,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1141,7 +1142,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1158,7 +1159,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1175,7 +1176,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1192,7 +1193,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1209,7 +1210,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1226,7 +1227,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1243,7 +1244,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1260,7 +1261,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(

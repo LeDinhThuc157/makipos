@@ -74,126 +74,74 @@ class _SettingsPageState extends State<SettingsPage> {
       //4.Thông tin thiết bị.
 
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
-      print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
+      // print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
 
-      setState(() {
-        _calibratingVolt = userMap["propertiesValue"]["bat_vol"].toString();
-        _calibratingCurr = userMap["propertiesValue"]["bat_current"].toString();
-        _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
-        _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
-        _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
-        _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
-        _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
-        _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
-        _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
-        _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
-        _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
-        _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
-        _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
-        _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
-        _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
-        _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
-        //Status
-        cells_vol = userMap["propertiesValue"]["cells_vol"];
-        bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
-        bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
-        bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
-        bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
-        bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
-        bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
-        box_temp = userMap["propertiesValue"]["box_temp"].toString();
-        system_working_time =
-            userMap["propertiesValue"]["system_working_time"].toString();
-        mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
-        bat_current =
-            (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
-                0.01)
-                .toString();
-        var min = cells_vol[0];
-        var max = cells_vol[0];
-        var sum = cells_vol.reduce((value, current) => value + current);
-        for (var i = 0; i < cells_vol.length; i++) {
-          // Calculate sum
-          // sum += cells_vol[i];
-          // Checking for largest value in the list
-          if (cells_vol[i] > max) {
-            max = cells_vol[i];
-          }
-          // Checking for smallest value in the list
-          if (cells_vol[i] < min) {
-            min = cells_vol[i];
-          }
-        }
-        cell_diff = (max - min)*0.001;
-        ave_cell = sum / (cells_vol.length);
-        print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
+
+      await Future.delayed(Duration(milliseconds: 1000), (){
+        setState(() {
+          // print("Setting");
+        });
       });
-      print(cells_vol);
+      _calibratingVolt = userMap["propertiesValue"]["bat_vol"].toString();
+      _calibratingCurr = userMap["propertiesValue"]["bat_current"].toString();
+      _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
+      _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
+      _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
+      _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
+      _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
+      _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
+      _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
+      _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
+      _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
+      _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
+      _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
+      _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
+      _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
+      _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
+      //Status
+      cells_vol = userMap["propertiesValue"]["cells_vol"];
+      bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+      bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+      bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+      bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+      bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+      bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+      box_temp = userMap["propertiesValue"]["box_temp"].toString();
+      system_working_time =
+          userMap["propertiesValue"]["system_working_time"].toString();
+      mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+      bat_current =
+          (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
+              0.01)
+              .toString();
+      var min = cells_vol[0];
+      var max = cells_vol[0];
+      var sum = cells_vol.reduce((value, current) => value + current);
+      for (var i = 0; i < cells_vol.length; i++) {
+        // Calculate sum
+        // sum += cells_vol[i];
+        // Checking for largest value in the list
+        if (cells_vol[i] > max) {
+          max = cells_vol[i];
+        }
+        // Checking for smallest value in the list
+        if (cells_vol[i] < min) {
+          min = cells_vol[i];
+        }
+      }
+      cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+      ave_cell = (sum / (cells_vol.length)).toStringAsFixed(4);
+      // print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
+      // print(cells_vol);
     } catch (e) {
       print(e);
     }
 
-    //1.Thông tin tạo tài khoản login.
-//       var response_user_login = await http.post(
-//           Uri.parse(
-//               "https://smarthome.test.makipos.net:3029/users-service/users/authentication?_v=1"),
-//           headers: {
-//             "Content-type": "application/json; charset=utf-8",
-//             // "Accept": "application/json",
-//             // "Ocp-Apim-Subscription-Key": "63b5363c0a3a520007fa2ab9",
-//             // "Ocp-Apim-Trace": "true"
-//           },
-//           body: jsonEncode({
-//             "authCode": false,
-//             "strategy": "local",
-//             "username": "BMS_admin",
-//             "password": "01012023"
-//           })
-//       );
-//       print("Status_response_user_login:${response_user_login.statusCode}");
-//       print("LoginUsers:${response_user_login.body}");
-
-//2.Tạo tài khoản.
-
-    // var response_create_user = await http.post(
-    //     Uri.parse("https://smarthome.test.makipos.net:3029/users"),
-    //     headers: {
-    //       "Content-type": "application/json; charset=utf-8",
-    //       // "Accept": "application/json",
-    //       // "Ocp-Apim-Subscription-Key": "63b5363c0a3a520007fa2ab9",
-    //       // "Ocp-Apim-Trace": "true"
-    //     },
-    //     body: jsonEncode(
-    //         {
-    //       "username": "bms_user_test_11",
-    //       "password": "123456789",
-    //       "manufacturerId": "63b5363c0a3a520007fa2ab9",
-    //       "roles": [
-    //         "user"
-    //       ],
-    //     }
-    //     ));
-    // print("Body_response_create:${response_create_user.body}");
-    // print("Status_response_create:${response_create_user.statusCode}");
-    // print("CreateUsers:${create["message"]["message"]}");
-
-//3.Thông tin all tài khoản.
-
-    // var responseGet_User = await http.get(
-    //   Uri.parse("https://smarthome.test.makipos.net:3029/users"),
-    //   headers: {
-    //     // "Accept": "application/json",
-    //     "Authorization":
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2I1M2M0NDYxMjVkYjAwMDdjYTIwZmMiLCJ1c2VybmFtZSI6IkJNU19hZG1pbiIsInR5cGUiOiJ1c2VyIiwiaWF0IjoxNjcyODI4NTA3LCJleHAiOjEwMzEyODI4NTA3LCJhdWQiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJpc3MiOiJodHRwOi8vc2VydmVyLm1ha2lwb3MubmV0OjMwMjgiLCJzdWIiOiIiLCJqdGkiOiI0MjA5OTUxNS0zZmY2LTQ0OTgtYmMxYS02NDg1MmEzM2U5ZjcifQ.HfJz87PI0G1T9nUF0doesD6sY-KTKSbZuJgaWfWN0Uo",
-    //   },
-    // );
-    // print("StatusUsers: ${responseGet_User.statusCode}");
-    // print("BodyUsers: ${responseGet_User.body}");
   }
 
   @override
@@ -203,6 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     final _height_1 = 40*heightR;
+    final _widht_1 = 260*heightR;
     postData();
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
@@ -398,7 +347,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           children: [
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -414,7 +363,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -430,7 +379,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -446,7 +395,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -694,7 +643,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           children: [
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -711,7 +660,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -728,7 +677,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -745,7 +694,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -762,7 +711,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -779,7 +728,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -796,7 +745,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -813,7 +762,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -830,7 +779,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -847,7 +796,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -864,7 +813,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -881,7 +830,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                             SizedBox(height: 20*heightR,),
                             Container(
-                              width: 260*heightR,
+                              width: _widht_1,
                               height: _height_1,
                               // color: Colors.red,
                               child: TextField(
@@ -1342,8 +1291,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
 
   postDataSetting(final id,final propertyCode, final value) async{
-    print(propertyCode);
-    print(value);
+    // print(propertyCode);
+    // print(value);
     try{
       var response_setting = await http.post(
           Uri.parse(
@@ -1359,11 +1308,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 "localId": "1",
                 "commandString": "{\"d\":$value}",
                 "waitResponse": false,
-                "timeout": 100
+                "timeout": 1000
               }
           )
       );
-      print("BodySetting $propertyCode : ${response_setting.statusCode}");
+      // print("BodySetting $propertyCode : ${response_setting.statusCode}");
     } catch(e){
       print(e);
     }
