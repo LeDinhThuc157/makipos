@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'dart:html';
+import 'package:intl/intl.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -87,59 +88,59 @@ class _StatusPageState extends State<StatusPage> {
   String id = "63be79a13ea8bc0007797118";
 
   postData() async {
+    await Future.delayed(Duration(milliseconds: 1000), (){
+      setState(() {
+      });
+    });
+    // print("Now: ${DateFormat.Hms().format(DateTime.now())}");
     try {
       //4.Thông tin thiết bị.
-
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
-      print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
+      // print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
-
-      setState(() {
-        cells_vol = userMap["propertiesValue"]["cells_vol"];
-
-        bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
-        bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
-        bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
-        bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
-        bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
-        bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
-        box_temp = userMap["propertiesValue"]["box_temp"].toString();
-        system_working_time =
-            userMap["propertiesValue"]["system_working_time"].toString();
-        charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
-        discharge =
-            userMap["propertiesValue"]["discharge_mos_switch"].toString();
-        balance =
-            userMap["propertiesValue"]["active_equalization_switch"].toString();
-        mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
-        bat_current =
-            (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
-                    0.01)
-                .toString();
-        var min = cells_vol[0];
-        var max = cells_vol[0];
-        var sum = cells_vol.reduce((value, current) => value + current);
-        for (var i = 0; i < cells_vol.length; i++) {
-          // Calculate sum
-          // sum += cells_vol[i];
-          // Checking for largest value in the list
-          if (cells_vol[i] > max) {
-            max = cells_vol[i];
-          }
-          // Checking for smallest value in the list
-          if (cells_vol[i] < min) {
-            min = cells_vol[i];
-          }
+      cells_vol = userMap["propertiesValue"]["cells_vol"];
+      bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+      bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+      bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+      bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+      bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+      bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+      box_temp = userMap["propertiesValue"]["box_temp"].toString();
+      system_working_time =
+          userMap["propertiesValue"]["system_working_time"].toString();
+      charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
+      discharge =
+          userMap["propertiesValue"]["discharge_mos_switch"].toString();
+      balance =
+          userMap["propertiesValue"]["active_equalization_switch"].toString();
+      mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+      bat_current =
+          (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
+              0.01)
+              .toString();
+      var min = cells_vol[0];
+      var max = cells_vol[0];
+      var sum = cells_vol.reduce((value, current) => value + current);
+      for (var i = 0; i < cells_vol.length; i++) {
+        // Calculate sum
+        // sum += cells_vol[i];
+        // Checking for largest value in the list
+        if (cells_vol[i] > max) {
+          max = cells_vol[i];
         }
-        cell_diff = (max - min)*0.001;
-        ave_cell = sum / (cells_vol.length);
-        print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell");
-      });
-      print(cells_vol);
+        // Checking for smallest value in the list
+        if (cells_vol[i] < min) {
+          min = cells_vol[i];
+        }
+      }
+      cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+      ave_cell = (sum / (cells_vol.length)).toStringAsFixed(4);
+      // print("SUM: $sum Min: $min Max: $max Diff: $cell_diff ave: $ave_cell ");
+      // print(cells_vol);
     } catch (e) {
       print(e);
     }
