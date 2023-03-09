@@ -977,6 +977,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             ),
                           ],
                         ),
+
                       ),
                     ],
                   ),
@@ -1003,6 +1004,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                             color: Colors.tealAccent,
                             fontSize: 30*heightR,
                           ),
+
                         ),
                       ),
                       SizedBox(
