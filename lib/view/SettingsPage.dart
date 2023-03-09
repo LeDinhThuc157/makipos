@@ -276,6 +276,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           color: Colors.greenAccent[400],
                           fontSize: 60 *heightR,
                         ),
+
                       ),
                     ),
                     SizedBox(),
@@ -360,6 +361,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   controller: cellcount,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.cyanAccent),
+
                                 ),
                               ),
                               SizedBox(height: 20*heightR,),
@@ -376,6 +378,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   controller: batterycapacity,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.cyanAccent),
+
                                 ),
                               ),
                               SizedBox(height: 20*heightR,),
@@ -392,6 +395,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.cyanAccent),
+
                                 ),
                               ),
                               SizedBox(height: 20*heightR,),
