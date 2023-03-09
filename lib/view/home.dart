@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
         index: activeTab,
         children: <Widget>[
           ResponsiveLayout(
-              mobileBody: MymobileBodySTT(widget.token.toString(), widget.id.toString()),
+              mobileBody: MymobileBodySTT(widget.token.toString(),widget.id.toString()),
               desktopBody: StatusPage( token: widget.token.toString(),id: widget.id,)),
           ResponsiveLayout(
               mobileBody: MymobileBodySTS(widget.token.toString(),widget.id.toString()),

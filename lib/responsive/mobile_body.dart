@@ -19,8 +19,8 @@ import '../theme/textvalue.dart';
 import '../widgets/custom_appbar.dart';
 
 class MymobileBodySTT extends StatefulWidget {
-  const MymobileBodySTT(this.token, this.id,);
-  final String token;
+  const MymobileBodySTT(this._token, this.id,);
+  final String _token;
   final String id;
   @override
   _MymobileBodySTTState createState() => _MymobileBodySTTState();
@@ -81,6 +81,7 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
 
   var ave_cell;
   var cell_diff;
+
   List cells_vol = [];
 
   postData() async {
@@ -92,7 +93,7 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
       //4.Thông tin thiết bị.
       var responseGet_Listdevice = await http.get(
         Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
-        headers: {"Authorization": widget.token.toString()},
+        headers: {"Authorization": widget._token.toString()},
       );
       // await Future.delayed(Duration(milliseconds: 10000), (){
       //   setState(() {
@@ -144,341 +145,326 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
     Boolvalue();
 
   }
-
   @override
   Widget build(BuildContext context) {
     double heightR, widthR;
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
-    return Scaffold(
-        appBar: CustomAppbar(widget.token.toString()),
-        backgroundColor: Colors.black45,
-        body: StreamBuilder(
-          stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
-          builder: (context, snapshot) => SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 5 * heightR,
-                ),
-                Container(
-                  height: 50 * heightR,
-                  // width: 2400 * heightR,
-                  // padding:
-                  //     EdgeInsets.only(left: 300 * heightR, right: 300 * heightR),
-                  color: mainColor,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(),
-                      Container(
-                        child: charbool
-                            ? Text(
-                          'Charge: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 24 * heightR,
-                          ),
-                        )
-                            : Text(
-                          'Charge: OFF',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 24 * heightR,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: dischabool
-                            ? Text(
-                          'Discharge: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 24 * heightR,
-                          ),
-                        )
-                            : Text(
-                          'Discharge: OFF',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 24 * heightR,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: balancebool
-                            ? Text(
-                          'Balance: ON',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 24 * heightR,
-                          ),
-                        )
-                            : Text(
-                          'Balance: OFF',
-                          style: TextStyle(
-                            color: secondary,
-                            fontSize: 24 * heightR,
-                          ),
-                        ),
-                      ),
-                      SizedBox(),
-                    ],
+      return Scaffold(
+          appBar: CustomAppbar(widget._token.toString()),
+          backgroundColor: Colors.black45,
+          body: StreamBuilder(
+            stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
+            builder: (context, snapshot) => SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 5 * heightR,
                   ),
-                ),
-                SizedBox(
-                  height: 5 * heightR,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.black54),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(),
-                      Container(
-                        child: Text(
-                          "$bat_vol mV",
-                          style: TextStyle(
-                            color: Colors.greenAccent[400],
-                            fontSize: 60*heightR,
+                  Container(
+                    height: 150*heightR,
+                    color: mainColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(height: 5*heightR,),
+                        Container(
+                          child: charbool
+                              ? Text(
+                            'Charge: ON',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                              : Text(
+                            'Charge: OFF',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text_title(data: 'MOS Temp:'),
-                                Text_title(data: 'Battery Capacity:'),
-                                Text_title(data: 'Cycle Capacity:'),
-                                Text_title(data: 'Ave. Cell Volt:'),
-                                Text_title(data: 'Battery T2:'),
-                              ],
+                        //SizedBox(height: 5*heightR,),
+                        Container(
+                          child: dischabool
+                              ? Text(
+                            'Discharge: ON',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
                             ),
-                            // SizedBox(
-                            //   width: 5 * heightR,
-                            // ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text_Value(
-                                  data: '$mos_temp°C',
-                                ),
-                                Text_Value(data: '$bat_cap AH'),
-                                Text_Value(data: '$bat_capacity AH'),
-                                Text_Value(data: '$ave_cell V'),
-                                Text_Value(data: '$bat_temp °C'),
-                              ],
+                            textAlign: TextAlign.center,
+                          )
+                              : Text(
+                            'Discharge: OFF',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(),
-                      Container(
-                        child: Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text_title(data: 'Remain Battery:'),
-                                // Text_title(
-                                //     data:'Remain Capacity(Khong co):'
-                                // ),
-                                Text_title(data: 'Cycle Count:'),
-                                Text_title(data: 'Cell Volt.Diff:'),
-                                Text_title(data: 'Battery T1:'),
-                                // Text_title(
-                                //     data:'Battery T3(Khoong co):'
-                                // ),
-                                // Text_title(
-                                //     data:'Heating Status(Khong co):'
-                                // ),
-                                // Text_title(
-                                //     data:'Charg.Plugged(Khong co):'
-                                // ),
-                                Text_title(data: 'Time Emerg:'),
-                              ],
-                            ),
-                            // SizedBox(
-                            //   width: 5 * heightR,
-                            // ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text_Value(
-                                  data: '$bat_percent%',
-                                ),
-                                // Text_Value(
-                                //     data:'396.0AH'
-                                // ),
-                                Text_Value(data: '$bat_cycles'),
-                                Text_Value(data: '$cell_diff V'),
-                                Text_Value(data: '$box_temp°C'),
-                                // Text_Value(
-                                //     data:'23.5°C'
-                                // ),
-                                // Text_Value(
-                                //     data:'OFF'
-                                // ),
-                                // Text_Value(
-                                //     data:'Plugged'
-                                // ),
-                                Text_Value(data: '$system_working_time'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          '$bat_current A',
-                          style: TextStyle(
-                            color: Colors.greenAccent[400],
-                            fontSize: 60 *heightR,
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                      ),
-                      SizedBox(),
-                    ],
+                        Container(
+                          child: balancebool
+                              ? Text(
+                            'Balance: ON',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                              : Text(
+                            'Balance: OFF',
+                            style: TextStyle(
+                              color: secondary,
+                              fontSize: 24 * heightR,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 20*heightR,
-                ),
-                Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        width: 230 * heightR,
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Cells Voltage",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.tealAccent,
-                            fontSize: 36 * heightR,
+                  SizedBox(
+                    height: 5 * heightR,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.black54
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text(
+                            "$bat_vol mV",
+                            style: TextStyle(
+                              color: Colors.greenAccent[400],
+                              fontSize: 60*heightR,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20*heightR,
-                      ),
-                      Container(
-                        height: 600 * heightR,
-                        width: 1200 * heightR,
-                        decoration: BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.circular(10),
+                        Container(
+                          // color: Colors.greenAccent,
+                          child:Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text_title(data: 'MOS Temp:'),
+                                        Text_title(data: 'Battery Capacity:'),
+                                        Text_title(data: 'Cycle Capacity:'),
+                                        Text_title(data: 'Ave. Cell Volt(Chưa có):'),
+                                        Text_title(data: 'Battery T2:'),
+                                        Text_title(data: 'Remain Battery:'),
+                                        // Text_title(
+                                        //     data:'Remain Capacity(Khong co):'
+                                        // ),
+                                        Text_title(data: 'Cycle Count:'),
+                                        Text_title(data: 'Cell Volt.Diff:'),
+                                        Text_title(data: 'Battery T1:'),
+                                        // Text_title(
+                                        //     data:'Battery T3(Khoong co):'
+                                        // ),
+                                        // Text_title(
+                                        //     data:'Heating Status(Khong co):'
+                                        // ),
+                                        // Text_title(
+                                        //     data:'Charg.Plugged(Khong co):'
+                                        // ),
+                                        Text_title(data: 'Time Emerg:'),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 5 * heightR,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text_Value(
+                                          data: '$mos_temp°C',
+                                        ),
+                                        Text_Value(data: '$bat_cap AH'),
+                                        Text_Value(data: '$bat_capacity AH'),
+                                        Text_Value(data: '3.384V'),
+                                        Text_Value(data: '$bat_temp °C'),
+                                        Text_Value(
+                                          data: '$bat_percent%',
+                                        ),
+                                        // Text_Value(
+                                        //     data:'396.0AH'
+                                        // ),
+                                        Text_Value(data: '$bat_cycles'),
+                                        Text_Value(data: '0.002V'),
+                                        Text_Value(data: '$box_temp°C'),
+                                        // Text_Value(
+                                        //     data:'23.5°C'
+                                        // ),
+                                        // Text_Value(
+                                        //     data:'OFF'
+                                        // ),
+                                        // Text_Value(
+                                        //     data:'Plugged'
+                                        // ),
+                                        Text_Value(data: '$system_working_time'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(),
+                              SizedBox(),
+                            ],
+                          ),
                         ),
-                        child: ListView.builder(
-                            itemCount: cells_vol.length ~/ 2,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Column(
-                                children: [
-                                  SizedBox(
-                                    height: 40 * heightR,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        child: Text(
-                                          "${2*index}",
+                        Container(
+                          child: Text(
+                            '$bat_current A',
+                            style: TextStyle(
+                              color: Colors.greenAccent[400],
+                              fontSize: 60 *heightR,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20*heightR,
+                  ),
+                  Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          width: 250 * heightR,
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Cells Voltage",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.tealAccent,
+                              fontSize: 36 * heightR,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20*heightR,
+                        ),
+                        Container(
+                          height: 600 * heightR,
+                          width: 1200 * heightR,
+                          color: Colors.black54,
+                          child: ListView.builder(
+                              itemCount: cells_vol.length ~/ 2,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 40 * heightR,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          child: Text(
+                                            "${2*index}",
+                                            style: TextStyle(
+                                                color: secondary,
+                                                fontSize: 25*heightR
+                                            ),
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: blue,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          width: 60 * heightR,
+                                          alignment: Alignment.center,
+                                        ),
+                                        SizedBox(
+                                          width: 10 * heightR,
+                                        ),
+                                        Text(
+                                          "${cells_vol[2*index]} mV",
                                           style: TextStyle(
-                                              color: secondary,
+                                              color: green,
                                               fontSize: 25*heightR
                                           ),
                                         ),
-                                        decoration: BoxDecoration(
-                                          color: blue,
-                                          borderRadius: BorderRadius.circular(10),
+                                        SizedBox(
+                                          width: 80 * heightR,
                                         ),
-                                        width: 60 * heightR,
-                                        alignment: Alignment.center,
-                                      ),
-                                      SizedBox(
-                                        width: 10 * heightR,
-                                      ),
-                                      Text(
-                                        "${cells_vol[2*index]} mV",
-                                        style: TextStyle(
-                                            color: green,
-                                            fontSize: 25*heightR
+                                        Container(
+                                          child: Text(
+                                            "${2*index + 1}",
+                                            style: TextStyle(
+                                                color: secondary,
+                                                fontSize: 25*heightR
+                                            ),
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: blue,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          width: 60 * heightR,
+                                          alignment: Alignment.center,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 80 * heightR,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          "${2*index + 1}",
+                                        SizedBox(
+                                          width: 10 * heightR,
+                                        ),
+                                        Text(
+                                          "${cells_vol[2*index+1]} mV",
                                           style: TextStyle(
-                                              color: secondary,
+                                              color: green,
                                               fontSize: 25*heightR
                                           ),
                                         ),
-                                        decoration: BoxDecoration(
-                                          color: blue,
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        width: 60 * heightR,
-                                        alignment: Alignment.center,
-                                      ),
-                                      SizedBox(
-                                        width: 10 * heightR,
-                                      ),
-                                      Text(
-                                        "${cells_vol[2*index+1]} mV",
-                                        style: TextStyle(
-                                            color: green,
-                                            fontSize: 25*heightR
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            }),
-                      ),
-                    ],
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              }),
+                        ),
+
+                      ],
+                    ),
                   ),
-                ),
-                // IconButton(
-                //   onPressed: () {
-                //     _makePostRequest(url);
-                //     // do something
-                //   },
-                //   icon: Icon(
-                //     Icons.menu,
-                //     color: secondary,
-                //   ),
-                // ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ) //Center
-    );
+          ) //Center
+      );
+
+
   }
 }
 
 
 class  MymobileBodySTS extends StatefulWidget {
   const MymobileBodySTS(
-      this.token, this.id1,
+      this._token, this.id1,
       );
-  final String token;
+  final String _token;
   final String id1;
   @override
   _MymobileBodySTSState createState() => _MymobileBodySTSState();
@@ -505,7 +491,6 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
   var _cellcount;
   TextEditingController batterycapacity = TextEditingController();
   var _batterycapacity;
-
 
   // Advance Settings
   TextEditingController cellOVP = TextEditingController();
@@ -537,6 +522,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
   var _startBalanceVolt;
 
   var id;
+
   postData() async {
     try {
       //4.Thông tin thiết bị.
@@ -544,7 +530,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
       id = id1;
       var responseGet_Listdevice = await http.get(
         Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id1"),
-        headers: {"Authorization": widget.token.toString()},
+        headers: {"Authorization": widget._token.toString()},
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       // await Future.delayed(Duration(milliseconds: 10000), (){
@@ -616,12 +602,12 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     final _height_1 = 40*heightR;
-    final _widht_1 = 260*heightR;
+    final _widht_1 = 200*heightR;
     postData();
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
     return Scaffold(
-        appBar: CustomAppbar(widget.token.toString()),
+        appBar: CustomAppbar(widget._token.toString()),
         backgroundColor: Colors.black45,
         body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
@@ -632,11 +618,12 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.black54),
-                  child: Row(
+                      color: Colors.black54
+                  ),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(),
                       Container(
                         child: Text(
                           "$bat_vol mV",
@@ -647,91 +634,82 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                         ),
                       ),
                       Container(
-                        child: Row(
+                        // color: Colors.greenAccent,
+                        child:Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text_title(data: 'MOS Temp:'),
-                                Text_title(data: 'Battery Capacity:'),
-                                Text_title(data: 'Cycle Capacity:'),
-                                Text_title(data: 'Ave. Cell Volt:'),
-                                Text_title(data: 'Battery T2:'),
-                              ],
+                            SizedBox(),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text_title(data: 'MOS Temp:'),
+                                      Text_title(data: 'Battery Capacity:'),
+                                      Text_title(data: 'Cycle Capacity:'),
+                                      Text_title(data: 'Ave. Cell Volt(Chưa có):'),
+                                      Text_title(data: 'Battery T2:'),
+                                      Text_title(data: 'Remain Battery:'),
+                                      // Text_title(
+                                      //     data:'Remain Capacity(Khong co):'
+                                      // ),
+                                      Text_title(data: 'Cycle Count:'),
+                                      Text_title(data: 'Cell Volt.Diff:'),
+                                      Text_title(data: 'Battery T1:'),
+                                      // Text_title(
+                                      //     data:'Battery T3(Khoong co):'
+                                      // ),
+                                      // Text_title(
+                                      //     data:'Heating Status(Khong co):'
+                                      // ),
+                                      // Text_title(
+                                      //     data:'Charg.Plugged(Khong co):'
+                                      // ),
+                                      Text_title(data: 'Time Emerg:'),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 5 * heightR,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text_Value(
+                                        data: '$mos_temp°C',
+                                      ),
+                                      Text_Value(data: '$bat_cap AH'),
+                                      Text_Value(data: '$bat_capacity AH'),
+                                      Text_Value(data: '3.384V'),
+                                      Text_Value(data: '$bat_temp °C'),
+                                      Text_Value(
+                                        data: '$bat_percent%',
+                                      ),
+                                      // Text_Value(
+                                      //     data:'396.0AH'
+                                      // ),
+                                      Text_Value(data: '$bat_cycles'),
+                                      Text_Value(data: '0.002V'),
+                                      Text_Value(data: '$box_temp°C'),
+                                      // Text_Value(
+                                      //     data:'23.5°C'
+                                      // ),
+                                      // Text_Value(
+                                      //     data:'OFF'
+                                      // ),
+                                      // Text_Value(
+                                      //     data:'Plugged'
+                                      // ),
+                                      Text_Value(data: '$system_working_time'),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            // SizedBox(
-                            //   width: 5 * heightR,
-                            // ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text_Value(
-                                  data: '$mos_temp°C',
-                                ),
-                                Text_Value(data: '$bat_cap AH'),
-                                Text_Value(data: '$bat_capacity AH'),
-                                Text_Value(data: '$ave_cell V'),
-                                Text_Value(data: '$bat_temp °C'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(),
-                      Container(
-                        child: Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text_title(data: 'Remain Battery:'),
-                                // Text_title(
-                                //     data:'Remain Capacity(Khong co):'
-                                // ),
-                                Text_title(data: 'Cycle Count:'),
-                                Text_title(data: 'Cell Volt.Diff:'),
-                                Text_title(data: 'Battery T1:'),
-                                // Text_title(
-                                //     data:'Battery T3(Khoong co):'
-                                // ),
-                                // Text_title(
-                                //     data:'Heating Status(Khong co):'
-                                // ),
-                                // Text_title(
-                                //     data:'Charg.Plugged(Khong co):'
-                                // ),
-                                Text_title(data: 'Time Emerg:'),
-                              ],
-                            ),
-                            // SizedBox(
-                            //   width: 5 * heightR,
-                            // ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text_Value(
-                                  data: '$bat_percent%',
-                                ),
-                                // Text_Value(
-                                //     data:'396.0AH'
-                                // ),
-                                Text_Value(data: '$bat_cycles'),
-                                Text_Value(data: '$cell_diff V'),
-                                Text_Value(data: '$box_temp°C'),
-                                // Text_Value(
-                                //     data:'23.5°C'
-                                // ),
-                                // Text_Value(
-                                //     data:'OFF'
-                                // ),
-                                // Text_Value(
-                                //     data:'Plugged'
-                                // ),
-                                Text_Value(data: '$system_working_time'),
-                              ],
-                            ),
+                            SizedBox(),
+                            SizedBox(),
                           ],
                         ),
                       ),
@@ -744,9 +722,11 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                           ),
                         ),
                       ),
-                      SizedBox(),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 20*heightR,
                 ),
                 Container(
                   child: Column(
@@ -1759,15 +1739,15 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
 
 
   postDataSetting(final id,final propertyCode, final value) async{
-    // print(propertyCode);
-    // print(value);
+    print(propertyCode);
+    print(value);
     try{
       var response_setting = await http.post(
           Uri.parse(
               "https://smarthome.test.makipos.net:3029/users-control-devices"),
           headers: {
             "Content-type": "application/json",
-            "Authorization": widget.token.toString()
+            "Authorization": widget._token.toString()
           },
           body: jsonEncode(
               {
@@ -1776,11 +1756,11 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                 "localId": "1",
                 "commandString": "{\"d\":$value}",
                 "waitResponse": false,
-                "timeout": 1000
+                "timeout": 100
               }
           )
       );
-      // print("BodySetting $propertyCode : ${response_setting.statusCode}");
+      print("BodySetting $propertyCode : ${response_setting.statusCode}");
     } catch(e){
       print(e);
     }
