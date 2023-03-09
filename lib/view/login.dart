@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
+import '../widgets/custom_appbar.dart';
 import 'create_user.dart';
 import 'home.dart';
 
@@ -29,7 +30,7 @@ class _LogInPageState extends State<LogInPage> {
       duration: 5000,
       imageSize: 300,
       imageSrc: "assets/logo_appthuepin.png",
-      text: "BK Lab Manager",
+      text: "Loading",
       textType: TextType.ColorizeAnimationText,
       textStyle: TextStyle(
         fontSize: 220*curR,
@@ -214,7 +215,7 @@ class _SignPageState extends State<SignPage> {
     try{
       var response_user_login = await http.post(
           Uri.parse(
-              "http://smarthome.test.makipos.net:3028/users-service/users/authentication?_v=1"),
+              "https://smarthome.test.makipos.net:3029/users-service/users/authentication?_v=1"),
           headers: {
             "Content-type": "application/json; charset=utf-8",
           },
@@ -228,7 +229,7 @@ class _SignPageState extends State<SignPage> {
       _statusCode = response_user_login.statusCode;
       if(_statusCode == 201){
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => Home(token),
+          builder: (context) => Home(token: token, id: "63be79a13ea8bc0007797118",),
         )
         );
       }

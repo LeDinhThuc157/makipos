@@ -11,10 +11,11 @@ import 'StatusPage.dart';
 
 
 class Home extends StatefulWidget {
-  const Home(
-      this._token,
+  const Home({Key ? key, required this.token, this.id}
+
       );
-  final String _token;
+  final String token;
+  final String? id;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -138,12 +139,9 @@ class _HomeState extends State<Home> {
       IndexedStack(
         index: activeTab,
         children: <Widget>[
-          ResponsiveLayout(mobileBody: MymobileBodySTT(widget._token.toString()), desktopBody: StatusPage(widget._token.toString())),
-          ResponsiveLayout(mobileBody: MymobileBodySTS(widget._token.toString()), desktopBody: SettingsPage(widget._token.toString())),
-
-          // StatusPage(widget._token.toString()),
-          // SettingsPage(widget._token.toString()),
-          ControlPage(Icon(Icons.cached), 'Cha',widget._token.toString(),"za"),
+          ResponsiveLayout(mobileBody: MymobileBodySTT(widget.token.toString()), desktopBody: StatusPage( token: widget.token.toString(),id: widget.id,)),
+          ResponsiveLayout(mobileBody: MymobileBodySTS(widget.token.toString()), desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id,)),
+          ControlPage(name: "za", token: widget.token.toString(), pc: 'Cha',id1: widget.id),
         ],
       );
   }

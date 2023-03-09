@@ -85,15 +85,11 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
   String id = "63be79a13ea8bc0007797118";
 
   postData() async {
-    await Future.delayed(Duration(milliseconds: 1000), (){
-      setState(() {
-      });
-    });
     // print("Now: ${DateFormat.Hms().format(DateTime.now())}");
     try {
       //4.Thông tin thiết bị.
       var responseGet_Listdevice = await http.get(
-        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
+        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
       // print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
@@ -153,7 +149,7 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
     postData();
     Boolvalue();
     return Scaffold(
-      appBar: CustomAppbar(),
+      appBar: CustomAppbar(widget._token.toString()),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -524,19 +520,13 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
       //4.Thông tin thiết bị.
 
       var responseGet_Listdevice = await http.get(
-        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
+        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
       // print("StatusListDevice: ${responseGet_Listdevice.statusCode}");
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       // print("Time: ${userMap["propertiesValue"]["cells_vol"]}");
 
-
-      await Future.delayed(Duration(milliseconds: 1000), (){
-        setState(() {
-          // print("Setting");
-        });
-      });
       _calibratingVolt = userMap["propertiesValue"]["bat_vol"].toString();
       _calibratingCurr = userMap["propertiesValue"]["bat_current"].toString();
       _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
@@ -606,7 +596,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
     return Scaffold(
-      appBar: CustomAppbar(),
+      appBar: CustomAppbar(widget._token.toString()),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -1740,7 +1730,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     try{
       var response_setting = await http.post(
           Uri.parse(
-              "http://smarthome.test.makipos.net:3028/users-control-devices"),
+              "https://smarthome.test.makipos.net:3029/users-control-devices"),
           headers: {
             "Content-type": "application/json",
             "Authorization": widget._token.toString()
