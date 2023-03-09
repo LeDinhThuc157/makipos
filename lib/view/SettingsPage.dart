@@ -76,7 +76,6 @@ class _SettingsPageState extends State<SettingsPage> {
       //4.Thông tin thiết bị.
       String? id1 = widget.id1;
       id = id1;
-      print("_SettingsPageState ${widget.id1}");
       var responseGet_Listdevice = await http.get(
         Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id1"),
         headers: {"Authorization": widget.token.toString()},
@@ -159,7 +158,7 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: CustomAppbar(widget.token.toString()),
       backgroundColor: Colors.black45,
       body: StreamBuilder(
-        stream: Stream.periodic(Duration(seconds: 4)).asyncMap((event) => postData()),
+        stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
         builder: (context,snapshot) => SingleChildScrollView(
           child: Column(
             children: [

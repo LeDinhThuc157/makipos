@@ -94,7 +94,6 @@ class _StatusPageState extends State<StatusPage> {
     // print("Now: ${DateFormat.Hms().format(DateTime.now())}");
     try {
       String? id = widget.id;
-      print("_StatusPageState ${widget.id}");
 
       //4.Thông tin thiết bị.
       var responseGet_Listdevice = await http.get(
@@ -162,7 +161,7 @@ class _StatusPageState extends State<StatusPage> {
       appBar: CustomAppbar(widget.token.toString()),
       backgroundColor: Colors.black45,
       body: StreamBuilder(
-        stream: Stream.periodic(Duration(seconds: 4)).asyncMap((event) => postData()),
+        stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
         builder: (context, snapshot) => SingleChildScrollView(
           child: Column(
             children: [

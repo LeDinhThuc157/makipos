@@ -63,10 +63,8 @@ class _ControlPageState extends State<ControlPage> {
 
       if(userMap["data"] == null || userMap["data"].toString() == '[]' || responseGet_Listdevice.statusCode != 200){
         checkct = false;
-        print("No: $checkct");
       }else{
         checkct = true;
-        print("Yes: $checkct");
       }
 
       var _switch = userMap["propertiesValue"]["$propertyCode"].toString();
@@ -110,12 +108,11 @@ class _ControlPageState extends State<ControlPage> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     _FetchAPI();
-    print("_ControlPageState ${widget.id1}");
     return Scaffold(
       appBar: CustomAppbar(widget.token.toString()),
       backgroundColor: Colors.white,
       body:  StreamBuilder(
-        stream: Stream.periodic(Duration(seconds: 4)).asyncMap((event) => _FetchAPI()),
+        stream: Stream.periodic(Duration(seconds: 3)).asyncMap((event) => _FetchAPI()),
         builder: (context, snapshot) => !checkct ? Column(
           children: [
             Container(

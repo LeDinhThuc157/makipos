@@ -139,8 +139,12 @@ class _HomeState extends State<Home> {
       IndexedStack(
         index: activeTab,
         children: <Widget>[
-          ResponsiveLayout(mobileBody: MymobileBodySTT(widget.token.toString()), desktopBody: StatusPage( token: widget.token.toString(),id: widget.id,)),
-          ResponsiveLayout(mobileBody: MymobileBodySTS(widget.token.toString()), desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id,)),
+          ResponsiveLayout(
+              mobileBody: MymobileBodySTT(widget.token.toString(), widget.id.toString()),
+              desktopBody: StatusPage( token: widget.token.toString(),id: widget.id,)),
+          ResponsiveLayout(
+              mobileBody: MymobileBodySTS(widget.token.toString(),widget.id.toString()),
+              desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id,)),
           ControlPage(name: "za", token: widget.token.toString(), pc: 'Cha',id1: widget.id),
         ],
       );

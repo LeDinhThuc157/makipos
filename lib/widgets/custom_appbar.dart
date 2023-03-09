@@ -40,7 +40,6 @@ class _CustomAppbarState extends State<CustomAppbar> {
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       _data = userMap["data"];
-      print("Du lieu : ${_data.toString()}");
       if (_data.toString() == '[]' || _data.toString() == null || responseGet_Listdevice.statusCode != 200) {
         checkid = false;
         // print("NoOke: $checkid");

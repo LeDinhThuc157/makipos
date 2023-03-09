@@ -334,3 +334,32 @@ Refresh requested types: Bookmarks, Preferences, Passwords, Autofill Profiles, A
 Contributing types: Autofill, User Consents}
 {"logTime": "0309/071511", "correlationVector":"ftPZ8oTsYB2P7IN8wFubO7.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general01000018"}}
 {"logTime": "0309/071511", "correlationVector":"ftPZ8oTsYB2P7IN8wFubO7.2","action":"Commit Response", "result":"SYNCER_OK", "context":Result: SYNCER_OK. cV=ftPZ8oTsYB2P7IN8wFubO7.0;server=general01000018;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101201", "correlationVector":"0vpJa/UYb2/M2ZdrgE2goR.0","action":"FeedSettingFetch_homeCloud", "result":"0", "context":{}}
+{"logTime": "0309/101202", "correlationVector":"93wqy/cqlYwx6YW3a7klZb.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general01000006"}}
+{"logTime": "0309/101202", "correlationVector":"93wqy/cqlYwx6YW3a7klZb","action":"Initial GetUpdates", "result":"", "context":Reason: NEW_CLIENT. cV=93wqy/cqlYwx6YW3a7klZb}
+{"logTime": "0309/101202", "correlationVector":"93wqy/cqlYwx6YW3a7klZb.2","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 1 update(s). cV=93wqy/cqlYwx6YW3a7klZb.0;server=general01000006;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101202", "correlationVector":"phSZRxS06L63OUQ/ln4cLd","action":"Normal GetUpdate request", "result":"", "context":cV=phSZRxS06L63OUQ/ln4cLd
+Refresh requested types: Bookmarks, Autofill Custom Data, Typed URLs, Encryption Keys}
+{"logTime": "0309/101202", "correlationVector":"phSZRxS06L63OUQ/ln4cLd.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general0100000N"}}
+{"logTime": "0309/101202", "correlationVector":"phSZRxS06L63OUQ/ln4cLd.2","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 2 update(s). cV=phSZRxS06L63OUQ/ln4cLd.0;server=general0100000N;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101547", "correlationVector":"VmE+vo4JTpKslM2V3vpKWw","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_ERROR", "context":{"environment":"", "error_type":"http_status_code", "error_value":"400", "server":""}}
+{"logTime": "0309/101547", "correlationVector":"XeZzBi4Le0gDaYBeIEHaoV","action":"Poll GetUpdate request", "result":"", "context":cV=XeZzBi4Le0gDaYBeIEHaoV}
+{"logTime": "0309/101547", "correlationVector":"XeZzBi4Le0gDaYBeIEHaoV.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general0100000T"}}
+{"logTime": "0309/101547", "correlationVector":"XeZzBi4Le0gDaYBeIEHaoV.2","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 0 update(s). cV=XeZzBi4Le0gDaYBeIEHaoV.0;server=general0100000T;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101809", "correlationVector":"7CKZBjUEXwKSI+ubDGb6++","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"", "server":""}}
+{"logTime": "0309/101810", "correlationVector":"g+7Xq6e2vxjj2IrtqLFFg6","action":"Normal GetUpdate request", "result":"", "context":cV=g+7Xq6e2vxjj2IrtqLFFg6
+Notified types: Typed URLs}
+{"logTime": "0309/101810", "correlationVector":"g+7Xq6e2vxjj2IrtqLFFg6.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general0100000O"}}
+{"logTime": "0309/101810", "correlationVector":"g+7Xq6e2vxjj2IrtqLFFg6.2","action":"GetUpdates", "result":"DeleteReceived", "context":{"id":"37b8d3df-c865-4c5a-97f0-befcc48cd88d", "isDeleted:":"true", "version":"1678357084995"}}
+{"logTime": "0309/101810", "correlationVector":"g+7Xq6e2vxjj2IrtqLFFg6.3","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 3 update(s). cV=g+7Xq6e2vxjj2IrtqLFFg6.0;server=general0100000O;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101810", "correlationVector":"9SgiJCRip5yTiLxPgQY14k","action":"Initial GetUpdates", "result":"", "context":Reason: NEWLY_SUPPORTED_DATATYPE. cV=9SgiJCRip5yTiLxPgQY14k}
+{"logTime": "0309/101810", "correlationVector":"9SgiJCRip5yTiLxPgQY14k.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general0100000R"}}
+{"logTime": "0309/101811", "correlationVector":"9SgiJCRip5yTiLxPgQY14k.2","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 27 update(s). cV=9SgiJCRip5yTiLxPgQY14k.0;server=general0100000R;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101811", "correlationVector":"b2o7EwXhhdOfrBPff3y0G5","action":"Normal GetUpdate request", "result":"", "context":cV=b2o7EwXhhdOfrBPff3y0G5
+Refresh requested types: Bookmarks, Passwords, Autofill Profiles, Autofill, Autofill Custom Data, Typed URLs, Encryption Keys}
+{"logTime": "0309/101811", "correlationVector":"b2o7EwXhhdOfrBPff3y0G5.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general0100001A"}}
+{"logTime": "0309/101811", "correlationVector":"b2o7EwXhhdOfrBPff3y0G5.2","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 1 update(s). cV=b2o7EwXhhdOfrBPff3y0G5.0;server=general0100001A;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
+{"logTime": "0309/101855", "correlationVector":"r5AX1RxZ4em7auIlD8bUQv","action":"Normal GetUpdate request", "result":"", "context":cV=r5AX1RxZ4em7auIlD8bUQv
+Notified types: Typed URLs}
+{"logTime": "0309/101855", "correlationVector":"r5AX1RxZ4em7auIlD8bUQv.1","action":"SyncServerConnectionManagerRequest", "result":"SYNC_SERVER_OK", "context":{"environment":"Prod_SoutheastAsia_000j", "server":"general01000012"}}
+{"logTime": "0309/101856", "correlationVector":"r5AX1RxZ4em7auIlD8bUQv.2","action":"GetUpdates Response", "result":"SYNCER_OK", "context":Received 1 update(s). cV=r5AX1RxZ4em7auIlD8bUQv.0;server=general01000012;cloudType=Consumer;environment=Prod_SoutheastAsia_000j;migrationStage=NotStarted}
