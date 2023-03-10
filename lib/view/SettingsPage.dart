@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
       bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
       box_temp = userMap["propertiesValue"]["box_temp"].toString();
       system_working_time =
-          userMap["propertiesValue"]["system_working_time"].toString();
+          userMap["propertiesValue"]["logger_status"].toString();
       mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
       bat_current =
           (int.parse(userMap["propertiesValue"]["bat_current"].toString()) *
@@ -176,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         "$bat_vol mV",
                         style: TextStyle(
                           color: Colors.greenAccent[400],
-                          fontSize: 60*heightR,
+                          fontSize: 30*heightR,
                         ),
                       ),
                     ),
@@ -274,7 +274,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         '$bat_current A',
                         style: TextStyle(
                           color: Colors.greenAccent[400],
-                          fontSize: 60 *heightR,
+                          fontSize: 30 *heightR,
                         ),
 
                       ),

@@ -68,7 +68,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
             offset: Offset(0, 1))
       ]),
       child: StreamBuilder(
-          stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => getData()),
+          stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => getData()),
           builder: (context, snapshot) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -173,9 +173,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 ),
               ),
 
-              Text(
-                "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
-                style: TextStyle(color: Colors.white, fontSize: 24 * heightR),
+              StreamBuilder(
+                stream: Stream.periodic(Duration(seconds: 1)),
+                  builder: (context, snapshot) => Text(
+                    "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
+                    style: TextStyle(color: Colors.white, fontSize: 24 * heightR),
+                  ),
               ),
               PopupMenuButton(
                   icon: Icon(

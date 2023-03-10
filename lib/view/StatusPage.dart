@@ -114,7 +114,7 @@ class _StatusPageState extends State<StatusPage> {
       bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
       box_temp = userMap["propertiesValue"]["box_temp"].toString();
       system_working_time =
-          userMap["propertiesValue"]["system_working_time"].toString();
+          userMap["propertiesValue"]["logger_status"].toString();
       charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
       discharge =
           userMap["propertiesValue"]["discharge_mos_switch"].toString();
@@ -250,7 +250,7 @@ class _StatusPageState extends State<StatusPage> {
                         "$bat_vol mV",
                         style: TextStyle(
                           color: Colors.greenAccent[400],
-                          fontSize: 60*heightR,
+                          fontSize: 30*heightR,
                         ),
                       ),
                     ),
@@ -348,7 +348,7 @@ class _StatusPageState extends State<StatusPage> {
                         '$bat_current A',
                         style: TextStyle(
                           color: Colors.greenAccent[400],
-                          fontSize: 60 *heightR,
+                          fontSize: 30 *heightR,
                         ),
                       ),
                     ),
