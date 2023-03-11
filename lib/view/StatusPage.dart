@@ -97,7 +97,7 @@ class _StatusPageState extends State<StatusPage> {
 
       //4.Thông tin thiết bị.
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget.token.toString()},
       );
       // await Future.delayed(Duration(milliseconds: 10000), (){
@@ -157,6 +157,7 @@ class _StatusPageState extends State<StatusPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
+    postData();
     return Scaffold(
       appBar: CustomAppbar(widget.token.toString()),
       backgroundColor: Colors.black45,

@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
       String? id1 = widget.id1;
       id = id1;
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id1"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id1"),
         headers: {"Authorization": widget.token.toString()},
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
@@ -1302,7 +1302,7 @@ class _SettingsPageState extends State<SettingsPage> {
     try{
       var response_setting = await http.post(
           Uri.parse(
-              "https://smarthome.test.makipos.net:3029/users-control-devices"),
+              "http://smarthome.test.makipos.net:3028/users-control-devices"),
           headers: {
             "Content-type": "application/json",
             "Authorization": widget.token.toString()

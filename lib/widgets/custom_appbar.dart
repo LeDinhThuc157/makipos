@@ -35,7 +35,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   getData() async {
     try {
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices"),
         headers: {"Authorization": widget._token.toString()},
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);

@@ -111,7 +111,7 @@ class _CreateUserState extends State<CreateUser> {
     try{
       var response_user_create = await http.post(
           Uri.parse(
-              "https://smarthome.test.makipos.net:3029/users"),
+              "http://smarthome.test.makipos.net:3028/users"),
           headers: {
             "Content-type": "application/json; charset=utf-8",
           },

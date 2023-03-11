@@ -215,7 +215,7 @@ class _SignPageState extends State<SignPage> {
     try{
       var response_user_login = await http.post(
           Uri.parse(
-              "https://smarthome.test.makipos.net:3029/users-service/users/authentication?_v=1"),
+              "http://smarthome.test.makipos.net:3028/users-service/users/authentication?_v=1"),
           headers: {
             "Content-type": "application/json; charset=utf-8",
           },

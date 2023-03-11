@@ -44,7 +44,7 @@ class _ControlPageState extends State<ControlPage> {
   var isOn_discharge ;
   var charge;
   var discharge;
-  var checkct = false;
+  var checkct = true;
   @override
   GetDataControl(final propertyCode) async {
 
@@ -53,7 +53,7 @@ class _ControlPageState extends State<ControlPage> {
       String? id1 = widget.id1;
       id = id1;
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {
           "Authorization": widget.token.toString()
         },
@@ -61,11 +61,7 @@ class _ControlPageState extends State<ControlPage> {
 
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
 
-      if(userMap["data"] == null || userMap["data"].toString() == '[]' || responseGet_Listdevice.statusCode != 200){
-        checkct = false;
-      }else{
-        checkct = true;
-      }
+
 
       var _switch = userMap["propertiesValue"]["$propertyCode"].toString();
       if(propertyCode == "charging_mos_switch"){
@@ -92,6 +88,16 @@ class _ControlPageState extends State<ControlPage> {
           // print("Off DCG:$isOn_discharge");
         }
       }
+      if( responseGet_Listdevice.statusCode != 200 ||  responseGet_Listdevice.statusCode != 201){
+        print("Loi");
+      }
+      if(userMap["data"] == null || userMap["data"].toString() == '[]' ){
+       checkct = false;
+       print("False ${userMap["data"]} ${ responseGet_Listdevice.statusCode}");
+      }else{
+        checkct = true;
+        print("True ${userMap["data"]} ${ responseGet_Listdevice.statusCode}");
+      }
     } catch (e) {
       print(e);
     }
@@ -107,13 +113,13 @@ class _ControlPageState extends State<ControlPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
-    _FetchAPI();
+    // _FetchAPI();
     return Scaffold(
       appBar: CustomAppbar(widget.token.toString()),
       backgroundColor: Colors.white,
       body:  StreamBuilder(
         stream: Stream.periodic(Duration(seconds: 3)).asyncMap((event) => _FetchAPI()),
-        builder: (context, snapshot) => !checkct ? Column(
+        builder: (context, snapshot) => checkct ? Column(
           children: [
             Container(
               height: 100*heightR,
@@ -196,7 +202,7 @@ postDataControl(final id,final propertyCode,bool _check) async{
   try{
     var response_control = await http.post(
         Uri.parse(
-            "https://smarthome.test.makipos.net:3029/users-control-devices"),
+            "http://smarthome.test.makipos.net:3028/users-control-devices"),
         headers: {
           "Content-type": "application/json",
           "Authorization": widget.token.toString()

@@ -92,7 +92,7 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
 
       //4.Thông tin thiết bị.
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget._token.toString()},
       );
       // await Future.delayed(Duration(milliseconds: 10000), (){
@@ -529,7 +529,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
       String? id1 = widget.id1;
       id = id1;
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id1"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id1"),
         headers: {"Authorization": widget._token.toString()},
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
@@ -1746,7 +1746,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     try{
       var response_setting = await http.post(
           Uri.parse(
-              "https://smarthome.test.makipos.net:3029/users-control-devices"),
+              "http://smarthome.test.makipos.net:3028/users-control-devices"),
           headers: {
             "Content-type": "application/json",
             "Authorization": widget._token.toString()
