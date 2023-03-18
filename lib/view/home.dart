@@ -11,9 +11,11 @@ import 'StatusPage.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({Key ? key, required this.token, this.id}
+  const Home({Key ? key, required this.token, this.id, required this.user, required this.password}
 
       );
+  final String user;
+  final String password;
   final String token;
   final String? id;
   @override
@@ -140,12 +142,12 @@ class _HomeState extends State<Home> {
         index: activeTab,
         children: <Widget>[
           ResponsiveLayout(
-              mobileBody: MymobileBodySTT(widget.token.toString(),widget.id.toString()),
-              desktopBody: StatusPage( token: widget.token.toString(),id: widget.id,)),
+              mobileBody: MymobileBodySTT(widget.token.toString(),widget.id.toString(),widget.user,widget.password),
+              desktopBody: StatusPage( token: widget.token.toString(),id: widget.id, user: widget.user, password: widget.password,)),
           ResponsiveLayout(
-              mobileBody: MymobileBodySTS(widget.token.toString(),widget.id.toString()),
-              desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id,)),
-          ControlPage(name: "za", token: widget.token.toString(), pc: 'Cha',id1: widget.id),
+              mobileBody: MymobileBodySTS(widget.token.toString(),widget.id.toString(),widget.user,widget.password),
+              desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id, user: widget.user, password: widget.password,)),
+          ControlPage(name: "za", token: widget.token.toString(), pc: 'Cha',id1: widget.id, user: widget.user, password: widget.password,),
         ],
       );
   }
