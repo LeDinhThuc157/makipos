@@ -14,10 +14,12 @@ import '../view/home.dart';
 class CustomAppbar extends StatefulWidget with PreferredSizeWidget {
   // CustomAppbar({Key? key,}) : super(key: key);
   const CustomAppbar(
-    this._token,
+    this._token, this.user, this.password,
   );
 
   final String _token;
+  final String user;
+  final String password;
 
   @override
   _CustomAppbarState createState() => _CustomAppbarState();
@@ -31,8 +33,11 @@ class _CustomAppbarState extends State<CustomAppbar> {
   var _data;
   var length;
   var checkid = false;
-
+  var ListID = [];
+  int i = 0;
   getData() async {
+    var arr;
+
     try {
       var responseGet_Listdevice = await http.get(
         Uri.parse("http://smarthome.test.makipos.net:3028/devices"),
@@ -40,12 +45,19 @@ class _CustomAppbarState extends State<CustomAppbar> {
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       _data = userMap["data"];
+
       if (_data.toString() == '[]' || _data.toString() == null || responseGet_Listdevice.statusCode != 200) {
         checkid = false;
         // print("NoOke: $checkid");
       } else {
         checkid = true;
-        // print("Oke: $checkid");
+      }
+      if(i ==0){
+        // print("i = $i");
+        while(true){
+          ListID.add(_data[i]["productId"].toString());
+          i++;
+        }
       }
     } catch (e) {}
   }
@@ -56,6 +68,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
+    getData();
+    // print("Add: ${_data[i]["productId"]} $i");
+    // print("So luong: ${ListID.length}");
     return Container(
       height: 80 * heightR,
       padding: EdgeInsets.only(
@@ -68,7 +83,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
             offset: Offset(0, 1))
       ]),
       child: StreamBuilder(
-          stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => getData()),
+          stream: Stream.periodic(Duration(seconds: 10)).asyncMap((event) => getData()),
           builder: (context, snapshot) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +109,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                           height: 600 * heightR,
                           width: 800 * heightR,
                           child: ListView.builder(
-                              itemCount: 9,
+                              itemCount: ListID.length,
                               itemBuilder:
                                   (BuildContext context, int index) {
                                 return TextButton(
@@ -106,10 +121,11 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                         MaterialPageRoute(
                                           builder: (context) => Home(
                                               token: widget._token,
-                                              id: _id),
+                                              id: _id, user: widget.user, password: widget.password,
+                                          ),
                                         ),
                                       );
-                                      print(_id);
+                                      // print(_id);
                                     },
                                     child: Container(
                                       height: 50 * heightR,

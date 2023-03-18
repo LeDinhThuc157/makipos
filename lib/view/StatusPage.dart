@@ -19,14 +19,15 @@ import 'home.dart';
 
 class StatusPage extends StatefulWidget {
   const StatusPage({Key ? key,
-    required this.token, this.id,
+    required this.token, this.id, required this.user, required this.password,
   }
 
   ):super(key: key);
 
   final String token;
   final String? id;
-
+  final String user;
+  final String password;
   @override
   _StatusPageState createState() => _StatusPageState();
 }
@@ -100,7 +101,7 @@ class _StatusPageState extends State<StatusPage> {
         Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
         headers: {"Authorization": widget.token.toString()},
       );
-      // await Future.delayed(Duration(milliseconds: 10000), (){
+      // await Future.delayed(Duration(seconds: 5), (){
       //   setState(() {
       //   });
       // });
@@ -159,9 +160,10 @@ class _StatusPageState extends State<StatusPage> {
     var curR = widthR;
     postData();
     return Scaffold(
-      appBar: CustomAppbar(widget.token.toString()),
+      appBar: CustomAppbar(widget.token.toString(),widget.user,widget.password),
       backgroundColor: Colors.black45,
-      body: StreamBuilder(
+      body:
+      StreamBuilder(
         stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
         builder: (context, snapshot) => SingleChildScrollView(
           child: Column(
