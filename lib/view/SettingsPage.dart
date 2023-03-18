@@ -9,11 +9,13 @@ import '../theme/textvalue.dart';
 import '../widgets/custom_appbar.dart';
 
 class  SettingsPage extends StatefulWidget {
-   SettingsPage({Key ? key, required this.token,  this.id1,}
+   SettingsPage({Key ? key, required this.token,  this.id1, required this.user, required this.password,}
 
       ):super(key: key);
   final String token;
   final String? id1;
+   final String user;
+   final String password;
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -77,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
       String? id1 = widget.id1;
       id = id1;
       var responseGet_Listdevice = await http.get(
-        Uri.parse("https://smarthome.test.makipos.net:3029/devices/$id1"),
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id1"),
         headers: {"Authorization": widget.token.toString()},
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
@@ -155,10 +157,10 @@ class _SettingsPageState extends State<SettingsPage> {
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
     return Scaffold(
-      appBar: CustomAppbar(widget.token.toString()),
+      appBar: CustomAppbar(widget.token.toString(),widget.user,widget.password),
       backgroundColor: Colors.black45,
       body: StreamBuilder(
-        stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
+        stream: Stream.periodic(Duration(seconds: 10)).asyncMap((event) => postData()),
         builder: (context,snapshot) => SingleChildScrollView(
           child: Column(
             children: [
@@ -1302,7 +1304,7 @@ class _SettingsPageState extends State<SettingsPage> {
     try{
       var response_setting = await http.post(
           Uri.parse(
-              "https://smarthome.test.makipos.net:3029/users-control-devices"),
+              "http://smarthome.test.makipos.net:3028/users-control-devices"),
           headers: {
             "Content-type": "application/json",
             "Authorization": widget.token.toString()

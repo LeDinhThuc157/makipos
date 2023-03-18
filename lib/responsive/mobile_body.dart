@@ -19,9 +19,11 @@ import '../theme/textvalue.dart';
 import '../widgets/custom_appbar.dart';
 
 class MymobileBodySTT extends StatefulWidget {
-  const MymobileBodySTT(this._token, this.id,);
+  const MymobileBodySTT(this._token, this.id, this.user, this.password,);
   final String _token;
   final String id;
+  final String user;
+  final String password;
   @override
   _MymobileBodySTTState createState() => _MymobileBodySTTState();
 }
@@ -152,7 +154,7 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     return Scaffold(
-        appBar: CustomAppbar(widget._token.toString()),
+        appBar: CustomAppbar(widget._token.toString(),widget.user,widget.password),
         backgroundColor: Colors.black45,
         body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
@@ -462,10 +464,12 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
 
 class  MymobileBodySTS extends StatefulWidget {
   const MymobileBodySTS(
-      this._token, this.id1,
+      this._token, this.id1, this.user, this.password,
       );
   final String _token;
   final String id1;
+  final String user;
+  final String password;
   @override
   _MymobileBodySTSState createState() => _MymobileBodySTSState();
 }
@@ -607,7 +611,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
     return Scaffold(
-        appBar: CustomAppbar(widget._token.toString()),
+        appBar: CustomAppbar(widget._token.toString(),widget.user,widget.password),
         backgroundColor: Colors.black45,
         body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
