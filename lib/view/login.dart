@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:splash_screen_view/SplashScreenView.dart';
 import '../widgets/custom_appbar.dart';
 import 'create_user.dart';
 import 'home.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() async {
 }
@@ -68,7 +70,26 @@ class _SignPageState extends State<SignPage> {
   var token = "";
   var _userNameError = "Tài khoản không hợp lệ";
   var _passwordError = "Mật khẩu phải trên 6 kí tự ";
+  // Create storage
+  final storage = new FlutterSecureStorage();
+  final _keysave = 'key_save';
+  final _passsave = 'pass_save';
 
+@override
+void initState(){
+  super.initState();
+  getDataSave();
+}
+
+  void getDataSave() async{
+    String? dataname = await storage.read(key: _keysave);
+    String? datapass = await storage.read(key: _passsave);
+
+    setState(() {
+      nameController.text = dataname!;
+      passwordController.text = datapass!;
+    });
+  }
 
 
   Widget _entryField(
@@ -169,10 +190,13 @@ class _SignPageState extends State<SignPage> {
                         'Login',
                         style: TextStyle(fontSize: 150*curR),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        await storage.write(key: _keysave, value: nameController.text);
+                        await storage.write(key: _passsave, value: passwordController.text);
                         setState(() {
                           _onLoginClick();
-                        });
+                        }
+                        );
                         print("Trạng thái Code: $_statusCode");
 
                         print(nameController.text);
@@ -215,7 +239,7 @@ class _SignPageState extends State<SignPage> {
     try{
       var response_user_login = await http.post(
           Uri.parse(
-              "http://smarthome.test.makipos.net:3028/users-service/users/authentication?_v=1"),
+              "https://smarthome.test.makipos.net:3029/users-service/users/authentication?_v=1"),
           headers: {
             "Content-type": "application/json; charset=utf-8",
           },
@@ -229,12 +253,7 @@ class _SignPageState extends State<SignPage> {
       _statusCode = response_user_login.statusCode;
       if(_statusCode == 201){
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => Home(token: token,
-            user: nameController.text,
-            password: passwordController.text,
-            id: "63be79a13ea8bc0007797118",
-            namedevice: "bms_device_test_2",
-          ),
+          builder: (context) => Home(token: token, id: "63be79a13ea8bc0007797118",),
         )
         );
       }
