@@ -253,7 +253,11 @@ void initState(){
       _statusCode = response_user_login.statusCode;
       if(_statusCode == 201){
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => Home(token: token, id: "63be79a13ea8bc0007797118",),
+          builder: (context) => Home(token: token,
+            user: nameController.text,
+            password: passwordController.text,
+            id: "63be79a13ea8bc0007797118",
+            namedevice: "bms_device_test_2",),
         )
         );
       }
