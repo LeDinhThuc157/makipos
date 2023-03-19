@@ -11,13 +11,14 @@ import 'StatusPage.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({Key ? key, required this.token, this.id, required this.user, required this.password}
+  const Home({Key ? key, required this.token, this.id, required this.user, required this.password, this.namedevice}
 
       );
   final String user;
   final String password;
   final String token;
   final String? id;
+  final String? namedevice;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -147,7 +148,7 @@ class _HomeState extends State<Home> {
           ResponsiveLayout(
               mobileBody: MymobileBodySTS(widget.token.toString(),widget.id.toString(),widget.user,widget.password),
               desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id, user: widget.user, password: widget.password,)),
-          ControlPage(name: "za", token: widget.token.toString(), pc: 'Cha',id1: widget.id, user: widget.user, password: widget.password,),
+          ControlPage(namedevice: widget.namedevice, token: widget.token.toString(), pc: '',id1: widget.id, user: widget.user, password: widget.password,),
         ],
       );
   }

@@ -53,6 +53,8 @@ Future<int> main() async {
   /// can fail either because you have tried to subscribe to an invalid topic or the broker
   /// rejects the subscribe request.
   client.onSubscribed = onSubscribed;
+  client.onSubscribeFail = onSubscribeFail;
+
   /// Set a ping received callback if needed, called whenever a ping response(pong) is received
   /// from the broker.
   client.pongCallback = pong;
@@ -79,12 +81,21 @@ Future<int> main() async {
   /// never send malformed messages.
   try {
     await client.connect('BMS_admin','01012023');
+    client.subscribe('d/bms_device_test_2/p/UP/#', MqttQos.atLeastOnce);
   } on Exception catch (e) {
     print('EXAMPLE::client exception - $e');
     client.disconnect();
     return -1;
   }
+  client.updates!.listen((List<MqttReceivedMessage<MqttMessage>> c) {
+    final MqttPublishMessage message = c[0].payload as MqttPublishMessage;
+    final payload =
+    MqttPublishPayload.bytesToStringAsString(message.payload.message);
+    var data = jsonDecode(payload);
 
+    print('Received message:$payload from topic: ${c[0].topic}>');
+    print("Data: ${data[0]['d']}");
+  });
   /// Check we are connected
   if (client.connectionStatus!.state == MqttConnectionState.connected) {
     print('EXAMPLE::Mosquitto client connected');
@@ -95,15 +106,15 @@ Future<int> main() async {
     client.disconnect();
     return -1;
   }
-const pubtopic = "d/bms_device_test_2/s/BMS_admin/CP/1/charging_mos_switch";
-  final builder = MqttClientPayloadBuilder();
-  builder.addString(jsonEncode(
-      {
-        "d" : 1
-      }
-  ));
-  client.publishMessage(pubtopic, MqttQos.atLeastOnce, builder.payload!);
-  print("Complete");
+  // const pubtopic = "d/bms_device_test_2/s/BMS_admin/CP/1/charging_mos_switch";
+  // final builder = MqttClientPayloadBuilder();
+  // builder.addString(jsonEncode(
+  //     {
+  //       "d" : 1
+  //     }
+  // ));
+  // client.publishMessage(pubtopic, MqttQos.atLeastOnce, builder.payload!);
+  // print("Complete");
   /// Ok, lets try a subscription
   // print('EXAMPLE::Subscribing to the topic = d/bms_user_test_1/s/#');
   // const topic = 'd/bms_user_test_1/s/#'; // Not a wildcard topic
@@ -148,8 +159,8 @@ const pubtopic = "d/bms_device_test_2/s/BMS_admin/CP/1/charging_mos_switch";
   // print('EXAMPLE::Publishing our topic');
   // client.publishMessage('d/bms_device_test_1/s/bms_device_test_1/CP/1/charging_mos_switch', MqttQos.exactlyOnce, builder.payload!);
 
-  /// Ok, we will now sleep a while, in this gap you will see ping request/response
-  /// messages being exchanged by the keep alive mechanism.
+  // / Ok, we will now sleep a while, in this gap you will see ping request/response
+  // / messages being exchanged by the keep alive mechanism.
   // print('EXAMPLE::Sleeping....');
   // await MqttUtilities.asyncSleep(60);
   //
@@ -164,27 +175,32 @@ const pubtopic = "d/bms_device_test_2/s/BMS_admin/CP/1/charging_mos_switch";
   return 0;
 }
 
-/// The subscribed callback
-void onSubscribed(String topic) {
-  print('EXAMPLE::Subscription confirmed for topic $topic');
-}
-
-/// The unsolicited disconnect callback
-void onDisconnected() {
-  print('EXAMPLE::OnDisconnected client callback - Client disconnection');
-  if (client.connectionStatus!.disconnectionOrigin ==
-      MqttDisconnectionOrigin.solicited) {
-    print('EXAMPLE::OnDisconnected callback is solicited, this is correct');
-  }
-}
-
-/// The successful connect callback
+// connection succeeded
 void onConnected() {
-  print(
-      'EXAMPLE::OnConnected client callback - Client connection was sucessful');
+  print('Connected');
 }
 
-/// Pong callback
+// unconnected
+void onDisconnected() {
+  print('Disconnected');
+}
+
+// subscribe to topic succeeded
+void onSubscribed(String topic) {
+  print('Subscribed topic: $topic');
+}
+
+// subscribe to topic failed
+void onSubscribeFail(String topic) {
+  print('Failed to subscribe $topic');
+}
+
+// unsubscribe succeeded
+void onUnsubscribed(String topic) {
+  print('Unsubscribed topic: $topic');
+}
+
+// PING response received
 void pong() {
-  print('EXAMPLE::Ping response client callback invoked Oke');
+  print('Ping response client callback invoked');
 }

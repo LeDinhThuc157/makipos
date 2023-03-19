@@ -164,7 +164,7 @@ class _StatusPageState extends State<StatusPage> {
       backgroundColor: Colors.black45,
       body:
       StreamBuilder(
-        stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()),
+        stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => postData()).take(2),
         builder: (context, snapshot) => SingleChildScrollView(
           child: Column(
             children: [
