@@ -121,7 +121,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                         MaterialPageRoute(
                                           builder: (context) => Home(
                                               token: widget._token,
-                                              id: _id, user: widget.user, password: widget.password,
+                                              id: _id, user: widget.user,
+                                            password: widget.password,
+                                            namedevice: _data[index]["productId"],
                                           ),
                                         ),
                                       );
