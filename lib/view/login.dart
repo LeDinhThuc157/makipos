@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 import '../widgets/custom_appbar.dart';
 import 'create_user.dart';
+import 'empty_page.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:localstorage/localstorage.dart';
+
 
 void main() async {
 }
@@ -68,51 +71,64 @@ class _SignPageState extends State<SignPage> {
   TextEditingController passwordController = TextEditingController();
   var _statusCode;
   var token = "";
-  var _userNameError = "Tài khoản không hợp lệ";
-  var _passwordError = "Mật khẩu phải trên 6 kí tự ";
-  // Create storage
-  final storage = new FlutterSecureStorage();
-  final _keysave = 'key_save';
-  final _passsave = 'pass_save';
+  var id_device = "";
+  var name_device = "";
 
+  String? dataname ;
+  String? datapass ;
 @override
 void initState(){
   super.initState();
-  getDataSave();
+  _GetDataSave();
+  _statusCode == null ? 1 : _statusCode;
+  // _SaveLogin();
 }
+  Future<String?> _Username() async => dataname = _localStorage['username'];
+  Future<String?> _Password() async => datapass = _localStorage['password'];
+  Future<String?> _Status() async => _statusCode = _localStorage['Status'];
 
-  void getDataSave() async{
-    String? dataname = await storage.read(key: _keysave);
-    String? datapass = await storage.read(key: _passsave);
 
+
+  _GetDataSave(){
+    _Username();
+    _Password();
+    _Status();
     setState(() {
-      nameController.text = dataname!;
-      passwordController.text = datapass!;
+      dataname != null ? nameController.text = dataname! : "";
+      datapass != null ? passwordController.text = datapass! : "";
     });
+
+}
+  // Widget _entryField(
+  //     bool obscure,
+  //     String title,
+  //     TextEditingController controller,
+  //     ) {
+  //   return TextField(
+  //     obscureText: obscure,
+  //     controller: controller,
+  //     decoration: InputDecoration(
+  //       enabledBorder: OutlineInputBorder(
+  //         // borderSide:
+  //         // BorderSide(width: 3, color: Colors.greenAccent), //<-- SEE HERE
+  //         borderRadius: BorderRadius.circular(20.0),
+  //       ),
+  //       labelText: title,
+  //     ),
+  //   );
+  // }
+
+  final Storage _localStorage = window.localStorage;
+  Future save(String data, String propertyCode) async {
+    _localStorage['$propertyCode'] = data;
   }
-
-
-  Widget _entryField(
-      bool obscure,
-      String title,
-      TextEditingController controller,
-      ) {
-    return TextField(
-      obscureText: obscure,
-      controller: controller,
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          // borderSide:
-          // BorderSide(width: 3, color: Colors.greenAccent), //<-- SEE HERE
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        labelText: title,
-      ),
-    );
-  }
-
+  // Future save_list(List data, String propertyCode) async {
+  //   _localStorage['$propertyCode'] = data as String;
+  // }
   @override
   Widget build(BuildContext context) {
+
+    // print("$dataname : $datapass");
     double  heightR,widthR;
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
@@ -126,17 +142,17 @@ void initState(){
                 Container(
                     alignment: Alignment.center,
                     padding:  EdgeInsets.only(top: 10*curR,left: 10*curR,right: 10*curR,bottom: 10*curR),
-                    margin: EdgeInsets.only(top: 70 * heightR),
+                    // margin: EdgeInsets.only(top: 70 * heightR),
                     child:  Text(
                       'Welcome Back!',
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.w500,
-                          fontSize: 200 * curR),
+                          fontSize: 160 * curR),
                     )),
                 Container(
                   // color: Colors.red,
-                  height: 450*heightR,
+                  height: 400*heightR,
                   padding:  EdgeInsets.all(40*heightR),
                   margin: EdgeInsets.only(bottom: 30*heightR),
                   alignment: Alignment.center,
@@ -144,64 +160,92 @@ void initState(){
                 ),
                 Container(
                     padding:  EdgeInsets.fromLTRB(60*widthR, 0, 60*widthR, 10*heightR),
-                    child: _entryField(false,'User Name', nameController)
+                    child: TextFormField(
+                      controller: nameController,
+                      decoration:  InputDecoration(
+                        labelText: 'Enter your Username',
+                      ),
+                    ),
                 ),
                 Container(
                   padding:  EdgeInsets.fromLTRB(60*widthR, 10*heightR, 60*widthR, 0),
-                  child: Stack(
-                    alignment: AlignmentDirectional.centerEnd,
-                    children: <Widget>[
-                      _entryField(
-                        !showPass,
-                        'Password',
-                        passwordController,
-                      ),
-                    ],
+                  child: TextFormField(
+                    controller: passwordController,
+                    onTap: (){
+
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      hintText: "Enter your Password",
+                      suffixIcon:
+                      IconButton(
+                          icon: Icon(
+                            showPass ? Icons.visibility : Icons.visibility_off,
+                            semanticLabel: showPass ? 'hide password' : 'show password',
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              setState(() {
+                                showPass = !showPass;
+                              });
+                              //print("Icon button pressed! state: $_passwordVisible"); //Confirmed that the _passwordVisible is toggled each time the button is pressed.
+                            });
+                          }),
+                    ),
+                    obscureText: !showPass,
+                    autofocus: false,
+
                   ),
                 ),
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      //forgot password screen
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => EmptyPage(),
+                      )
+                      );
+
+                      // AwesomeDialog(
+                      //   context: context,
+                      //   animType: AnimType.leftSlide,
+                      //   headerAnimationLoop: false,
+                      //   dialogType: DialogType.error,
+                      //   showCloseIcon: true,
+                      //   title: 'Notification',
+                      //   desc:
+                      //   'Vui lòng liên hệ với quản trị viên để lấy lại mật khẩu!',
+                      //   btnOkOnPress: () {
+                      //   },
+                      //   btnOkIcon: Icons.cancel,
+                      //   onDismissCallback: (type) {
+                      //   },
+                      // ).show();
                     },
                     child:  Text(
                       'Forgot Password?',
                       style: TextStyle(
-                        fontSize: 100*curR,
+                        fontSize: 60*curR,
                       ),
                     ),
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () {
-                //     //forgot password screen
-                //   },
-                //   child: const Text(
-                //     'Forgot Password?',
-                //   ),
-                // ),
                 Container(
-                    height: 200*heightR,
-                    margin: EdgeInsets.only(top: 60*heightR),
+                    height: 150*heightR,
+                    margin: EdgeInsets.only(top: 20*heightR),
                     padding:  EdgeInsets.fromLTRB(60*widthR, 0, 60*widthR, 0),
                     child: ElevatedButton(
                       child:  Text(
                         'Login',
-                        style: TextStyle(fontSize: 150*curR),
+                        style: TextStyle(fontSize: 120*curR),
                       ),
-                      onPressed: () async {
-                        await storage.write(key: _keysave, value: nameController.text);
-                        await storage.write(key: _passsave, value: passwordController.text);
+                      onPressed: () {
                         setState(() {
-                          _onLoginClick();
+                          _SaveLogin();
                         }
                         );
-                        print("Trạng thái Code: $_statusCode");
 
-                        print(nameController.text);
-                        print(passwordController.text);
-                      },
+                        },
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -210,7 +254,7 @@ void initState(){
                       margin: EdgeInsets.only(left: 200*widthR),
                       child: Text('Do not have an account?',
                         style: TextStyle(
-                          fontSize: 105*curR,
+                          fontSize: 80*curR,
                         ),),
                     ),
                     Container(
@@ -218,10 +262,9 @@ void initState(){
                         child: TextButton(
                           child:  Text(
                             'Sign up',
-                            style: TextStyle(fontSize: 110*curR),
+                            style: TextStyle(fontSize: 80*curR),
                           ),
                           onPressed: () {
-
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) => CreateUser(),
                             ));
@@ -234,8 +277,7 @@ void initState(){
             ))
     );
   }
-
-  _onLoginClick() async {
+  _SaveLogin() async {
     try{
       var response_user_login = await http.post(
           Uri.parse(
@@ -251,17 +293,19 @@ void initState(){
           })
       );
       _statusCode = response_user_login.statusCode;
+      Map<String, dynamic> userMap = jsonDecode(response_user_login.body);
+      token = userMap["accessToken"].toString();
       if(_statusCode == 201){
+        save(nameController.text,'username');
+        save(passwordController.text,'password');
+        save(token, "Token");
+        get_device();
+        save(_statusCode.toString(),'Status');
+        // Login
         Navigator.push(context, MaterialPageRoute(
-          builder: (context) => Home(token: token,
-            user: nameController.text,
-            password: passwordController.text,
-            id: "63be79a13ea8bc0007797118",
-            namedevice: "bms_device_test_2",),
-        )
-        );
-      }
-      else{
+          builder: (context) => Home(),
+        ));
+      }else{
         AwesomeDialog(
           context: context,
           animType: AnimType.leftSlide,
@@ -278,14 +322,124 @@ void initState(){
           },
         ).show();
       }
-      print(_statusCode);
-      Map<String, dynamic> userMap = jsonDecode(response_user_login.body);
-      token = userMap["accessToken"].toString();
+
+
     } catch (e) {
       print(e);
     }
     return token;
   }
+  get_device() async {
+    try{
+      var Get_Listdevice = await http.get(
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices"),
+        headers: {"Authorization": token},
+      );
+      Map<String, dynamic> userMap = jsonDecode(Get_Listdevice.body);
+      id_device = userMap["data"][0]["_id"].toString();
+      save(id_device,"Id_device");
+      name_device = userMap["data"][0]["productId"].toString();
+      save(name_device, "Name_device");
+      getData();
+    }catch(e){
+      print(e);
+    }
+  }
+  getData() async {
+    try {
+      var responseGet_Listdevice = await http.get(
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id_device"),
+        headers: {"Authorization": token},
+      );
+      Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
+
+      var cells_vol = userMap["propertiesValue"]["cells_vol"];
+      save(cells_vol.toString(), "List_Cell");
+      // saveList(userMap["propertiesValue"]["cells_vol"], "cells_vol");
+      // bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+      save(userMap["propertiesValue"]["bat_vol"].toString(), "bat_vol");
+      // bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+      save(userMap["propertiesValue"]["bat_cap"].toString(), "bat_cap");
+      // bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+      save(userMap["propertiesValue"]["bat_capacity"].toString(), "bat_capacity");
+      // bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+      save(userMap["propertiesValue"]["bat_temp"].toString(), "bat_temp");
+      // bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+      save(userMap["propertiesValue"]["bat_percent"].toString(), "bat_percent");
+      // bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+      save(userMap["propertiesValue"]["bat_cycles"].toString(), "bat_cycles");
+      // box_temp = userMap["propertiesValue"]["box_temp"].toString();
+      save(userMap["propertiesValue"]["box_temp"].toString(), "box_temp");
+      // system_working_time = userMap["propertiesValue"]["logger_status"].toString();
+      save(userMap["propertiesValue"]["logger_status"].toString(), "logger_status");
+      save(userMap["propertiesValue"]["tube_temp"].toString(), "tube_temp");
+
+      save(userMap["propertiesValue"]["charging_mos_switch"].toString(), "charging_mos_switch");
+      save(userMap["propertiesValue"]["discharge_mos_switch"].toString(), "discharge_mos_switch");
+      save(userMap["propertiesValue"]["active_equalization_switch"].toString(), "active_equalization_switch");
+      // charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
+      // discharge = userMap["propertiesValue"]["discharge_mos_switch"].toString();
+      // balance = userMap["propertiesValue"]["active_equalization_switch"].toString();
+      // mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+      // bat_current = (int.parse(userMap["propertiesValue"]["bat_current"].toString()) * 0.01).toString();
+      save((int.parse(userMap["propertiesValue"]["bat_current"].toString()) * 0.01).toString(), "bat_current");
+      var min = cells_vol[0];
+      var max = cells_vol[0];
+      var sum = cells_vol.reduce((value, current) => value + current);
+      for (var i = 0; i < cells_vol.length; i++) {
+        // Calculate sum
+        // sum += cells_vol[i];
+        // Checking for largest value in the list
+        if (cells_vol[i] > max) {
+          max = cells_vol[i];
+        }
+        // Checking for smallest value in the list
+        if (cells_vol[i] < min) {
+          min = cells_vol[i];
+        }
+      }
+      // cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+      save(((max - min)*0.001).toStringAsFixed(4), "cell_diff");
+      // ave_cell = (sum / (cells_vol.length)).toStringAsFixed(2);
+      save((sum / (cells_vol.length)).toStringAsFixed(2), "ave_cell");
+
+      // Setting data
+
+      // _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
+      save(userMap["propertiesValue"]["single_overvoltage"].toString(), "single_overvoltage");
+      // _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
+      save(userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString(), "monomer_overvoltage_recovery");
+      // _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
+      save(userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString(), "discharge_overcurrent_protection_value");
+      // _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
+      save(userMap["propertiesValue"]["differential_voltage_protection_value"].toString(), "differential_voltage_protection_value");
+      // _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
+      save(userMap["propertiesValue"]["equalizing_opening_differential"].toString(), "equalizing_opening_differential");
+      // _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
+      save(userMap["propertiesValue"]["charging_overcurrent_delay"].toString(), "charging_overcurrent_delay");
+      // _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
+      save(userMap["propertiesValue"]["equalizing_starting_voltage"].toString(), "equalizing_starting_voltage");
+      // _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
+      save(userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString(), "high_temp_protect_bat_charge");
+      // _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
+      save(userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString(), "high_temp_protect_bat_discharge");
+      // _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
+      save(userMap["propertiesValue"]["charge_cryo_protect"].toString(), "charge_cryo_protect");
+      // _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
+      save(userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString(), "recover_val_charge_cryoprotect");
+      // _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
+      save(userMap["propertiesValue"]["tube_temp_protection"].toString(), "tube_temp_protection");
+      // _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
+      save(userMap["propertiesValue"]["strings_settings"].toString(), "strings_settings");
+      // _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
+      save(userMap["propertiesValue"]["battery_capacity_settings"].toString(), "battery_capacity_settings");
+    } catch (e) {
+      print(e);
+    }
+    // Boolvalue();
+
+  }
+
 }
 ThemeData _themeData(Brightness brightness) {
   return ThemeData(

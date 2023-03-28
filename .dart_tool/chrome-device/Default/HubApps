@@ -19,9 +19,9 @@
       "flights": [ "msEdgeNurturingHub" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_activity_hub_dark.png/1.1.16/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_activity_hub_hc.png/1.1.16/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_activity_hub_light.png/1.1.16/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_action_center_maximal_dark.png/1.1.17/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_action_center_hc.png/1.1.17/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_action_center_maximal_light.png/1.1.17/asset"
          }
       },
       "id": "d304175e-bbd4-4b66-8839-9627e56f391f",
@@ -37,7 +37,7 @@
       "target": {
          "url": "edge://rewards/?sharedHeader=1"
       },
-      "version": "1.1.16"
+      "version": "1.1.17"
    }, {
       "capabilities": {
          "deprecated_hide_header": true
@@ -46,9 +46,9 @@
       "description": "Search without losing your place",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_search_dark.png/1.3.4/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_fluent_search_hc.png/1.3.4/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_search_light.png/1.3.4/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_maximal_dark.png/1.3.5/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_hc.png/1.3.5/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_search_maximal_light.png/1.3.5/asset"
          }
       },
       "id": "8ac719c5-140b-4bf2-a0b7-c71617f1f377",
@@ -60,7 +60,7 @@
       "target": {
          "command": "search"
       },
-      "version": "1.3.4"
+      "version": "1.3.5"
    }, {
       "capabilities": {
          "deprecated_hide_header": true
@@ -69,9 +69,9 @@
       "description": "Contextually relevant info for any page",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_chatB_active_dark.png/1.5.8/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_chatB_hc.png/1.5.8/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_chatB_active_light.png/1.5.8/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_chatB_active_dark.png/1.6.8/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_chatB_hc.png/1.6.8/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_chatB_active_light.png/1.6.8/asset"
          }
       },
       "id": "2354565a-f412-4654-b89c-f92eaa9dbd20",
@@ -86,7 +86,7 @@
       "target": {
          "command": "discover"
       },
-      "version": "1.5.8"
+      "version": "1.6.8"
    }, {
       "capabilities": {
          "deprecated_hide_header": true
@@ -123,9 +123,9 @@
       "flights": [ "msEdgeHubAppHistory" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_history-maximal-dark.png/0.1.2/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_history-monoline-light.png/0.1.2/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_history-maximal-light.png/0.1.2/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_history_maximal_dark.png/0.1.3/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_history_hc.png/0.1.3/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_history_maximal_light.png/0.1.3/asset"
          }
       },
       "id": "b1b2ba12-8484-42cd-a25f-e3a2ab619cd1",
@@ -136,7 +136,7 @@
       "target": {
          "url": "edge://history/hub?sidebar=true"
       },
-      "version": "0.1.2"
+      "version": "0.1.3"
    }, {
       "capabilities": {
          "deprecated_hide_header": true,
@@ -144,12 +144,11 @@
       },
       "default_locale": "en",
       "description": "Coupons, compare savings and save money while you shop",
-      "flights": [ "msEdgeHubAppShopping", "msEdgeShoppingUI", "msEdgeShoppingHub", "msEdgeOpenShoppingHubPinned" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_shopping_dark.png/1.3.8/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_shopping_hc.png/1.3.8/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_shopping_light.png/1.3.8/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_shopping_maximal_dark.png/1.3.10/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_shopping_hc.png/1.3.10/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_shopping_maximal_light.png/1.3.10/asset"
          }
       },
       "id": "523b5ef3-0b10-4154-8b62-10b2ebd00921",
@@ -165,7 +164,7 @@
       "target": {
          "url": "edge://shopping"
       },
-      "version": "1.3.8"
+      "version": "1.3.10"
    }, {
       "capabilities": {
          "resize_disabled": true
@@ -189,9 +188,9 @@
          },
          "icon": {
             "raster_icon": {
-               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_dark.png/1.4.12/asset",
-               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_hc.png/1.4.12/asset",
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_light.png/1.4.12/asset"
+               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_dark.png/1.5.13/asset",
+               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_hc.png/1.5.13/asset",
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_light.png/1.5.13/asset"
             }
          },
          "location": "header_button",
@@ -201,9 +200,9 @@
       "description": "Easy access to commonly used tools",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_toolbox_dark.png/1.4.12/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_toolbox_hc.png/1.4.12/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_toolbox_light.png/1.4.12/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_toolbox_maximal_dark.png/1.5.13/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_toolbox_hc.png/1.5.13/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_toolbox_maximal_light.png/1.5.13/asset"
          }
       },
       "id": "0c835d2d-9592-4c7a-8d0a-0e283c9ad3cd",
@@ -219,7 +218,7 @@
          "url|flight:msEdgeHubAppToolsVnext|theme:dark": "https://edgeservices.bing.com/edgesvc/toolbox?darkschemeovr=1",
          "url|theme:dark": "https://edgeservices.bing.com/edgesvc/toolbox?darkschemeovr=1"
       },
-      "version": "1.4.12"
+      "version": "1.5.13"
    }, {
       "auto_show": {
          "enabled": true,
@@ -255,9 +254,9 @@
       "description": "Play popular games for free",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_games_dark-2x.png/1.6.12/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_fluent_games_hc-2x.png/1.6.12/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_games_light-2x.png/1.6.12/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_games_maximal_dark.png/1.6.14/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_games_hc.png/1.6.14/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_games_maximal_light.png/1.6.14/asset"
          }
       },
       "id": "96defd79-4015-4a32-bd09-794ff72183ef",
@@ -281,15 +280,15 @@
          "url|flight:msEdgeHubAppGameSearchEnabled": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&playInSidebar=1&gameSearchEnabled=1",
          "url|flight:msEdgeHubAppPlayGamesInSidebar": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&playInSidebar=1",
          "url|flight:msEdgeHubAppUseCGSideBar": "https://www.msn.com/widgets/fullpage/cgSideBar/widget?experiences=CasualGamesHub&sharedHeader=1",
-         "url|flight:msEdgeHubAppUseCGSideBarPlayGamesInSidebar": "https://www.msn.com/widgets/fullpage/cgSideBar/widget?experiences=CasualGamesHub&sharedHeader=1&playInSidebar=1",
+         "url|flight:msEdgeHubAppUseCGSideBarPlayGamesInSidebar": "https://www.msn.com/widgets/fullpage/cgSideBar/widget?experiences=CasualGamesHub&sharedHeader=1",
          "url|flight:msEdgeHubAppUseCGSideBarWGICard": "https://www.msn.com/widgets/fullpage/cgSideBar/widget?experiences=CasualGamesHub&sharedHeader=1&gameSearchEnabled=1",
          "url|flight:msEdgeHubAppUseCGSideBarWGITopGames": "https://www.msn.com/widgets/fullpage/cgSideBar/widget?experiences=CasualGamesHub&sharedHeader=1&item=flights%3Aprg-cg-wgitg",
          "url|flight:msEdgeHubAppUseCGSideBarWGITopSearchbar": "https://www.msn.com/widgets/fullpage/cgSideBar/widget?experiences=CasualGamesHub&sharedHeader=1&item=flights%3Aprg-cg-l1wgi",
-         "url|flight:msEdgeHubAppWGITopGames": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&playInSidebar=1&item=flights%3Aprg-cg-wgitg",
-         "url|flight:msEdgeHubAppWGITopGamesAndSearchbar": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&playInSidebar=1&item=flights%3Aprg-cg-wgitg,prg-cg-l1wgi",
-         "url|flight:msEdgeHubAppWGITopSearchbar": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&playInSidebar=1&item=flights%3Aprg-cg-l1wgi"
+         "url|flight:msEdgeHubAppWGITopGames": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&item=flights%3Aprg-cg-wgitg",
+         "url|flight:msEdgeHubAppWGITopGamesAndSearchbar": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&item=flights%3Aprg-cg-wgitg,prg-cg-l1wgi",
+         "url|flight:msEdgeHubAppWGITopSearchbar": "https://www.msn.com/widgets/fullpage/gaming/widget?experiences=CasualGamesHub&sharedHeader=1&item=flights%3Aprg-cg-l1wgi"
       },
-      "version": "1.6.12"
+      "version": "1.6.14"
    }, {
       "auto_show": {
          "enabled": true,
@@ -309,7 +308,7 @@
          },
          "icon": {
             "raster_icon": {
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_word.png/1.6.25/asset"
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_word.png/1.7.27/asset"
             }
          },
          "location": "hovercard",
@@ -322,7 +321,7 @@
          },
          "icon": {
             "raster_icon": {
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_excel.png/1.6.25/asset"
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_excel.png/1.7.27/asset"
             }
          },
          "location": "hovercard",
@@ -335,7 +334,7 @@
          },
          "icon": {
             "raster_icon": {
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_power_point.png/1.6.25/asset"
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_power_point.png/1.7.27/asset"
             }
          },
          "location": "hovercard",
@@ -354,12 +353,12 @@
       } ],
       "default_locale": "en",
       "description": "Access Microsoft 365 apps for free",
-      "description|flight:msRemoveStringFromChromiumCode": "Access Microsoft Office apps for free",
+      "description|flight:msRemoveStringFromChromiumCode": "Access Microsoft 365 apps for free",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_M365_dark.png/1.6.25/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_M365_hc_light.png/1.6.25/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_M365_light.png/1.6.25/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_M365_dark.png/1.7.27/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_M365_hc.png/1.7.27/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_M365_light.png/1.7.27/asset"
          }
       },
       "id": "64be4f9b-3b81-4b6e-b354-0ba00d6ba485",
@@ -372,7 +371,7 @@
             "bubble_notifications": {
                "domains": [ "www.office.com", "www.microsoft365.com" ],
                "text": "Office is now Microsoft 365. Use for free!",
-               "text|flight:msRemoveStringFromChromiumCode": "Use Microsoft Office for free!"
+               "text|flight:msRemoveStringFromChromiumCode": "Use Microsoft 365 for free!"
             }
          },
          "enabled": true
@@ -383,7 +382,7 @@
          "url": "edge://free-office/?sharedHeader=1",
          "url|flight:msEdgeHubAppOfficeCom": "https://www.office.com"
       },
-      "version": "1.6.25"
+      "version": "1.7.27"
    }, {
       "auto_show": {
          "enabled": true,
@@ -437,9 +436,9 @@
       "description": "Check email while staying in your flow",
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook.png/1.7.3/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_fluent_outlook_hc.png/1.7.3/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook.png/1.7.3/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_dark.png/1.7.4/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_hc.png/1.7.4/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_outlook_light.png/1.7.4/asset"
          }
       },
       "id": "8682d0fa-50b3-4ece-aa5b-e0b33f9919e2",
@@ -467,7 +466,7 @@
       },
       "trusted_domains": [ "live.com", "office.com", "microsoftonline.com", "microsoft.com", "office365.com" ],
       "trusted_types": [ "default", "dompurify" ],
-      "version": "1.7.3"
+      "version": "1.7.4"
    }, {
       "default_locale": "en",
       "description": "Empower people to express themselves creatively",
@@ -475,9 +474,9 @@
       "flights": [ "msEdgeSalvador" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_dall_e_dark.png/1.0.11/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_dall_e_hc.png/1.0.11/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_dall_e_light.png/1.0.11/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_image_creator_maximal_dark.png/1.0.12/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_image_creator_hc.png/1.0.12/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_image_creator_maximal_light.png/1.0.12/asset"
          }
       },
       "id": "2caf0cf4-ea42-4083-b928-29b39da1182b",
@@ -494,7 +493,7 @@
          "url": "https://www.bing.com/images/create?FORM=ESHBIC&edgehub=1&lightschemeovr=1",
          "url|theme:dark": "https://www.bing.com/images/create?FORM=ESHBIC&edgehub=1&darkschemeovr=1"
       },
-      "version": "1.0.11"
+      "version": "1.0.12"
    }, {
       "capabilities": {
          "deprecated_hide_header": true,
@@ -507,9 +506,9 @@
          },
          "icon": {
             "raster_icon": {
-               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_dark.png/1.0.7/asset",
-               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_hc.png/1.0.7/asset",
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_light.png/1.0.7/asset"
+               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_dark.png/1.1.9/asset",
+               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_hc.png/1.1.9/asset",
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_settings_light.png/1.1.9/asset"
             }
          },
          "location": "header_context_menu",
@@ -521,9 +520,9 @@
          },
          "icon": {
             "raster_icon": {
-               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_dark.png/1.0.7/asset",
-               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_hc.png/1.0.7/asset",
-               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_light.png/1.0.7/asset"
+               "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_dark.png/1.1.9/asset",
+               "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_hc.png/1.1.9/asset",
+               "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_refresh_light.png/1.1.9/asset"
             }
          },
          "location": "header_button",
@@ -531,17 +530,16 @@
       } ],
       "default_locale": "en",
       "description": "Send files across your mobile and desktop devices",
-      "flights": [ "msEdgeHubAppEDrop" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_edrop_dark.png/1.0.7/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_edrop_hc.png/1.0.7/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_edrop_light.png/1.0.7/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_maximal_dark.png/1.1.9/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_hc.png/1.1.9/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_edrop_maximal_light.png/1.1.9/asset"
          }
       },
       "id": "92f1b743-e26b-433b-a1ec-912d1f0ad1fa",
       "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9BhGcpOnNnAz2Uq1+G168ATHAwW/+lmtwhoktOmZQmB0xmQu6glBP9iSqW8wuy7+qpB7ekGtN3BylvAyFjAKvfd9OJhG2mw7uzAiti7fJssSwmNB1o8yfy6A5cqFDYyf4wjp0Uw66ye8V85Y26efYnERWYZzExPRy0wWfjwqfCgcskDwFIv7w6UYoA3UKh79OsBNDUyVAEcs81FaFp0QB3P96uHmhBAuwsm4XsWnejWC40JgcFtd/+ugcnI8ZiXiEhlX6QQeOLUQxD/0yoqQuh3u1olSTXFRuBsvyQQCImYOPRV6l50uC33T2qQz8f+UbswaJ/7WVyVKBRwZ8vQBgQIDAQAB",
-      "locales": [ "en" ],
+      "locales": [ "af", "am", "ar", "as", "az", "bg", "bn_IN", "bs", "ca", "ca_Es_VALENCIA", "cs", "cy", "da", "de", "el", "en", "en_GB", "es", "es_MX", "et", "eu", "fa", "fi", "fil", "fr", "fr_CA", "ga", "gd", "gl", "gu", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "km", "kn", "ko", "kok", "lb", "lo", "lt", "lv", "mi", "mk", "ml", "mr", "ms", "mt", "nb", "ne", "nl", "nn", "or", "pa", "pl", "pt_BR", "pt_PT", "quz", "ro", "ru", "sk", "sl", "sq", "sr_Cyrl_BA", "sr_Cyrl_RS", "sr_Latn_RS", "sv", "ta", "te", "th", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "zh_CN", "zh_TW" ],
       "manifest_version": 3,
       "name": "Drop",
       "notifications": {
@@ -553,7 +551,7 @@
          "url": "edge://e-drop/",
          "url|flight:msEdgeEDropSharedHeader": "edge://e-drop/?shared_header=1"
       },
-      "version": "1.0.7"
+      "version": "1.1.9"
    }, {
       "capabilities": {
          "resize_disabled": true
@@ -565,9 +563,9 @@
       "flights": [ "msEdgeHubAppEtree", "msEdgeEtreeUI", "msEdgeEtreePerformTask" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_etree_dark.png/1.1.11/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_etree_hc.png/1.1.11/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_maximal_etree_light.png/1.1.11/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_etree_maximal_dark.png/1.1.12/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_etree_hc.png/1.1.12/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_etree_maximal_light.png/1.1.12/asset"
          }
       },
       "id": "9ce3c9c2-462f-4cc9-bbd7-57d656445be0",
@@ -589,7 +587,7 @@
       "target": {
          "url": "edge://etree/?sharedHeader=1"
       },
-      "version": "1.1.11"
+      "version": "1.1.12"
    }, {
       "capabilities": {
          "show_domain_in_header": true
@@ -599,9 +597,9 @@
       "flights": [ "msEdgeHubAppOneNoteMemory" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_onenote.png/1.3.6/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_fluent_onenote_hc.png/1.3.6/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_onenote.png/1.3.6/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_onenote_dark.png/1.4.8/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_onenote_hc.png/1.4.8/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_onenote_light.png/1.4.8/asset"
          }
       },
       "id": "7b52ae05-ae84-4165-b083-98ba2031bc22",
@@ -609,7 +607,6 @@
       "locales": [ "af", "am", "ar", "as", "az", "bg", "bn_IN", "bs", "ca", "ca_Es_VALENCIA", "cs", "cy", "da", "de", "el", "en", "en_GB", "es", "es_MX", "et", "eu", "fa", "fi", "fil", "fil", "fr", "fr_CA", "ga", "gd", "gl", "gu", "he", "hi", "hr", "hu", "hy", "id", "is", "it", "ja", "ka", "kk", "km", "kn", "ko", "kok", "kok", "lb", "lo", "lt", "lv", "mi", "mk", "ml", "mr", "ms", "mt", "nb", "ne", "nl", "nn", "or", "pa", "pl", "pt_BR", "pt_PT", "quz", "ro", "ru", "sk", "sl", "sq", "sr_Cyrl_BA", "sr_Cyrl_RS", "sr_Latn_RS", "sv", "ta", "te", "th", "tr", "tt", "ug", "uk", "ur", "uz", "vi", "zh_CN", "zh_TW" ],
       "manifest_version": 3,
       "name": "OneNote Feed",
-      "on_by_default": true,
       "target": {
          "url": "https://www.onenote.com/stickynotes?isEdgeHub=true",
          "url|auth:aad": "https://www.onenote.com/stickynotes?isEdgeHub=true&auth=2",
@@ -618,7 +615,7 @@
          "url|auth:msa|flight:msEdgeHubAppOneNoteInStaging": "https://www.onenote.com/stickynotesstaging?isEdgeHub=true&auth=1",
          "url|flight:msEdgeHubAppOneNoteInStaging": "https://www.onenote.com/stickynotesstaging?isEdgeHub=true"
       },
-      "version": "1.3.6"
+      "version": "1.4.8"
    }, {
       "auto_show": {
          "enabled": true,
@@ -655,12 +652,11 @@
       "description": "Short & easy exercise sessions at your seat for a quick healthy break",
       "disabled": true,
       "disabled|locale:en": false,
-      "flights": [ "msEdgeHubAppHealth" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_health_dark.png/0.1.9/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_health_hc.png/0.1.9/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_health_light.png/0.1.9/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_health_maximal_dark.png/1.0.0/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_health_hc.png/1.0.0/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_health_maximal_light.png/1.0.0/asset"
          }
       },
       "id": "b0197d6d-a306-4106-8536-17bb5ecfd446",
@@ -671,7 +667,7 @@
       "target": {
          "url": "https://www.msn.com/en-us/health/healthapp"
       },
-      "version": "0.1.9"
+      "version": "1.0.0"
    }, {
       "capabilities": {
          "show_domain_in_header": true
@@ -889,7 +885,7 @@
       "description": "Chat with people via Messenger",
       "icon": {
          "raster_icon": {
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_facebook_messenger.png/1.5.12/asset"
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_facebook_messenger.png/1.5.13/asset"
          }
       },
       "id": "1ec8a5a9-971c-4c82-a104-5e1a259456b8",
@@ -902,12 +898,12 @@
          "enabled": true,
          "title_change_pattern": ".*messaged.*"
       },
-      "preferred_side_pane_width": 1250,
+      "preferred_side_pane_width": 901,
       "tags": [ "third_party" ],
       "target": {
          "url": "https://www.messenger.com"
       },
-      "version": "1.5.12"
+      "version": "1.5.13"
    }, {
       "capabilities": {
          "show_domain_in_header": true
@@ -927,7 +923,7 @@
       "description": "Chat with people via Instagram",
       "icon": {
          "raster_icon": {
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_instagram.png/1.4.11/asset"
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_instagram.png/1.4.12/asset"
          }
       },
       "id": "168a2510-04d5-473e-b6a0-828815a7ca5f",
@@ -939,11 +935,12 @@
       "notifications": {
          "enabled": true
       },
+      "preferred_side_pane_width": 496,
       "tags": [ "third_party" ],
       "target": {
          "url": "https://www.instagram.com"
       },
-      "version": "1.4.11"
+      "version": "1.4.12"
    }, {
       "default_locale": "en",
       "description": " Chat with people via Twitter!",
@@ -952,7 +949,7 @@
       "disabled|locale:en": false,
       "icon": {
          "raster_icon": {
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_twitter.png/1.0.2/asset"
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_twitter_light.png/1.0.3/asset"
          }
       },
       "id": "06be1ebe-f23a-4bea-ae45-3120ad86cfea",
@@ -965,7 +962,7 @@
       "target": {
          "url": "https://twitter.com/"
       },
-      "version": "1.0.2"
+      "version": "1.0.3"
    }, {
       "default_locale": "en",
       "description": " Chat with people via Telegram!",
@@ -1205,7 +1202,7 @@
       "description": "Chat with people via WhatsApp",
       "icon": {
          "raster_icon": {
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_whatsapp.png/1.4.9/asset"
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_whatsapp_light.png/1.4.10/asset"
          }
       },
       "id": "da15ec1d-543d-41c9-94b8-eb2bd060f2c7",
@@ -1223,7 +1220,7 @@
       "target": {
          "url": "https://web.whatsapp.com"
       },
-      "version": "1.4.9"
+      "version": "1.4.10"
    }, {
       "auto_show": {
          "enabled": true,
@@ -1240,12 +1237,19 @@
       "description": "Chat and collaborate on shared links",
       "disabled": true,
       "disabled|auth:aad": false,
+      "dormancy": {
+         "allow_sync": false,
+         "exit_triggers": {
+            "auto_show": true
+         },
+         "initial_state": true
+      },
       "flights": [ "msEdgeHubAppTeams" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams.png/1.0.11/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_fluent_teams_hc.png/1.0.11/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams.png/1.0.11/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_dark.png/1.0.13/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_hc.png/1.0.13/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_teams_light.png/1.0.13/asset"
          }
       },
       "id": "bc25fcef-8964-4e72-8287-23e2b496c128",
@@ -1257,7 +1261,7 @@
       "target": {
          "url": "https://teams.microsoft.com/embed-client/chats/list"
       },
-      "version": "1.0.11"
+      "version": "1.0.13"
    }, {
       "capabilities": {
          "show_domain_in_header": true
@@ -1266,7 +1270,7 @@
       "description": "Check email while staying in your flow.",
       "icon": {
          "raster_icon": {
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_gmail.png/1.4.3/asset"
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_gmail.png/1.5.3/asset"
          }
       },
       "id": "dadd1f1c-380c-4871-9e09-7971b6b15069",
@@ -1288,7 +1292,7 @@
          "url": "https://mail.google.com/mail/mu/mp/266/#tl/Inbox"
       },
       "trusted_domains": [ "accounts.google.com" ],
-      "version": "1.4.3"
+      "version": "1.5.3"
    }, {
       "capabilities": {
          "show_domain_in_header": true
@@ -1328,6 +1332,15 @@
       "trusted_domains": [ "accounts.google.com" ],
       "version": "1.4.14"
    }, {
+      "auto_show": {
+         "enabled": true,
+         "fre_notification": {
+            "enabled": false,
+            "header": "Using Skype"
+         },
+         "settings_description": "When a web link is opened from an Skype chat, the side pane will automatically open to show that chat for context.",
+         "settings_title": "Automatically open Skype chat context in the side pane"
+      },
       "capabilities": {
          "show_domain_in_header": true
       },
@@ -1337,9 +1350,9 @@
       "flights": [ "msEdgeHubAppSkype" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_skype.png/1.3.9/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_fluent_skype_hc.png/1.3.9/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_skype.png/1.3.9/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_skype_dark.png/1.3.11/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_skype_hc.png/1.3.11/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_skype_light.png/1.3.11/asset"
          }
       },
       "id": "439642fc-998d-4a64-8bb6-940ecaf6b60b",
@@ -1355,16 +1368,16 @@
          "url|flight:msEdgeHubAppLatestSkype": "https://latest.web.skype.com/?source=shoreline"
       },
       "trusted_domains": [ "live.com", "office.com", "microsoftonline.com", "microsoft.com", "office365.com", "sharepoint-df.com", "skype.com" ],
-      "version": "1.3.9"
+      "version": "1.3.11"
    }, {
       "default_locale": "en",
       "description": "Improve browser performance and save battery",
       "flights": [ "msEdgeHubAppPerfCenter" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_performance_dark.png/1.0.5/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_performance_hc.png/1.0.5/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_performance_light.png/1.0.5/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_performance_maximal_dark.png/1.0.6/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_performance_hc.png/1.0.6/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_performance_maximal_light.png/1.0.6/asset"
          }
       },
       "id": "451c5859-4e83-437b-9abd-f88ed97d11cb",
@@ -1377,7 +1390,7 @@
       "target": {
          "url": "edge://perf-center/"
       },
-      "version": "1.0.5"
+      "version": "1.0.6"
    }, {
       "default_locale": "en",
       "description": "Demoing the power of Shoreline Manifest Driven apps using Hub Protocol.",
@@ -1446,7 +1459,7 @@
       "description": "Watch videos on the TikTok",
       "icon": {
          "raster_icon": {
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_tik_tok.png/1.0.3/asset"
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_tik_tok_light.png/1.0.4/asset"
          }
       },
       "id": "add60331-bd63-40db-bd63-5d2125e0779b",
@@ -1458,7 +1471,7 @@
       "target": {
          "url": "https://www.tiktok.com/"
       },
-      "version": "1.0.3"
+      "version": "1.0.4"
    }, {
       "default_locale": "en",
       "description": "Earn valuable Microsoft Rewards just by searching, shopping, and gaming with Microsoft",
@@ -1466,9 +1479,9 @@
       "flights": [ "msEdgeRewardsInSidebar" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_rewards_dark.png/1.1.0/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_rewards_hc.png/1.1.0/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_rewards_light.png/1.1.0/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_rewards_maximal_dark.png/1.1.1/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_rewards_hc.png/1.1.1/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_rewards_maximal_light.png/1.1.1/asset"
          }
       },
       "id": "698b01b4-557a-4a3b-9af7-a7e8138e8372",
@@ -1480,7 +1493,7 @@
          "url": "https://edgeservices.bing.com/rewards/panelflyout/engagement?channel=bingflyout&partnerId=RewardsHub&isDarkMode=0",
          "url|theme:dark": "https://edgeservices.bing.com/rewards/panelflyout/engagement?channel=bingflyout&partnerId=RewardsHub&isDarkMode=1"
       },
-      "version": "1.1.0"
+      "version": "1.1.1"
    }, {
       "capabilities": {
          "deprecated_hide_header": true,
@@ -1491,9 +1504,9 @@
       "flights": [ "msEdgeCollectionsInShoreline" ],
       "icon": {
          "raster_icon": {
-            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_Collections_dark.png/1.0.2/asset",
-            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_Collections_hc.png/1.0.2/asset",
-            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_Collections_light.png/1.0.2/asset"
+            "dark_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_collections_maximal_dark.png/1.0.3/asset",
+            "high_contrast": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_collections_hc.png/1.0.3/asset",
+            "light_mode": "https://edgeassetservice.azureedge.net/assets/edge_hub_apps_collections_maximal_light.png/1.0.3/asset"
          }
       },
       "id": "bbb6413e-2f0a-46ea-bb32-6a3288017d28",
@@ -1507,7 +1520,7 @@
       "target": {
          "url": "edge://collections"
       },
-      "version": "1.0.2"
+      "version": "1.0.3"
    } ],
    "manifest_version": "4.0.0"
 }

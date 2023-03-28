@@ -11,14 +11,8 @@ import 'StatusPage.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({Key ? key, required this.token, this.id, required this.user, required this.password, this.namedevice}
+  const Home({Key ? key,});
 
-      );
-  final String user;
-  final String password;
-  final String token;
-  final String? id;
-  final String? namedevice;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -138,17 +132,18 @@ class _HomeState extends State<Home> {
 
   Widget getBarPage(){
 
-    return
-      IndexedStack(
+    return IndexedStack(
         index: activeTab,
         children: <Widget>[
           ResponsiveLayout(
-              mobileBody: MymobileBodySTT(widget.token.toString(),widget.id.toString(),widget.user,widget.password),
-              desktopBody: StatusPage( token: widget.token.toString(),id: widget.id, user: widget.user, password: widget.password,)),
+              mobileBody: MymobileBodySTT(),
+              desktopBody: StatusPage()
+              ),
           ResponsiveLayout(
-              mobileBody: MymobileBodySTS(widget.token.toString(),widget.id.toString(),widget.user,widget.password),
-              desktopBody: SettingsPage( token: widget.token.toString(),id1: widget.id, user: widget.user, password: widget.password,)),
-          ControlPage(namedevice: widget.namedevice, token: widget.token.toString(), pc: '',id1: widget.id, user: widget.user, password: widget.password,),
+              mobileBody: MymobileBodySTS(),
+              desktopBody: SettingsPage()
+          ),
+          ControlPage(),
         ],
       );
   }

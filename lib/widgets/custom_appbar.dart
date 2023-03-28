@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:html';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -13,13 +15,7 @@ import '../view/home.dart';
 
 class CustomAppbar extends StatefulWidget with PreferredSizeWidget {
   // CustomAppbar({Key? key,}) : super(key: key);
-  const CustomAppbar(
-    this._token, this.user, this.password,
-  );
-
-  final String _token;
-  final String user;
-  final String password;
+  const CustomAppbar();
 
   @override
   _CustomAppbarState createState() => _CustomAppbarState();
@@ -29,29 +25,28 @@ class CustomAppbar extends StatefulWidget with PreferredSizeWidget {
 }
 
 class _CustomAppbarState extends State<CustomAppbar> {
-  String _id = "";
+  final Storage _localStorage = window.localStorage;
+  var token;
+  Future<String?> _token() async => token = _localStorage['Token'];
+  var namedevice;
+  Future<String?> _name() async => namedevice = _localStorage['Name_device'];
   var _data;
   var length;
-  var checkid = false;
   var ListID = [];
   int i = 0;
+  Future save(String data, String propertyCode) async {
+    _localStorage['$propertyCode'] = data;
+  }
   getData() async {
-    var arr;
-
+    _token();
+    _name();
     try {
       var responseGet_Listdevice = await http.get(
         Uri.parse("http://smarthome.test.makipos.net:3028/devices"),
-        headers: {"Authorization": widget._token.toString()},
+        headers: {"Authorization": token},
       );
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       _data = userMap["data"];
-
-      if (_data.toString() == '[]' || _data.toString() == null || responseGet_Listdevice.statusCode != 200) {
-        checkid = false;
-        // print("NoOke: $checkid");
-      } else {
-        checkid = true;
-      }
       if(i ==0){
         // print("i = $i");
         while(true){
@@ -61,7 +56,114 @@ class _CustomAppbarState extends State<CustomAppbar> {
       }
     } catch (e) {}
   }
+  get_device(int x,String iddevice) async {
+    try{
+      var Get_Listdevice = await http.get(
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices"),
+        headers: {"Authorization": token},
+      );
+      Map<String, dynamic> userMap = jsonDecode(Get_Listdevice.body);
+      // name_device = userMap["data"][x]["productId"].toString();
+      save(userMap["data"][x]["productId"].toString(), "Name_device");
+      get(iddevice);
+    }catch(e){
+      print(e);
+    }
+  }
+  get(String id_device) async {
+    try {
+      var responseGet_Listdevice = await http.get(
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id_device"),
+        headers: {"Authorization": token},
+      );
+      Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
 
+      var cells_vol = userMap["propertiesValue"]["cells_vol"];
+      save(cells_vol.toString(), "List_Cell");
+      // saveList(userMap["propertiesValue"]["cells_vol"], "cells_vol");
+      // bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+      save(userMap["propertiesValue"]["bat_vol"].toString(), "bat_vol");
+      // bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+      save(userMap["propertiesValue"]["bat_cap"].toString(), "bat_cap");
+      // bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+      save(userMap["propertiesValue"]["bat_capacity"].toString(), "bat_capacity");
+      // bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+      save(userMap["propertiesValue"]["bat_temp"].toString(), "bat_temp");
+      // bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+      save(userMap["propertiesValue"]["bat_percent"].toString(), "bat_percent");
+      // bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+      save(userMap["propertiesValue"]["bat_cycles"].toString(), "bat_cycles");
+      // box_temp = userMap["propertiesValue"]["box_temp"].toString();
+      save(userMap["propertiesValue"]["box_temp"].toString(), "box_temp");
+      // system_working_time = userMap["propertiesValue"]["logger_status"].toString();
+      save(userMap["propertiesValue"]["logger_status"].toString(), "logger_status");
+      save(userMap["propertiesValue"]["tube_temp"].toString(), "tube_temp");
+
+      save(userMap["propertiesValue"]["charging_mos_switch"].toString(), "charging_mos_switch");
+      save(userMap["propertiesValue"]["discharge_mos_switch"].toString(), "discharge_mos_switch");
+      save(userMap["propertiesValue"]["active_equalization_switch"].toString(), "active_equalization_switch");
+      // charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
+      // discharge = userMap["propertiesValue"]["discharge_mos_switch"].toString();
+      // balance = userMap["propertiesValue"]["active_equalization_switch"].toString();
+      // mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+      // bat_current = (int.parse(userMap["propertiesValue"]["bat_current"].toString()) * 0.01).toString();
+      save((int.parse(userMap["propertiesValue"]["bat_current"].toString()) * 0.01).toString(), "bat_current");
+      var min = cells_vol[0];
+      var max = cells_vol[0];
+      var sum = cells_vol.reduce((value, current) => value + current);
+      for (var i = 0; i < cells_vol.length; i++) {
+        // Calculate sum
+        // sum += cells_vol[i];
+        // Checking for largest value in the list
+        if (cells_vol[i] > max) {
+          max = cells_vol[i];
+        }
+        // Checking for smallest value in the list
+        if (cells_vol[i] < min) {
+          min = cells_vol[i];
+        }
+      }
+      // cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+      save(((max - min)*0.001).toStringAsFixed(4), "cell_diff");
+      // ave_cell = (sum / (cells_vol.length)).toStringAsFixed(2);
+      save((sum / (cells_vol.length)).toStringAsFixed(2), "ave_cell");
+
+      // Setting data
+
+      // _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
+      save(userMap["propertiesValue"]["single_overvoltage"].toString(), "single_overvoltage");
+      // _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
+      save(userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString(), "monomer_overvoltage_recovery");
+      // _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
+      save(userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString(), "discharge_overcurrent_protection_value");
+      // _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
+      save(userMap["propertiesValue"]["differential_voltage_protection_value"].toString(), "differential_voltage_protection_value");
+      // _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
+      save(userMap["propertiesValue"]["equalizing_opening_differential"].toString(), "equalizing_opening_differential");
+      // _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
+      save(userMap["propertiesValue"]["charging_overcurrent_delay"].toString(), "charging_overcurrent_delay");
+      // _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
+      save(userMap["propertiesValue"]["equalizing_starting_voltage"].toString(), "equalizing_starting_voltage");
+      // _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
+      save(userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString(), "high_temp_protect_bat_charge");
+      // _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
+      save(userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString(), "high_temp_protect_bat_discharge");
+      // _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
+      save(userMap["propertiesValue"]["charge_cryo_protect"].toString(), "charge_cryo_protect");
+      // _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
+      save(userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString(), "recover_val_charge_cryoprotect");
+      // _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
+      save(userMap["propertiesValue"]["tube_temp_protection"].toString(), "tube_temp_protection");
+      // _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
+      save(userMap["propertiesValue"]["strings_settings"].toString(), "strings_settings");
+      // _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
+      save(userMap["propertiesValue"]["battery_capacity_settings"].toString(), "battery_capacity_settings");
+    } catch (e) {
+      print(e);
+    }
+    // Boolvalue();
+
+  }
   @override
   Widget build(BuildContext context) {
     double heightR, widthR;
@@ -69,8 +171,6 @@ class _CustomAppbarState extends State<CustomAppbar> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     getData();
-    // print("Add: ${_data[i]["productId"]} $i");
-    // print("So luong: ${ListID.length}");
     return Container(
       height: 80 * heightR,
       padding: EdgeInsets.only(
@@ -83,13 +183,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
             offset: Offset(0, 1))
       ]),
       child: StreamBuilder(
-          stream: Stream.periodic(Duration(seconds: 10)).asyncMap((event) => getData()),
+          stream: Stream.periodic(Duration(seconds: 2)).asyncMap((event) => getData()).take(1),
           builder: (context, snapshot) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              checkid
-                  ? IconButton(
+              IconButton(
                 onPressed: () => showDialog(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
@@ -114,20 +213,24 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                   (BuildContext context, int index) {
                                 return TextButton(
                                     onPressed: () {
-                                      _id =
-                                          _data[index]["_id"].toString();
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Home(
-                                              token: widget._token,
-                                              id: _id, user: widget.user,
-                                            password: widget.password,
-                                            namedevice: _data[index]["productId"],
-                                          ),
-                                        ),
-                                      );
-                                      // print(_id);
+                                      AwesomeDialog(
+                                        context: context,
+                                        animType: AnimType.leftSlide,
+                                        headerAnimationLoop: false,
+                                        dialogType: DialogType.success,
+                                        showCloseIcon: true,
+                                        title: 'Notification',
+                                        desc:
+                                        'Xác nhận đổi thiết bị ???',
+                                        btnOkOnPress: () {
+                                          save(_data[index]["_id"].toString(),"Id_device");
+                                          get_device(index,_data[index]["_id"].toString());
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) => Home(),
+                                          )
+                                          );},
+
+                                      ).show();
                                     },
                                     child: Container(
                                       height: 50 * heightR,
@@ -150,53 +253,64 @@ class _CustomAppbarState extends State<CustomAppbar> {
                   color: secondary,
                   size: 30 * heightR,
                 ),
-              )
-                  : IconButton(
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    backgroundColor: Colors.grey[200],
-                    title: Center(
-                      child: Text(
-                        'List Device',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32 * heightR,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    actions: <Widget>[
-                      SizedBox(
-                          height: 600 * heightR,
-                          width: 800 * heightR,
-                          child: Column(
-                            children: [
-                              Container(
-                                child: Text(
-                                    'Không có thiết bị nào trên tài khoản này!',
-                                    style: TextStyle(
-                                        fontSize: 20 * heightR,
-                                        color: Colors.black87)),
-                              )
-                            ],
-                          ))
-                    ],
-                  ),
-                ),
-                icon: Icon(
-                  Icons.menu,
-                  color: secondary,
-                  size: 30 * heightR,
-                ),
               ),
+              //     : IconButton(
+              //   onPressed: () => showDialog(
+              //     context: context,
+              //     builder: (BuildContext context) => AlertDialog(
+              //       backgroundColor: Colors.grey[200],
+              //       title: Center(
+              //         child: Text(
+              //           'List Device',
+              //           style: TextStyle(
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 32 * heightR,
+              //             color: Colors.black,
+              //           ),
+              //         ),
+              //       ),
+              //       actions: <Widget>[
+              //         SizedBox(
+              //             height: 600 * heightR,
+              //             width: 800 * heightR,
+              //             child: Column(
+              //               children: [
+              //                 Container(
+              //                   child: Text(
+              //                       'Không có thiết bị nào trên tài khoản này!',
+              //                       style: TextStyle(
+              //                           fontSize: 20 * heightR,
+              //                           color: Colors.black87)),
+              //                 )
+              //               ],
+              //             ))
+              //       ],
+              //     ),
+              //   ),
+              //   icon: Icon(
+              //     Icons.menu,
+              //     color: secondary,
+              //     size: 30 * heightR,
+              //   ),
+              // ),
 
               StreamBuilder(
-                stream: Stream.periodic(Duration(seconds: 1)),
-                  builder: (context, snapshot) => Text(
-                    "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
-                    style: TextStyle(color: Colors.white, fontSize: 24 * heightR),
-                  ),
+                stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => _name()),
+                  builder: (context, snapshot) => Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "${namedevice}",
+                          style: TextStyle(color: Colors.cyanAccent, fontSize: 26 * heightR),
+                        ),
+                        Text(
+                          "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
+                          style: TextStyle(color: Colors.white, fontSize: 24 * heightR),
+                        ),
+                      ],
+                    ),
+                  )
               ),
               PopupMenuButton(
                   icon: Icon(
