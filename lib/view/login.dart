@@ -201,26 +201,25 @@ void initState(){
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => EmptyPage(),
-                      )
-                      );
-
-                      // AwesomeDialog(
-                      //   context: context,
-                      //   animType: AnimType.leftSlide,
-                      //   headerAnimationLoop: false,
-                      //   dialogType: DialogType.error,
-                      //   showCloseIcon: true,
-                      //   title: 'Notification',
-                      //   desc:
-                      //   'Vui lòng liên hệ với quản trị viên để lấy lại mật khẩu!',
-                      //   btnOkOnPress: () {
-                      //   },
-                      //   btnOkIcon: Icons.cancel,
-                      //   onDismissCallback: (type) {
-                      //   },
-                      // ).show();
+                      // Navigator.push(context, MaterialPageRoute(
+                      //   builder: (context) => EmptyPage(),
+                      // )
+                      // );
+                      AwesomeDialog(
+                        context: context,
+                        animType: AnimType.leftSlide,
+                        headerAnimationLoop: false,
+                        dialogType: DialogType.error,
+                        showCloseIcon: true,
+                        title: 'Notification',
+                        desc:
+                        'Vui lòng liên hệ với quản trị viên để lấy lại mật khẩu!',
+                        btnOkOnPress: () {
+                        },
+                        btnOkIcon: Icons.cancel,
+                        onDismissCallback: (type) {
+                        },
+                      ).show();
                     },
                     child:  Text(
                       'Forgot Password?',
