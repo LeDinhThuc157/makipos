@@ -211,39 +211,55 @@ class _CustomAppbarState extends State<CustomAppbar> {
                               itemCount: ListID.length,
                               itemBuilder:
                                   (BuildContext context, int index) {
-                                return TextButton(
-                                    onPressed: () {
-                                      AwesomeDialog(
-                                        context: context,
-                                        animType: AnimType.leftSlide,
-                                        headerAnimationLoop: false,
-                                        dialogType: DialogType.success,
-                                        showCloseIcon: true,
-                                        title: 'Notification',
-                                        desc:
-                                        'Xác nhận đổi thiết bị ???',
-                                        btnOkOnPress: () {
-                                          save(_data[index]["_id"].toString(),"Id_device");
-                                          get_device(index,_data[index]["_id"].toString());
-                                          Navigator.push(context, MaterialPageRoute(
-                                              builder: (context) => Home(),
-                                          )
-                                          );},
+                                return Column(
+                                  children: [
+                                    Container(
+                                      color: Colors.black54,
+                                      height: 50*heightR,
+                                      width: 300*heightR,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                AwesomeDialog(
+                                                  context: context,
+                                                  animType: AnimType.leftSlide,
+                                                  headerAnimationLoop: false,
+                                                  dialogType: DialogType.success,
+                                                  showCloseIcon: true,
+                                                  title: 'Notification',
+                                                  desc:
+                                                  'Xác nhận đổi thiết bị ???',
+                                                  btnOkOnPress: () {
+                                                    save(_data[index]["_id"].toString(),"Id_device");
+                                                    get_device(index,_data[index]["_id"].toString());
+                                                    Navigator.push(context, MaterialPageRoute(
+                                                      builder: (context) => Home(),
+                                                    )
+                                                    );},
 
-                                      ).show();
-                                    },
-                                    child: Container(
-                                      height: 50 * heightR,
-                                      // color: Colors.white60,
-                                      child: Text(
-                                          "${_data[index]["productId"]}",
-                                        style: TextStyle(
-                                          fontSize: 24*heightR,
-                                          color: Colors.black,
+                                                ).show();
+                                              },
+                                              child: Container(
+                                                child: Text(
+                                                  "${_data[index]["productId"]}",
+                                                  style: TextStyle(
+                                                    fontSize: 24*heightR,
+                                                    color: Colors.white,
 
-                                        ),
-                                      ),
-                                    ));
+                                                  ),
+                                                ),
+                                              )),
+                                        ],
+                                      )
+                                    ),
+                                    SizedBox(
+                                      height: 10*heightR,
+                                    ),
+                                  ],
+                                );
                               }),
                         )
                       ],
@@ -254,45 +270,6 @@ class _CustomAppbarState extends State<CustomAppbar> {
                   size: 30 * heightR,
                 ),
               ),
-              //     : IconButton(
-              //   onPressed: () => showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) => AlertDialog(
-              //       backgroundColor: Colors.grey[200],
-              //       title: Center(
-              //         child: Text(
-              //           'List Device',
-              //           style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 32 * heightR,
-              //             color: Colors.black,
-              //           ),
-              //         ),
-              //       ),
-              //       actions: <Widget>[
-              //         SizedBox(
-              //             height: 600 * heightR,
-              //             width: 800 * heightR,
-              //             child: Column(
-              //               children: [
-              //                 Container(
-              //                   child: Text(
-              //                       'Không có thiết bị nào trên tài khoản này!',
-              //                       style: TextStyle(
-              //                           fontSize: 20 * heightR,
-              //                           color: Colors.black87)),
-              //                 )
-              //               ],
-              //             ))
-              //       ],
-              //     ),
-              //   ),
-              //   icon: Icon(
-              //     Icons.menu,
-              //     color: secondary,
-              //     size: 30 * heightR,
-              //   ),
-              // ),
 
               StreamBuilder(
                 stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => _name()),

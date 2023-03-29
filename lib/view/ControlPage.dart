@@ -55,6 +55,7 @@ class _ControlPageState extends State<ControlPage> {
     _token();
     // print("charge: $charge \n discharge: $discharge");
     _Check_value();
+
   }
   void _Check_value(){
     if(charge == "1"){
@@ -228,8 +229,12 @@ class _ControlPageState extends State<ControlPage> {
       appBar: CustomAppbar(),
       backgroundColor: Colors.white,
       body: StreamBuilder(
-          stream: Stream.periodic(Duration(seconds: 10)).asyncMap((event) => _Read()),
-          builder: (context, snapshot) =>Column(
+          stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => _Read()),
+          builder: (context, snapshot) => charge == null ? Center(
+            child: CircularProgressIndicator(
+              color: Colors.greenAccent,
+            ),
+          ) : Column(
             children: [
               Container(
                 height: 100*heightR,
