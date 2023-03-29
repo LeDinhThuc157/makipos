@@ -169,31 +169,26 @@ void initState(){
                 ),
                 Container(
                   padding:  EdgeInsets.fromLTRB(60*widthR, 10*heightR, 60*widthR, 0),
-                  child: TextFormField(
+                  child: TextField(
                     controller: passwordController,
-                    onTap: (){
-
-                    },
                     decoration: InputDecoration(
                       labelText: 'Password',
                       hintText: "Enter your Password",
-                      suffixIcon:
-                      IconButton(
-                          icon: Icon(
-                            showPass ? Icons.visibility : Icons.visibility_off,
-                            semanticLabel: showPass ? 'hide password' : 'show password',
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              setState(() {
-                                showPass = !showPass;
-                              });
-                              //print("Icon button pressed! state: $_passwordVisible"); //Confirmed that the _passwordVisible is toggled each time the button is pressed.
-                            });
-                          }),
+                      // suffixIcon: IconButton(
+                      //     icon: Icon(
+                      //       showPass ? Icons.visibility : Icons.visibility_off,
+                      //       semanticLabel: showPass ? 'hide password' : 'show password',
+                      //     ),
+                      //     onPressed: () {
+                      //       setState(() {
+                      //         setState(() {
+                      //           showPass = !showPass;
+                      //         });
+                      //         //print("Icon button pressed! state: $_passwordVisible"); //Confirmed that the _passwordVisible is toggled each time the button is pressed.
+                      //       });
+                      //     }),
                     ),
                     obscureText: !showPass,
-                    autofocus: false,
 
                   ),
                 ),

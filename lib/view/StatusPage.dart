@@ -126,10 +126,16 @@ class _StatusPageState extends State<StatusPage> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     return Scaffold(
-        appBar: CustomAppbar(),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: CustomAppbar(),
+        ),
         backgroundColor: Colors.black45,
-        body:
-        StreamBuilder(
+        drawer: Drawer(
+          backgroundColor: Colors.white60,
+          child: DrawerPage(),
+        ),
+        body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => _Read()),
           builder: (context, snapshot) => SingleChildScrollView(
             child: Column(

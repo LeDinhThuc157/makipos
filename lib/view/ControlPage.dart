@@ -226,8 +226,15 @@ class _ControlPageState extends State<ControlPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     return Scaffold(
-      appBar: CustomAppbar(),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: CustomAppbar(),
+      ),
       backgroundColor: Colors.white,
+      drawer: Drawer(
+        backgroundColor: Colors.white60,
+        child: DrawerPage(),
+      ),
       body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 5)).asyncMap((event) => _Read()),
           builder: (context, snapshot) => charge == null ? Center(

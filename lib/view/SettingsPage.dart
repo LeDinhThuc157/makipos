@@ -234,10 +234,17 @@ class _SettingsPageState extends State<SettingsPage> {
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
     return Scaffold(
-      appBar: CustomAppbar(),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: CustomAppbar(),
+        ),
+        drawer: Drawer(
+          backgroundColor: Colors.white60,
+          child: DrawerPage(),
+        ),
       backgroundColor: Colors.black45,
       body: StreamBuilder(
-        stream: Stream.periodic(Duration(seconds: 2)).asyncMap((event) => _Read()).take(2),
+        stream: Stream.periodic(Duration(seconds: 2)).asyncMap((event) => _Read()),
         builder: (context,snapshot) => SingleChildScrollView(
           child: Column(
             children: [
@@ -590,15 +597,15 @@ class _SettingsPageState extends State<SettingsPage> {
                                       AwesomeDialog(
                                         context: context,
                                         animType: AnimType.leftSlide,
-                                        headerAnimationLoop: false,
-                                        dialogType: DialogType.error,
-                                        showCloseIcon: true,
+                                        // headerAnimationLoop: false,
+                                        // dialogType: DialogType.error,
+                                        // showCloseIcon: true,
                                         title: 'Notification',
                                         desc:
                                         'Thông tin này không được thay đổi!',
                                         btnOkOnPress: () {
                                         },
-                                        btnOkIcon: Icons.cancel,
+                                        // btnOkIcon: Icons.cancel,
                                         onDismissCallback: (type) {
                                         },
                                       ).show();
@@ -617,15 +624,15 @@ class _SettingsPageState extends State<SettingsPage> {
                                       AwesomeDialog(
                                         context: context,
                                         animType: AnimType.leftSlide,
-                                        headerAnimationLoop: false,
-                                        dialogType: DialogType.error,
-                                        showCloseIcon: true,
+                                        // headerAnimationLoop: false,
+                                        // dialogType: DialogType.error,
+                                        // showCloseIcon: true,
                                         title: 'Notification',
                                         desc:
                                         'Thông tin này không được thay đổi!',
                                         btnOkOnPress: () {
                                         },
-                                        btnOkIcon: Icons.cancel,
+                                        // btnOkIcon: Icons.cancel,
                                         onDismissCallback: (type) {
                                         },
                                       ).show();

@@ -117,7 +117,14 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     return Scaffold(
-        appBar: CustomAppbar(),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: CustomAppbar(),
+        ),
+        drawer: Drawer(
+          backgroundColor: Colors.white60,
+          child: DrawerPage(),
+        ),
         backgroundColor: Colors.black45,
         body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => _Read()),
@@ -543,7 +550,14 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     // postDataSetting(id,"single_overvoltage",4200);
     // postDataSetting(id,"single_overvoltage",4200);
     return Scaffold(
-        appBar: CustomAppbar(),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: CustomAppbar(),
+        ),
+        drawer: Drawer(
+          backgroundColor: Colors.white60,
+          child: DrawerPage(),
+        ),
         backgroundColor: Colors.black45,
         body: StreamBuilder(
           stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => _Read()),
