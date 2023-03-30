@@ -26,11 +26,121 @@ class CustomAppbar extends StatefulWidget with PreferredSizeWidget {
 
 class _CustomAppbarState extends State<CustomAppbar> {
   final Storage _localStorage = window.localStorage;
-
+  Future save(String data, String propertyCode) async {
+    _localStorage['$propertyCode'] = data;
+  }
   var namedevice;
 
   Future<String?> _name() async => namedevice = _localStorage['Name_device'];
+  _Delete(){
+    save("Không có thiết bị", "Name_device");
+    save("0", "Token");
+    save("0", "List_Cell");
+    // saveList(userMap["propertiesValue"]["cells_vol"], "cells_vol");
+    // bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
+    save("0", "bat_vol");
+    // bat_cap = userMap["propertiesValue"]["bat_cap"].toString();
+    save("0", "bat_cap");
+    // bat_capacity = userMap["propertiesValue"]["bat_capacity"].toString();
+    save("0",
+        "bat_capacity");
+    // bat_temp = userMap["propertiesValue"]["bat_temp"].toString();
+    save("0", "bat_temp");
+    // bat_percent = userMap["propertiesValue"]["bat_percent"].toString();
+    save("0", "bat_percent");
+    // bat_cycles = userMap["propertiesValue"]["bat_cycles"].toString();
+    save("0", "bat_cycles");
+    // box_temp = userMap["propertiesValue"]["box_temp"].toString();
+    save("0", "box_temp");
+    // system_working_time = userMap["propertiesValue"]["logger_status"].toString();
+    save("0",
+        "logger_status");
+    save("0", "tube_temp");
 
+    save("0",
+        "charging_mos_switch");
+    save("0",
+        "discharge_mos_switch");
+    save("0",
+        "active_equalization_switch");
+    // charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
+    // discharge = userMap["propertiesValue"]["discharge_mos_switch"].toString();
+    // balance = userMap["propertiesValue"]["active_equalization_switch"].toString();
+    // mos_temp = userMap["propertiesValue"]["tube_temp"].toString();
+    // bat_current = (int.parse(userMap["propertiesValue"]["bat_current"].toString()) * 0.01).toString();
+    save("0", "bat_current");
+    // var min = cells_vol[0];
+    // var max = cells_vol[0];
+    // var sum = cells_vol.reduce((value, current) => value + current);
+    // for (var i = 0; i < cells_vol.length; i++) {
+    //   // Calculate sum
+    //   // sum += cells_vol[i];
+    //   // Checking for largest value in the list
+    //   if (cells_vol[i] > max) {
+    //     max = cells_vol[i];
+    //   }
+    //   // Checking for smallest value in the list
+    //   if (cells_vol[i] < min) {
+    //     min = cells_vol[i];
+    //   }
+    // }
+    // cell_diff = ((max - min)*0.001).toStringAsFixed(4);
+    save("0", "cell_diff");
+    // ave_cell = (sum / (cells_vol.length)).toStringAsFixed(2);
+    save("0", "ave_cell");
+
+    // Setting data
+
+    // _cellOVP = userMap["propertiesValue"]["single_overvoltage"].toString();
+    save("0",
+        "single_overvoltage");
+    // _cellOVPR = userMap["propertiesValue"]["monomer_overvoltage_recovery"].toString();
+    save(
+        "0",
+        "monomer_overvoltage_recovery");
+    // _cellUVPR = userMap["propertiesValue"]["discharge_overcurrent_protection_value"].toString();
+    save(
+        "0",
+        "discharge_overcurrent_protection_value");
+    // _cellUVP = userMap["propertiesValue"]["differential_voltage_protection_value"].toString();
+    save(
+        "0",
+        "differential_voltage_protection_value");
+    // _continuedChargeCurr = userMap["propertiesValue"]["equalizing_opening_differential"].toString();
+    save(
+        "0",
+        "equalizing_opening_differential");
+    // _continuedDischargeCurr = userMap["propertiesValue"]["charging_overcurrent_delay"].toString();
+    save("0",
+        "charging_overcurrent_delay");
+    // _dischargeOCPdelay = userMap["propertiesValue"]["equalizing_starting_voltage"].toString();
+    save("0",
+        "equalizing_starting_voltage");
+    // _chargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_charge"].toString();
+    save(
+        "0",
+        "high_temp_protect_bat_charge");
+    // _dischargeOTP = userMap["propertiesValue"]["high_temp_protect_bat_discharge"].toString();
+    save(
+        "0",
+        "high_temp_protect_bat_discharge");
+    // _chargeUTP = userMap["propertiesValue"]["charge_cryo_protect"].toString();
+    save("0",
+        "charge_cryo_protect");
+    // _chargeUTPR =  userMap["propertiesValue"]["recover_val_charge_cryoprotect"].toString();
+    save(
+        "0",
+        "recover_val_charge_cryoprotect");
+    // _startBalanceVolt = userMap["propertiesValue"]["tube_temp_protection"].toString();
+    save("0",
+        "tube_temp_protection");
+    // _cellcount = userMap["propertiesValue"]["strings_settings"].toString();
+    save("0",
+        "strings_settings");
+    // _batterycapacity = userMap["propertiesValue"]["battery_capacity_settings"].toString();
+    save("0",
+        "battery_capacity_settings");
+  }
   @override
   Widget build(BuildContext context) {
     double heightR, widthR;
@@ -189,6 +299,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 // enabled: true,
                 onSelected: (value) {
                   if (value == 'logout') {
+                    _Delete();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -232,6 +343,7 @@ class _DrawerPageState extends State<DrawerPage> {
   var _data;
   var length;
   var ListID = [];
+  var ListStatus = [];
   int i = 0;
 
   Future save(String data, String propertyCode) async {
@@ -249,12 +361,13 @@ class _DrawerPageState extends State<DrawerPage> {
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
       _data = userMap["data"];
       if (i == 0) {
-        // print("i = $i");
         while (true) {
           ListID.add(_data[i]["productId"].toString());
+          ListStatus.add(_data[i]["status"].toString());
           i++;
         }
       }
+      print("Status: $ListStatus");
     } catch (e) {}
   }
 
@@ -408,9 +521,10 @@ class _DrawerPageState extends State<DrawerPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
 
+
     return StreamBuilder(
       stream:
-          Stream.periodic(Duration(milliseconds: 1000)).asyncMap((event) => getData()).take(1),
+          Stream.periodic(Duration(milliseconds: 100)).asyncMap((event) => getData()).take(1),
       builder: (context, snapshot) => Center(
         child: ListView.builder(
             itemCount: ListID.length + 1,
@@ -420,7 +534,7 @@ class _DrawerPageState extends State<DrawerPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   index == -1   ? Container(
-                      height: 100 * heightR,
+                      height: 200 * heightR,
                       decoration: BoxDecoration(
                         color: Colors.blue,
                       ),
@@ -468,10 +582,14 @@ class _DrawerPageState extends State<DrawerPage> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(),
-                                      Icon(Icons.devices,size: 40*heightR,),
+                                      Icon(
+                                        Icons.devices,
+                                        size: 40*heightR,
+                                        color: ListStatus[index] == "OFFLINE" ? Colors.red : Colors.green[500],
+                                      ),
                                       SizedBox(),
                                       Text(
-                                        "${_data[index]["productId"]}",
+                                        "${ListID[index]}",
                                         style: TextStyle(
                                           fontSize: 24 * heightR,
                                           color: Colors.white,
