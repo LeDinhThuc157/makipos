@@ -66,12 +66,12 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
 
   var ave_cell;
   var cell_diff;
-  var cells_vol;
+  var cells_vol = [];
   List<String> cells = [];
   @override
   void initState(){
     super.initState();
-    _ReadList();
+    // _Read();
   }
   final Storage _localStorage = window.localStorage;
 
@@ -116,6 +116,7 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
     double heightR, widthR;
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
+    // _Read();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -560,7 +561,7 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
         ),
         backgroundColor: Colors.black45,
         body: StreamBuilder(
-          stream: Stream.periodic(Duration(seconds: 1)).asyncMap((event) => _Read()),
+          stream: Stream.periodic(Duration(seconds: 2)).asyncMap((event) => _Read()),
           builder: (context,snapshot) => SingleChildScrollView(
             child: Column(
               children: [
@@ -901,6 +902,21 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                                         ),
                                       ),
                                       onPressed: (){
+                                        AwesomeDialog(
+                                          context: context,
+                                          animType: AnimType.leftSlide,
+                                          // headerAnimationLoop: false,
+                                          // dialogType: DialogType.error,
+                                          // showCloseIcon: true,
+                                          title: 'Notification',
+                                          desc:
+                                          'Thông tin này không được thay đổi!',
+                                          btnOkOnPress: () {
+                                          },
+                                          // btnOkIcon: Icons.cancel,
+                                          onDismissCallback: (type) {
+                                          },
+                                        ).show();
                                       },
                                     )
                                 ),
@@ -913,6 +929,21 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                                   ),
                                   child: TextButton(
                                       onPressed: (){
+                                        AwesomeDialog(
+                                          context: context,
+                                          animType: AnimType.leftSlide,
+                                          // headerAnimationLoop: false,
+                                          // dialogType: DialogType.error,
+                                          // showCloseIcon: true,
+                                          title: 'Notification',
+                                          desc:
+                                          'Thông tin này không được thay đổi!',
+                                          btnOkOnPress: () {
+                                          },
+                                          // btnOkIcon: Icons.cancel,
+                                          onDismissCallback: (type) {
+                                          },
+                                        ).show();
                                       },
                                       child: Text(
                                         "Ok",
@@ -1691,28 +1722,28 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
 
 
   postDataSetting(final id,final propertyCode, final value) async{
-    print(propertyCode);
-    print(value);
+    // print(propertyCode);
+    // print(value);
     try{
       var response_setting = await http.post(
           Uri.parse(
               "http://smarthome.test.makipos.net:3028/users-control-devices"),
           headers: {
             "Content-type": "application/json",
-            "Authorization": token
+            "Authorization": token,
           },
           body: jsonEncode(
               {
                 "deviceId": id,
                 "propertyCode": propertyCode,
                 "localId": "1",
-                "commandString": "{\"d\":$value}",
+                "data": "$value",
                 "waitResponse": false,
-                "timeout": 100
+                "timeout": 1000
               }
           )
       );
-      print("BodySetting $propertyCode : ${response_setting.statusCode}");
+      // print("BodySetting $propertyCode : ${response_setting.statusCode}");
     } catch(e){
       print(e);
     }

@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 import 'dart:html';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -50,12 +51,41 @@ class _ControlPageState extends State<ControlPage> {
   Future<String?> _id() async => id = _localStorage['Id_device'];
   Future<String?> _token() async => token = _localStorage['Token'];
   void _Read(){
-    _charge();_discharge();_id();
+    Value();
+    // _charge();_discharge();
+    _id();
     _user();_pass();_namedevice();
     _token();
     // print("charge: $charge \n discharge: $discharge");
     _Check_value();
 
+  }
+  void Value(){
+    try{
+      _charge();_discharge();
+      _SoSanh();
+    }catch(e){
+      print(e);
+    }
+  }
+   _SoSanh() async {
+    try{
+      var responseGet_Listdevice = await http.get(
+        Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id"),
+        headers: {"Authorization": token},
+      );
+      Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
+      if(userMap["propertiesValue"]["charging_mos_switch"].toString() != charge){
+        save(userMap["propertiesValue"]["charging_mos_switch"].toString(), "charging_mos_switch");
+        charge = userMap["propertiesValue"]["charging_mos_switch"].toString();
+      }
+      if(userMap["propertiesValue"]["discharge_mos_switch"].toString() != discharge){
+        save(userMap["propertiesValue"]["discharge_mos_switch"].toString(), "discharge_mos_switch");
+        discharge = userMap["propertiesValue"]["discharge_mos_switch"].toString();
+      }
+    }catch(e){
+      print(e);
+    }
   }
   void _Check_value(){
     if(charge == "1"){
@@ -221,7 +251,7 @@ class _ControlPageState extends State<ControlPage> {
   // }
 
   Widget build(BuildContext context) {
-
+    _MQTT("${name_device}");
     double  heightR,widthR;
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
@@ -243,6 +273,48 @@ class _ControlPageState extends State<ControlPage> {
             ),
           ) : Column(
             children: [
+          //     Container(
+          //       child: Center(
+          //         child: Container(
+          //           decoration: BoxDecoration(
+          //               color: Colors.white,
+          //             border: Border.all(
+          //               color: Colors.black12,
+          //               width: 4*heightR,
+          //             ),
+          //             boxShadow: [ //BoxShadow
+          //               BoxShadow(
+          //                 color: Colors.white,
+          //                 offset: const Offset(0.0, 0.0),
+          //                 blurRadius: 0.0,
+          //                 spreadRadius: 0.0,
+          //               ), //BoxShadow
+          //             ],
+          // ),
+          //           child: TextButton(
+          //             onPressed: (){
+          //               setState(() {
+          //                 _SoSanh();
+          //               });
+          //               AwesomeDialog(
+          //                 context: context,
+          //                 animType: AnimType.leftSlide,
+          //                 headerAnimationLoop: false,
+          //                 dialogType: DialogType.success,
+          //                 showCloseIcon: true,
+          //                 title: 'Update Complete',
+          //                 btnOkOnPress: () {
+          //                 },
+          //                 btnOkIcon: Icons.check_circle,
+          //               ).show();
+          //             },
+          //             child: Text("Update",style: TextStyle(
+          //               fontSize: 26*heightR
+          //             ),),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
               Container(
                 height: 100*heightR,
                 child: check_1 ? Center(
@@ -269,6 +341,7 @@ class _ControlPageState extends State<ControlPage> {
                             isOn_charge_mqtt = value;
                             // _Publish(widget.namedevice.toString(),"charging_mos_switch",isOn_charge_mqtt);
                             postDataControl(id, "charging_mos_switch", isOn_charge_mqtt);
+                            save(!isOn_charge_mqtt ? "0" : "1", "charging_mos_switch");
                           });
                         }
                     )
@@ -296,6 +369,7 @@ class _ControlPageState extends State<ControlPage> {
                             isOn_charge = value;
                             // _Publish(widget.namedevice.toString(),"charging_mos_switch",isOn_charge);
                             postDataControl(id, "charging_mos_switch", isOn_charge);
+                            save(!isOn_charge ? "0" : "1", "charging_mos_switch");
                           });
                         }
                     )
@@ -327,6 +401,7 @@ class _ControlPageState extends State<ControlPage> {
                             isOn_discharge_mqtt = value;
                             // _Publish(widget.namedevice.toString(),"discharge_mos_switch",isOn_discharge_mqtt);
                             postDataControl(id, "discharge_mos_switch", isOn_discharge_mqtt);
+                            save(!isOn_discharge_mqtt ? "0" : "1", "discharge_mos_switch");
                           });
                         }
                     )
@@ -354,6 +429,7 @@ class _ControlPageState extends State<ControlPage> {
                             isOn_discharge = value;
                             // _Publish(widget.namedevice.toString(),"discharge_mos_switch",isOn_discharge);
                             postDataControl(id, "discharge_mos_switch", isOn_discharge);
+                            save(!isOn_discharge ? "0" : "1", "discharge_mos_switch");
                           });
                         }
                     )

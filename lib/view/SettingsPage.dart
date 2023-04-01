@@ -1428,7 +1428,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 "deviceId": id,
                 "propertyCode": propertyCode,
                 "localId": "1",
-                "commandString": "{\"d\":$value}",
+                "data": "$value",
                 "waitResponse": false,
                 "timeout": 1000
               }

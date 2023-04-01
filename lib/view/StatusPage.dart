@@ -50,11 +50,11 @@ class _StatusPageState extends State<StatusPage> {
   var cell_diff;
   var cells_vol = [];
   List<String> cells = [];
-  // @override
-  // void initState(){
-  //   super.initState();
-  //   // _Read()();
-  // }
+  @override
+  void initState(){
+    super.initState();
+    // _Read();
+  }
   final Storage _localStorage = window.localStorage;
 
   Future<List?> _cells() async => cells = _localStorage['List_Cell']!.split(",");
@@ -125,6 +125,7 @@ class _StatusPageState extends State<StatusPage> {
     heightR = MediaQuery.of(context).size.height / 1080; //v26
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
+    // _Read();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,

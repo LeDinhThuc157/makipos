@@ -148,16 +148,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
     widthR = MediaQuery.of(context).size.width / 2400;
     var curR = widthR;
     return Container(
-        height: 80 * heightR,
-        // width: 300*heightR,
         padding: EdgeInsets.only(left: 50 * widthR, right: 15 * widthR, top: 10 * heightR),
-        // decoration: BoxDecoration(color: shadowColor, boxShadow: [
-        //   BoxShadow(
-        //       color: shadowColor.withOpacity(0.1),
-        //       blurRadius: .5,
-        //       spreadRadius: .5,
-        //       offset: Offset(0, 1))
-        // ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -267,7 +258,6 @@ class _CustomAppbarState extends State<CustomAppbar> {
             SizedBox(),
             StreamBuilder(
                 stream: Stream.periodic(Duration(seconds: 1))
-                    .asyncMap((event) => _name())
                     .asyncMap((event) => _name()),
                 builder: (context, snapshot) => Container(
                       child: Column(
@@ -367,7 +357,6 @@ class _DrawerPageState extends State<DrawerPage> {
           i++;
         }
       }
-      print("Status: $ListStatus");
     } catch (e) {}
   }
 
