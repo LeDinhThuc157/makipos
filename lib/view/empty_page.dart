@@ -5,15 +5,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:mqtt_client/mqtt_browser_client.dart';
-import 'package:mqtt_client/mqtt_client.dart';
-import 'package:mqtt_client/mqtt_server_client.dart';
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:websocket_universal/websocket_universal.dart';
-import 'package:socket_io_client/socket_io_client.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import '../theme/colors.dart';
+import '../widgets/custom_appbar.dart';
+
 
 
 class EmptyPage extends StatefulWidget {
@@ -22,11 +17,20 @@ class EmptyPage extends StatefulWidget {
   _EmptyPageState createState() => _EmptyPageState();
 }
 class _EmptyPageState extends State<EmptyPage> {
-
   @override
   Widget build(BuildContext context) {
-
-    return Text("data");
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Drawer Demo'),
+        actions: [
+          Icon(Icons.icecream)
+        ],
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.white60,
+        child: DrawerPage(),
+      ),
+    );
   }
 
 }

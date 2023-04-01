@@ -44,15 +44,10 @@ class _CreateUserState extends State<CreateUser> {
       appBar: AppBar(
         title: Text('Create User'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.folder_shared,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
+          Icon(
+            Icons.folder_shared,
+            color: Colors.white,
+          ),
         ],
       ),
       backgroundColor: Colors.white,
@@ -80,14 +75,14 @@ class _CreateUserState extends State<CreateUser> {
               ),
               Container(
                 margin: EdgeInsets.all(22*heightR),
-                child: _entryFiled('Dia Chi', addrcontroler),
+                child: _entryFiled('Address', addrcontroler),
               ),
               Container(
                 margin: EdgeInsets.all(22*heightR),
                 child: _entryFiled('Email',emailcontroler),
               ),
               Container(
-                height: 80*heightR,
+                height: 150*heightR,
                 margin: EdgeInsets.only(top: 70*heightR),
                 padding:  EdgeInsets.fromLTRB(120*curR, 0, 120*curR, 0),
                 child: ElevatedButton(
