@@ -335,7 +335,7 @@ class _DrawerPageState extends State<DrawerPage> {
   var ListID = [];
   var ListStatus = [];
   int i = 0;
-
+  TextEditingController controller = new TextEditingController();
   Future save(String data, String propertyCode) async {
     _localStorage['$propertyCode'] = data;
   }
@@ -503,7 +503,23 @@ class _DrawerPageState extends State<DrawerPage> {
     }
     // Boolvalue();
   }
+  List<String> _searchResult = [];
+  onSearchTextChanged(String text) async {
+    _searchResult.clear();
+    if (text.isEmpty) {
+      setState(() {
+      });
+      return;
+    }
 
+    ListID.forEach((userDetail) {
+      if (userDetail.contains(text) || userDetail.contains(text))
+        _searchResult.add(userDetail);
+    });
+
+
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     double heightR, widthR;
@@ -515,89 +531,342 @@ class _DrawerPageState extends State<DrawerPage> {
       stream:
           Stream.periodic(Duration(milliseconds: 100)).asyncMap((event) => getData()).take(1),
       builder: (context, snapshot) => Center(
-        child: ListView.builder(
-            itemCount: ListID.length + 1,
-            itemBuilder: (BuildContext context, int index) {
-              index = index -1;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          children: [
+            Container(
+              color: Theme.of(context).primaryColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  index == -1   ? Container(
-                      height: 200 * heightR,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'ListDevice',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                          ),
+                  ListTile(
+                    title: const Icon(
+                        Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.all(8.0*heightR),
+                    child:  Card(
+                      child:  ListTile(
+                        leading:  Icon(Icons.search),
+                        title:  TextField(
+                          controller: controller,
+                          decoration: new InputDecoration(
+                              hintText: 'Search', border: InputBorder.none),
+                          onChanged: onSearchTextChanged,
                         ),
-                      )
-                  ) :Container(
-                      color: Colors.black54,
-                      height: 70 * heightR,
-                      // width: 800 * heightR,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                           TextButton(
-                              onPressed: () {
-                                AwesomeDialog(
-                                  context: context,
-                                  animType: AnimType.leftSlide,
-                                  headerAnimationLoop: false,
-                                  dialogType: DialogType.success,
-                                  showCloseIcon: true,
-                                  title: 'Notification',
-                                  desc: 'Xác nhận đổi thiết bị ???',
-                                  btnOkOnPress: () {
-                                    save(_data[index]["_id"].toString(),
-                                        "Id_device");
-                                    get_device(index,
-                                        _data[index]["_id"].toString());
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Home(),
-                                        ));
-                                  },
-                                ).show();
-                              },
-                              child: Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(),
-                                      Icon(
-                                        Icons.devices,
-                                        size: 40*heightR,
-                                        color: ListStatus[index] == "OFFLINE" ? Colors.red : Colors.green[500],
-                                      ),
-                                      SizedBox(),
-                                      Text(
-                                        "${ListID[index]}",
-                                        style: TextStyle(
-                                          fontSize: 24 * heightR,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      SizedBox(),
-                                    ],
-                                  )
-                              )),
-                        ],
-                      )),
-                  SizedBox(
-                    height: 10 * heightR,
+                        trailing: new IconButton(icon: new Icon(Icons.cancel), onPressed: () {
+                          controller.clear();
+                          onSearchTextChanged('');
+                        },),
+                      ),
+                    ),
                   ),
                 ],
-              );
-            }),
+              )
+            ),
+            Expanded(
+              child: _searchResult.length != 0 || controller.text.isNotEmpty
+                  ? new ListView.builder(
+                itemCount: _searchResult.length,
+                itemBuilder: (context, i) {
+                  return new Card(
+                    child: new Container(
+                        color: Colors.black54,
+                        height: 70 * heightR,
+                        // width: 800 * heightR,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  AwesomeDialog(
+                                    context: context,
+                                    animType: AnimType.leftSlide,
+                                    headerAnimationLoop: false,
+                                    dialogType: DialogType.success,
+                                    showCloseIcon: true,
+                                    title: 'Notification',
+                                    desc: 'Xác nhận đổi sang thiết bị ${_searchResult[i]}???',
+                                    btnOkOnPress: () {
+                                      save(_data[i]["_id"].toString(),
+                                          "Id_device");
+                                      get_device(i,
+                                          _data[i]["_id"].toString());
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Home(),
+                                          ));
+                                    },
+                                  ).show();
+                                },
+                                child: Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(),
+                                        Icon(
+                                          Icons.devices,
+                                          size: 40*heightR,
+                                          color: ListStatus[i] == "OFFLINE" ? Colors.red : Colors.green[500],
+                                        ),
+                                        SizedBox(),
+                                        Text(
+                                          "${_searchResult[i]}",
+                                          style: TextStyle(
+                                            fontSize: 24 * heightR,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(),
+                                      ],
+                                    )
+                                )),
+                          ],
+                        )),
+                    margin: const EdgeInsets.all(0.0),
+                  );
+                },
+              )
+                  : new ListView.builder(
+                itemCount: ListID.length,
+                itemBuilder: (context, index) {
+                  return new Card(
+                    child: new Container(
+                        color: Colors.black54,
+                        height: 70 * heightR,
+                        // width: 800 * heightR,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  AwesomeDialog(
+                                    context: context,
+                                    animType: AnimType.leftSlide,
+                                    headerAnimationLoop: false,
+                                    dialogType: DialogType.success,
+                                    showCloseIcon: true,
+                                    title: 'Notification',
+                                    desc: 'Xác nhận đổi sang thiết bị ${ListID[index]}???',
+                                    btnOkOnPress: () {
+                                      save(_data[index]["_id"].toString(),
+                                          "Id_device");
+                                      get_device(index,
+                                          _data[index]["_id"].toString());
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Home(),
+                                          ));
+                                    },
+                                  ).show();
+                                },
+                                child: Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(),
+                                        Icon(
+                                          Icons.devices,
+                                          size: 40*heightR,
+                                          color: ListStatus[index] == "OFFLINE" ? Colors.red : Colors.green[500],
+                                        ),
+                                        SizedBox(),
+                                        Text(
+                                          "${ListID[index]}",
+                                          style: TextStyle(
+                                            fontSize: 24 * heightR,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(),
+                                      ],
+                                    )
+                                )),
+                          ],
+                        )),
+                    margin: const EdgeInsets.all(0.0),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        // ListView.builder(
+        //     itemCount: 1,
+        //     itemBuilder: (BuildContext context, int a) {
+        //       a = a -1;
+        //       print("stt: $a");
+        //       return Column(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           a == -1   ? Container(
+        //             color: Theme.of(context).primaryColor,
+        //             child:  Padding(
+        //               padding:  EdgeInsets.all(8.0*heightR),
+        //               child:  Card(
+        //                 child:  ListTile(
+        //                   leading:  Icon(Icons.search),
+        //                   title:  TextField(
+        //                     controller: controller,
+        //                     decoration: new InputDecoration(
+        //                         hintText: 'Search', border: InputBorder.none),
+        //                     onChanged: onSearchTextChanged,
+        //                   ),
+        //                   trailing: new IconButton(icon: new Icon(Icons.cancel), onPressed: () {
+        //                     controller.clear();
+        //                     onSearchTextChanged('');
+        //                   },),
+        //                 ),
+        //               ),
+        //             ),
+        //           ) :
+        //           Column(
+        //             children: [
+        //               Expanded(
+        //                 child: _searchResult.length != 0 || controller.text.isNotEmpty
+        //                     ? new ListView.builder(
+        //                   itemCount: _searchResult.length,
+        //                   itemBuilder: (context, i) {
+        //                     return new Card(
+        //                       child: new Container(
+        //                           color: Colors.black54,
+        //                           height: 70 * heightR,
+        //                           // width: 800 * heightR,
+        //                           child: Column(
+        //                             mainAxisAlignment: MainAxisAlignment.center,
+        //                             children: [
+        //                               TextButton(
+        //                                   onPressed: () {
+        //                                     AwesomeDialog(
+        //                                       context: context,
+        //                                       animType: AnimType.leftSlide,
+        //                                       headerAnimationLoop: false,
+        //                                       dialogType: DialogType.success,
+        //                                       showCloseIcon: true,
+        //                                       title: 'Notification',
+        //                                       desc: 'Xác nhận đổi thiết bị ???',
+        //                                       btnOkOnPress: () {
+        //                                         save(_data[i]["_id"].toString(),
+        //                                             "Id_device");
+        //                                         get_device(i,
+        //                                             _data[i]["_id"].toString());
+        //                                         Navigator.push(
+        //                                             context,
+        //                                             MaterialPageRoute(
+        //                                               builder: (context) => Home(),
+        //                                             ));
+        //                                       },
+        //                                     ).show();
+        //                                   },
+        //                                   child: Container(
+        //                                       child: Row(
+        //                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                                         children: [
+        //                                           SizedBox(),
+        //                                           Icon(
+        //                                             Icons.devices,
+        //                                             size: 40*heightR,
+        //                                             color: ListStatus[i] == "OFFLINE" ? Colors.red : Colors.green[500],
+        //                                           ),
+        //                                           SizedBox(),
+        //                                           Text(
+        //                                             "${ListID[i]}",
+        //                                             style: TextStyle(
+        //                                               fontSize: 24 * heightR,
+        //                                               color: Colors.white,
+        //                                             ),
+        //                                           ),
+        //                                           SizedBox(),
+        //                                         ],
+        //                                       )
+        //                                   )),
+        //                             ],
+        //                           )),
+        //                       margin: const EdgeInsets.all(0.0),
+        //                     );
+        //                   },
+        //                 )
+        //                     : new ListView.builder(
+        //                   itemCount: ListID.length,
+        //                   itemBuilder: (context, index) {
+        //                     return new Card(
+        //                       child: new Container(
+        //                           color: Colors.black54,
+        //                           height: 70 * heightR,
+        //                           // width: 800 * heightR,
+        //                           child: Column(
+        //                             mainAxisAlignment: MainAxisAlignment.center,
+        //                             children: [
+        //                               TextButton(
+        //                                   onPressed: () {
+        //                                     AwesomeDialog(
+        //                                       context: context,
+        //                                       animType: AnimType.leftSlide,
+        //                                       headerAnimationLoop: false,
+        //                                       dialogType: DialogType.success,
+        //                                       showCloseIcon: true,
+        //                                       title: 'Notification',
+        //                                       desc: 'Xác nhận đổi thiết bị ???',
+        //                                       btnOkOnPress: () {
+        //                                         save(_data[index]["_id"].toString(),
+        //                                             "Id_device");
+        //                                         get_device(index,
+        //                                             _data[index]["_id"].toString());
+        //                                         Navigator.push(
+        //                                             context,
+        //                                             MaterialPageRoute(
+        //                                               builder: (context) => Home(),
+        //                                             ));
+        //                                       },
+        //                                     ).show();
+        //                                   },
+        //                                   child: Container(
+        //                                       child: Row(
+        //                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                                         children: [
+        //                                           SizedBox(),
+        //                                           Icon(
+        //                                             Icons.devices,
+        //                                             size: 40*heightR,
+        //                                             color: ListStatus[index] == "OFFLINE" ? Colors.red : Colors.green[500],
+        //                                           ),
+        //                                           SizedBox(),
+        //                                           Text(
+        //                                             "${ListID[index]}",
+        //                                             style: TextStyle(
+        //                                               fontSize: 24 * heightR,
+        //                                               color: Colors.white,
+        //                                             ),
+        //                                           ),
+        //                                           SizedBox(),
+        //                                         ],
+        //                                       )
+        //                                   )),
+        //                             ],
+        //                           )),
+        //                       margin: const EdgeInsets.all(0.0),
+        //                     );
+        //                   },
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //
+        //           SizedBox(
+        //             height: 10 * heightR,
+        //           ),
+        //         ],
+        //       );
+        //     }),
       )
 
     );
+
   }
 }
