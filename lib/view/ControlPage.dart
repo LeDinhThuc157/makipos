@@ -156,7 +156,6 @@ class _ControlPageState extends State<ControlPage> {
       final payload =
       MqttPublishPayload.bytesToStringAsString(message.payload.message);
       data_1 = jsonDecode(payload);
-
       if(data_1[0]['pc'].toString() == 'charging_mos_switch' && data_1 != null){
         check_1 = true;
         if(data_1[0]['d'].toString() == '0'){

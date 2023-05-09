@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:makipos/view/Alarm_tab.dart';
 
 import '../responsive/mobile_body.dart';
 import '../responsive/responsive_layout.dart';
@@ -124,6 +125,17 @@ class _HomeState extends State<Home> {
                     });
                   },
                 ),
+                BottomBarItem(
+                  Icons.notification_important_outlined,
+                  "ALARM",
+                  isActive: activeTab == 3,
+                  activeColor: red_alarm,
+                  onTap: () {
+                    setState(() {
+                      activeTab = 3;
+                    });
+                  },
+                ),
               ]
           )
       ),
@@ -144,6 +156,7 @@ class _HomeState extends State<Home> {
               desktopBody: SettingsPage()
           ),
           ControlPage(),
+          AlarmPage(),
         ],
       );
   }

@@ -30,11 +30,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
     _localStorage['$propertyCode'] = data;
   }
   var namedevice;
-
+  var _status;
   Future<String?> _name() async => namedevice = _localStorage['Name_device'];
+  Future<String?> _Status() async => _status = _localStorage['status_device'];
   _Delete(){
     save("Không có thiết bị", "Name_device");
-    save("0", "Token");
+    save("", "Token");
     save("0", "List_Cell");
     // saveList(userMap["propertiesValue"]["cells_vol"], "cells_vol");
     // bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
@@ -141,6 +142,11 @@ class _CustomAppbarState extends State<CustomAppbar> {
     save("0",
         "battery_capacity_settings");
   }
+  _Load(){
+    _name();
+    _Status();
+  }
+
   @override
   Widget build(BuildContext context) {
     double heightR, widthR;
@@ -258,7 +264,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
             SizedBox(),
             StreamBuilder(
                 stream: Stream.periodic(Duration(seconds: 1))
-                    .asyncMap((event) => _name()),
+                    .asyncMap((event) => _Load()),
                 builder: (context, snapshot) => Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -269,11 +275,35 @@ class _CustomAppbarState extends State<CustomAppbar> {
                                 color: Colors.cyanAccent,
                                 fontSize: 26 * heightR),
                           ),
+                          _status == "OFFLINE" ?
                           Text(
-                            "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
+                            "OFFLINE",
                             style: TextStyle(
-                                color: Colors.white, fontSize: 24 * heightR),
-                          ),
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24 * heightR
+                            ),
+                          ):
+                          Row(
+                            children: [
+                              Text(
+                                "ONLINE",
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                    fontSize: 24 * heightR
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10*heightR,
+                              ),
+                              Text(
+                                "${DateFormat("yyyy-MM-dd").format(DateTime.now())} ${DateFormat.Hms().format(DateTime.now())}",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 24 * heightR),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     )),
@@ -297,12 +327,14 @@ class _CustomAppbarState extends State<CustomAppbar> {
                       ),
                     );
                   }
+
                 },
                 itemBuilder: (context) => [
                       PopupMenuItem(
                         child: Text("Logout"),
                         value: "logout",
                       ),
+
                       // PopupMenuItem(
                       //   child: Text("Second"),
                       //   value: "Second",
@@ -384,6 +416,7 @@ class _DrawerPageState extends State<DrawerPage> {
       Map<String, dynamic> userMap = jsonDecode(responseGet_Listdevice.body);
 
       var cells_vol = userMap["propertiesValue"]["cells_vol"];
+      save(userMap["status"],"status_device");
       save(cells_vol.toString(), "List_Cell");
       // saveList(userMap["propertiesValue"]["cells_vol"], "cells_vol");
       // bat_vol = userMap["propertiesValue"]["bat_vol"].toString();
