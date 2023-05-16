@@ -60,12 +60,13 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
   var bat_percent;
   var bat_cycles;
   var box_temp;
-  var system_working_time;
+  var uptime;
   var bat_current;
   var mos_temp;
 
   var ave_cell;
   var cell_diff;
+  var last_update;
   var cells_vol = [];
   List<String> cells = [];
   @override
@@ -87,11 +88,13 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
   Future<String?> _bat_percent() async => bat_percent = _localStorage['bat_percent'];
   Future<String?> _bat_cycles() async => bat_cycles = _localStorage['bat_cycles'];
   Future<String?> _box_temp() async => box_temp = _localStorage['box_temp'];
-  Future<String?> _logger_status() async => system_working_time = _localStorage['logger_status'];
+  Future<String?> _uptime() async => uptime = _localStorage['uptime'];
   Future<String?> _tube_temp() async => mos_temp = _localStorage['tube_temp'];
   Future<String?> _bat_current() async => bat_current = _localStorage['bat_current'];
   Future<String?> _cell_diff() async => cell_diff = _localStorage['cell_diff'];
   Future<String?> _ave_cell() async => ave_cell = _localStorage['ave_cell'];
+  Future<String?> _last_update() async => last_update = _localStorage['logger_status'];
+
 
 
   void _Read(){
@@ -99,8 +102,8 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
     _charge();_discharge();_balance();
     _bat_vol();_bat_cap();_bat_capacity();
     _bat_temp();_bat_percent();_bat_cycles();
-    _box_temp();_logger_status();_tube_temp();
-    _bat_current();_cell_diff();_ave_cell();
+    _box_temp();_uptime();_tube_temp();
+    _bat_current();_cell_diff();_ave_cell(); _last_update();
     Boolvalue();
     _ReadList();
   }
@@ -260,7 +263,9 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
                                       // Text_title(
                                       //     data:'Charg.Plugged(Khong co):'
                                       // ),
-                                      Text_title(data: 'Time Emerg:'),
+                                      Text_title(data: 'Working time:'),
+                                      Text_title(data: 'Last Update:'),
+
                                     ],
                                   ),
                                   SizedBox(
@@ -295,7 +300,8 @@ class _MymobileBodySTTState extends State<MymobileBodySTT> {
                                       // Text_Value(
                                       //     data:'Plugged'
                                       // ),
-                                      Text_Value(data: '$system_working_time'),
+                                      Text_Value(data: '$uptime'),
+                                      Text_Value(data: '$last_update'),
                                     ],
                                   ),
                                 ],
@@ -449,11 +455,12 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
   var bat_percent;
   var bat_cycles;
   var box_temp;
-  var system_working_time;
+  var uptime;
   var bat_current;
   var mos_temp;
   var ave_cell;
   var cell_diff;
+  var last_update;
 
   Future<String?> _bat_vol() async => bat_vol = _localStorage['bat_vol'];
   Future<String?> _bat_cap() async => bat_cap = _localStorage['bat_cap'];
@@ -463,11 +470,13 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
   Future<String?> _bat_percent() async => bat_percent = _localStorage['bat_percent'];
   Future<String?> _bat_cycles() async => bat_cycles = _localStorage['bat_cycles'];
   Future<String?> _box_temp() async => box_temp = _localStorage['box_temp'];
-  Future<String?> _logger_status() async => system_working_time = _localStorage['logger_status'];
+  Future<String?> _uptime() async => uptime = _localStorage['uptime'];
   Future<String?> _tube_temp() async => mos_temp = _localStorage['tube_temp'];
   Future<String?> _bat_current() async => bat_current = _localStorage['bat_current'];
   Future<String?> _cell_diff() async => cell_diff = _localStorage['cell_diff'];
   Future<String?> _ave_cell() async => ave_cell = _localStorage['ave_cell'];
+  Future<String?> _last_update() async => last_update = _localStorage['logger_status'];
+
   // Basic setting text
   TextEditingController  cellcount = TextEditingController();
   var _cellcount;
@@ -529,8 +538,8 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
     // Read status
     _bat_vol();_bat_cap();_bat_capacity();
     _bat_temp();_bat_percent();_bat_cycles();
-    _box_temp();_logger_status();_tube_temp();
-    _bat_current();_cell_diff();_ave_cell();
+    _box_temp();_uptime();_tube_temp();
+    _bat_current();_cell_diff();_ave_cell();_last_update();
     // Read setting
     _Cellcount();_Batterycapacity();_CalibratingVolt();
     _CalibratingCurr();_CellOVP();_CellOVPR();_CellUVPR();
@@ -618,7 +627,8 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                                       // Text_title(
                                       //     data:'Charg.Plugged(Khong co):'
                                       // ),
-                                      Text_title(data: 'Time Emerg:'),
+                                      Text_title(data: 'Working time:'),
+                                      Text_title(data: 'Last Update:'),
                                     ],
                                   ),
                                   SizedBox(
@@ -653,7 +663,8 @@ class _MymobileBodySTSState extends State<MymobileBodySTS> {
                                       // Text_Value(
                                       //     data:'Plugged'
                                       // ),
-                                      Text_Value(data: '$system_working_time'),
+                                      Text_Value(data: '$uptime'),
+                                      Text_Value(data: '$last_update'),
                                     ],
                                   ),
                                 ],

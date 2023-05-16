@@ -27,12 +27,13 @@ class _SettingsPageState extends State<SettingsPage> {
   var bat_percent;
   var bat_cycles;
   var box_temp;
-  var system_working_time;
+  var uptime;
   var bat_current;
   var mos_temp;
   var ave_cell;
   var cell_diff;
-
+  var last_update;
+  var logger_status;
   Future<String?> _bat_vol() async => bat_vol = _localStorage['bat_vol'];
   Future<String?> _bat_cap() async => bat_cap = _localStorage['bat_cap'];
 
@@ -41,11 +42,15 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<String?> _bat_percent() async => bat_percent = _localStorage['bat_percent'];
   Future<String?> _bat_cycles() async => bat_cycles = _localStorage['bat_cycles'];
   Future<String?> _box_temp() async => box_temp = _localStorage['box_temp'];
-  Future<String?> _logger_status() async => system_working_time = _localStorage['logger_status'];
+  Future<String?> _logger_status() async => logger_status = _localStorage['logger_status'];
   Future<String?> _tube_temp() async => mos_temp = _localStorage['tube_temp'];
   Future<String?> _bat_current() async => bat_current = _localStorage['bat_current'];
   Future<String?> _cell_diff() async => cell_diff = _localStorage['cell_diff'];
   Future<String?> _ave_cell() async => ave_cell = _localStorage['ave_cell'];
+  Future<String?> _last_update() async => last_update = _localStorage['logger_status'];
+  Future<String?> _uptime() async => uptime = _localStorage['uptime'];
+
+
 
   // Basic setting text
   TextEditingController  cellcount = TextEditingController();
@@ -112,7 +117,7 @@ class _SettingsPageState extends State<SettingsPage> {
     _bat_vol();_bat_cap();_bat_capacity();
     _bat_temp();_bat_percent();_bat_cycles();
     _box_temp();_logger_status();_tube_temp();
-    _bat_current();_cell_diff();_ave_cell();
+    _bat_current();_cell_diff();_ave_cell();_last_update();_uptime();
     // Read setting
     _Cellcount();_Batterycapacity();_CalibratingVolt();
     _CalibratingCurr();_CellOVP();_CellOVPR();_CellUVPR();
@@ -322,7 +327,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               // Text_title(
                               //     data:'Charg.Plugged(Khong co):'
                               // ),
-                              Text_title(data: 'Time Emerg:'),
+                              Text_title(data: 'Working time:'),
+                              Text_title(data: 'Last Update:'),
                             ],
                           ),
                           // SizedBox(
@@ -349,7 +355,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               // Text_Value(
                               //     data:'Plugged'
                               // ),
-                              Text_Value(data: '$system_working_time'),
+                              Text_Value(data: '$uptime minutes'),
+                              Text_Value(data: '$last_update'),
                             ],
                           ),
                         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+const contentColorGreen = Colors.greenAccent;
 const primary = Colors.black;
 const secondary = Colors.white;
 const mainColor = Color(0xFF1B1F1F);
@@ -16,3 +16,5 @@ const purple = Color(0xFFd9bcff);
 const red = Color(0xFFef5013);
 const blue = Color(0xFF03A9F4);
 const light_pink = Color(0xFFF2A5B9);
+const contentColorCyan = Colors.cyan;
+const red_alarm =  Colors.red;
