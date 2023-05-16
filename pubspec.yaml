@@ -52,6 +52,7 @@ dependencies:
   dio: ^5.0.1
   fl_chart: ^0.62.0
   socket_io_client: ^2.0.1
+  icon_forest: ^1.1.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:makipos/view/login.dart';
@@ -373,6 +375,7 @@ class _DrawerPageState extends State<DrawerPage> {
   }
 
   getData() async {
+
     _token();
     _name();
     try {
@@ -406,6 +409,7 @@ class _DrawerPageState extends State<DrawerPage> {
       print(e);
     }
   }
+
 
   get(String id_device) async {
     try {

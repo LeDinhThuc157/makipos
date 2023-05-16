@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:html';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -219,6 +221,7 @@ class _SignPageState extends State<SignPage> {
 @override
 void initState(){
   super.initState();
+
   _GetDataSave();
   _statusCode == null ? 1 : _statusCode;
 }
@@ -427,15 +430,20 @@ void initState(){
       Map<String, dynamic> userMap = jsonDecode(response_user_login.body);
       token = userMap["accessToken"].toString();
       if(_statusCode == 201){
-        save(nameController.text,'username');
-        save(passwordController.text,'password');
-        save(token, "Token");
-        get_device(token);
-        save(_statusCode.toString(),'Status');
-        // Login
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) => Home(),
-        ));
+        try{
+          save(nameController.text,'username');
+          save(passwordController.text,'password');
+          save(token, "Token");
+          get_device(token);
+          save(_statusCode.toString(),'Status');
+          // Login
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => Home(),
+          ));
+        }catch(e){
+
+        }
+
       }else{
         AwesomeDialog(
           context: context,
@@ -460,6 +468,8 @@ void initState(){
     }
     return token;
   }
+
+
   get_device(var token) async {
     try{
       var Get_Listdevice = await http.get(
@@ -472,12 +482,12 @@ void initState(){
       name_device = userMap["data"][0]["productId"].toString();
       save(name_device, "Name_device");
       getData(token);
-
     }catch(e){
       print(e);
     }
   }
   getData(var token) async {
+
     try {
       var responseGet_Listdevice = await http.get(
         Uri.parse("http://smarthome.test.makipos.net:3028/devices/$id_device"),
